@@ -1,29 +1,29 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : GameLayer.cpp                                                                        //
-// @ brief	 : ƒQ[ƒ€•”•ª‚ÌƒNƒ‰ƒX                                                                   //
+// @ brief	 : ã‚²ãƒ¼ãƒ éƒ¨åˆ†ã®ã‚¯ãƒ©ã‚¹                                                                   //
 // @ date	 : 2017/06/30                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/Direct3D.h"
 #include "../../ImaseLib/DirectXTK.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "PlayGameLayer.h"
 
-/* –¼‘O‹óŠÔ */
+/* åå‰ç©ºé–“ */
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-/* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ‰Šú‰»                                                                               //
-// @ param	: int width...ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•                                                     //
-// @ param	: int height...ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³                                                  //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: åˆæœŸåŒ–                                                                               //
+// @ param	: int width...ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…                                                     //
+// @ param	: int height...ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•                                                  //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayGameLayer::Initialize(Scene* scene)
@@ -31,48 +31,48 @@ void PlayGameLayer::Initialize(Scene* scene)
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ‰Šú‰»                                                                               //
-// @ param	: int width...ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì•                                                     //
-// @ param	: int height...ƒNƒ‰ƒCƒAƒ“ƒg—Ìˆæ‚Ì‚‚³                                                  //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: åˆæœŸåŒ–                                                                               //
+// @ param	: int width...ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®å¹…                                                     //
+// @ param	: int height...ã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆé ˜åŸŸã®é«˜ã•                                                  //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 {
-	// ƒV[ƒ“‚Ìæ“¾
+	// ã‚·ãƒ¼ãƒ³ã®å–å¾—
 	pScene = scene;
-	// ƒGƒtƒFƒNƒgƒtƒ@ƒNƒgƒŠ‚Ì‰Šú‰»
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¯ãƒˆãƒªã®åˆæœŸåŒ–
 	mEf = make_shared<EffectFactory>(g_pd3dDevice.Get());
-	// ƒtƒ@ƒCƒ‹ƒpƒX‚ğw’è
+	// ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã‚’æŒ‡å®š
 	mEf->SetDirectory(L"Resources");
-	// DGSLƒGƒtƒFƒNƒgƒtƒ@ƒNƒgƒŠ‚Ì‰Šú‰»
+	// DGSLã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¯ãƒˆãƒªã®åˆæœŸåŒ–
 	mDef = make_shared<DGSLEffectFactory>(g_pd3dDevice.Get());
-	// ƒtƒ@ƒCƒ‹ƒpƒX‚Ìw’è
+	// ãƒ•ã‚¡ã‚¤ãƒ«ãƒ‘ã‚¹ã®æŒ‡å®š
 	mDef->SetDirectory(L"Resources");
 
-	// CSV“Ç‚İ‚İ•Ï”‚Ì¶¬
+	// CSVèª­ã¿è¾¼ã¿å¤‰æ•°ã®ç”Ÿæˆ
 	mCSV = make_shared<CSVReader>();
-	// CSV“Ç‚İ‚İ
+	// CSVèª­ã¿è¾¼ã¿
 	mCSV->ReadCSV(L"Resources\\mapdata3.csv");
-	// “Ç‚İ‚ñ‚¾ƒf[ƒ^‚Ìæ“¾
+	// èª­ã¿è¾¼ã‚“ã ãƒ‡ãƒ¼ã‚¿ã®å–å¾—
 	mMapData = mCSV->GetData();
-	// ƒ}ƒbƒvƒTƒCƒY‚ğæ“¾
+	// ãƒãƒƒãƒ—ã‚µã‚¤ã‚ºã‚’å–å¾—
 	mMapSize_x = mMapData[0].size();
 	mMapSize_z = mMapData.size() - 1;
-	// ƒ}ƒbƒv‚ÌƒIƒtƒZƒbƒg‚ğZo
+	// ãƒãƒƒãƒ—ã®ã‚ªãƒ•ã‚»ãƒƒãƒˆã‚’ç®—å‡º
 	mOffset_x = mMapSize_x / 2.0f;
 	mOffset_z = mMapSize_z / 2.0f;
 
-	// ƒ{ƒ€‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ãƒœãƒ ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	mBombModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\dogbomb1.cmo", *mDef);
-	// ƒNƒbƒL[°‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ã‚¯ãƒƒã‚­ãƒ¼åºŠã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	mCookieModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\cookie.cmo", *mDef);
-	// ŒŠ‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ç©´ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	mHoleModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\hole.cmo", *mDef);
-	// –Ô‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ç¶²ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	mNetModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\net1.cmo", *mDef);
 
-	// ƒ}ƒbƒvƒ`ƒbƒv‚Ì“o˜^
+	// ãƒãƒƒãƒ—ãƒãƒƒãƒ—ã®ç™»éŒ²
 	mChip[MapChipAttribute::HOLE] = new MapChip(HOLE);
 	mChip[MapChipAttribute::HOLE]->SetModel(mHoleModel);
 	mChip[MapChipAttribute::COOKIE] = new MapChip(COOKIE);
@@ -80,130 +80,130 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mChip[MapChipAttribute::NET] = new MapChip(NET);
 	mChip[MapChipAttribute::NET]->SetModel(mNetModel);
 
-	// ƒ}ƒbƒv‚Ì¶¬
+	// ãƒãƒƒãƒ—ã®ç”Ÿæˆ
 	mMap = make_unique<Map>(mMapSize_x, mMapSize_z);
 	for (int i = 0; i < mMapSize_z; i++)
 	{
 		for (int j = 0; j < mMapSize_x; j++)
 		{
-			// ƒ}ƒbƒv‚Ì”z—ñ‚ğ‘ã“ü
+			// ãƒãƒƒãƒ—ã®é…åˆ—ã‚’ä»£å…¥
 			mMap->Set(j, i, mChip[mMapData[i][j]]);
 		}
 	}
 
-	// ƒLƒƒƒ‰ƒNƒ^[‚Ì¶¬
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ç”Ÿæˆ
 	mKuma = make_shared<Character>();
-	// ƒLƒƒƒ‰ƒNƒ^[‚Ì‰Šú‰»
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®åˆæœŸåŒ–
 	mKuma->Initialize();
-	// ƒLƒƒƒ‰ƒNƒ^[‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	mKuma->LoadModel(L"Resources\\kumakyun2.cmo");
-	// À•W‚ğƒ‰ƒ“ƒ_ƒ€‚Åİ’è
+	// åº§æ¨™ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§è¨­å®š
 	Vector3 kpos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-	// À•W‚©‚ç”z—ñ‚Ì—v‘f”Ô†‚ğZo
+	// åº§æ¨™ã‹ã‚‰é…åˆ—ã®è¦ç´ ç•ªå·ã‚’ç®—å‡º
 	auto kposs = Vector3(0, 0, 0);
 	kposs.x = floorf(kpos.x + mOffset_x);
 	kposs.z = floorf(kpos.z + mOffset_z);
-	// ˆÚ“®‰Â”\ƒ}ƒX‚É‚È‚é‚Ü‚Å
+	// ç§»å‹•å¯èƒ½ãƒã‚¹ã«ãªã‚‹ã¾ã§
 	while (mMap->GetAttribute(kposs.x, kposs.z) != COOKIE)
 	{
-		// À•W‚ğƒ‰ƒ“ƒ_ƒ€‚Åİ’è
+		// åº§æ¨™ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§è¨­å®š
 		kpos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-		// À•W‚©‚ç”z—ñ‚Ì—v‘f”Ô†‚ğZo
+		// åº§æ¨™ã‹ã‚‰é…åˆ—ã®è¦ç´ ç•ªå·ã‚’ç®—å‡º
 		kposs.x = floorf(kpos.x + mOffset_x);
 		kposs.z = floorf(kpos.z + mOffset_z);
 	}
 	kpos.x = kposs.x + 0.5f - mOffset_x;
 	kpos.z = kposs.z + 0.5f - mOffset_z;
-	// À•W‚ğƒ‰ƒ“ƒ_ƒ€‚Åİ’è
+	// åº§æ¨™ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§è¨­å®š
 	mKuma->SetPos(kpos);
-	// ‘¬“x‚Ìİ’è
+	// é€Ÿåº¦ã®è¨­å®š
 	mKuma->SetVel(Vector3(0, 0, 0));
 
-	// ƒAƒCƒeƒ€‚Ì¶¬
+	// ã‚¢ã‚¤ãƒ†ãƒ ã®ç”Ÿæˆ
 	mItem = make_shared<Item>();
-	// ƒAƒCƒeƒ€‚Ì‰Šú‰»
+	// ã‚¢ã‚¤ãƒ†ãƒ ã®åˆæœŸåŒ–
 	mItem->Initialize();
-	// ƒAƒCƒeƒ€‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	mItem->LoadModel(L"Resources\\PoPcandy.cmo");
-	// À•W‚ğƒ‰ƒ“ƒ_ƒ€‚Åİ’è
+	// åº§æ¨™ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§è¨­å®š
 	Vector3 ipos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-	// À•W‚©‚ç”z—ñ‚Ì—v‘f”Ô†‚ğZo
+	// åº§æ¨™ã‹ã‚‰é…åˆ—ã®è¦ç´ ç•ªå·ã‚’ç®—å‡º
 	auto iposs = Vector3(0, 0, 0);
 	iposs.x = floorf(ipos.x + mOffset_x);
 	iposs.z = floorf(ipos.z + mOffset_z);
-	// ˆÚ“®‰Â”\ƒ}ƒX‚É‚È‚é‚Ü‚Å
+	// ç§»å‹•å¯èƒ½ãƒã‚¹ã«ãªã‚‹ã¾ã§
 	while (mMap->GetAttribute(iposs.x, iposs.z) != COOKIE)
 	{
-		// À•W‚ğƒ‰ƒ“ƒ_ƒ€‚Åİ’è
+		// åº§æ¨™ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§è¨­å®š
 		ipos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-		// À•W‚©‚ç”z—ñ‚Ì—v‘f”Ô†‚ğZo
+		// åº§æ¨™ã‹ã‚‰é…åˆ—ã®è¦ç´ ç•ªå·ã‚’ç®—å‡º
 		iposs.x = floorf(ipos.x + mOffset_x);
 		iposs.z = floorf(ipos.z + mOffset_z);
 	}
 	ipos.x = iposs.x + 0.5f - mOffset_x;
 	ipos.z = iposs.z + 0.5f - mOffset_z;
-	// ‚™À•W‚ğ‚‚­‚·‚é
+	// ï½™åº§æ¨™ã‚’é«˜ãã™ã‚‹
 	ipos.y = 1;
-	// À•W‚Ìİ’è
+	// åº§æ¨™ã®è¨­å®š
 	mItem->SetPos(ipos);
-	// Šg‘å—¦‚ğ¬‚³‚­‚·‚é
+	// æ‹¡å¤§ç‡ã‚’å°ã•ãã™ã‚‹
 	mItem->SetScale(0.2f);
 
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ì¶¬
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®ç”Ÿæˆ
 	mCursor = make_shared<Cursor>();
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ì‰Šú‰»
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®åˆæœŸåŒ–
 	mCursor->Initialize(width, height);
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	mCursor->LoadModel(L"Resources\\okiba2.cmo");
 
-	// ƒ^ƒCƒ}[‚ÌƒJƒEƒ“ƒg‚ğ‚O‚É‰Šú‰»
+	// ã‚¿ã‚¤ãƒãƒ¼ã®ã‚«ã‚¦ãƒ³ãƒˆã‚’ï¼ã«åˆæœŸåŒ–
 	mWaitTimer = 0;
 
-	// ƒV[ƒ“Ø‘Ö—p•Ï”‚Ì‰Šú‰»
+	// ã‚·ãƒ¼ãƒ³åˆ‡æ›¿ç”¨å¤‰æ•°ã®åˆæœŸåŒ–
 	mSceneFlag = false;
-	// •`‰æ‰æ‘œ•ÏX—p•Ï”‚Ì‰Šú‰»
+	// æç”»ç”»åƒå¤‰æ›´ç”¨å¤‰æ•°ã®åˆæœŸåŒ–
 	mResultFlag = false;
-	// ƒ|[ƒY‚Å‚ ‚é‚©
+	// ãƒãƒ¼ã‚ºã§ã‚ã‚‹ã‹
 	mPauseFlag = false;
-	// ƒXƒ^[ƒgƒJƒEƒ“ƒg’†‚Å‚ ‚é‚©
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ãƒˆä¸­ã§ã‚ã‚‹ã‹
 	mStartFlag = true;
 
-	// ƒJƒEƒ“ƒ^‚Ì‰Šú‰»
+	// ã‚«ã‚¦ãƒ³ã‚¿ã®åˆæœŸåŒ–
 	mCount = 0;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: XV                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æ›´æ–°                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayGameLayer::Update()
 {
 	int w = 0;
 
-	// ƒ}ƒbƒvƒ`ƒbƒv‚Ì’†S
+	// ãƒãƒƒãƒ—ãƒãƒƒãƒ—ã®ä¸­å¿ƒ
 	float cx = 0;
 	float cz = 0;
-	// ƒIƒuƒWƒFƒNƒg‚Ì’†S
+	// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸­å¿ƒ
 	Vector3 oc = Vector3(0, 0, 0);
 
-	// t = 0Fnear,t = 1Ffar
+	// t = 0ï¼šnear,t = 1ï¼šfar
 	float t = -1;
-	// ©‹@‘_‚¢ƒ^ƒCƒ~ƒ“ƒO
+	// è‡ªæ©Ÿç‹™ã„ã‚¿ã‚¤ãƒŸãƒ³ã‚°
 	auto timing = 0;
-	// ƒXƒ^[ƒgƒJƒEƒ“ƒg’†‚Å‚È‚¢‚È‚ç
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ãƒˆä¸­ã§ãªã„ãªã‚‰
 	if (!mStartFlag)
 	{
-		// ƒ|[ƒY’†‚Å‚È‚¢‚È‚ç
+		// ãƒãƒ¼ã‚ºä¸­ã§ãªã„ãªã‚‰
 		if (!mPauseFlag)
 		{
-			// ©‹@‘_‚¢ƒ^ƒCƒ}[‚ğƒJƒEƒ“ƒg
-			// ƒ^ƒCƒ}[‚ğƒJƒEƒ“ƒgƒAƒbƒv‚³‚¹‚é
+			// è‡ªæ©Ÿç‹™ã„ã‚¿ã‚¤ãƒãƒ¼ã‚’ã‚«ã‚¦ãƒ³ãƒˆ
+			// ã‚¿ã‚¤ãƒãƒ¼ã‚’ã‚«ã‚¦ãƒ³ãƒˆã‚¢ãƒƒãƒ—ã•ã›ã‚‹
 			mWaitTimer++;
-			// ©‹@‘_‚¢ƒ^ƒCƒ~ƒ“ƒO‚ğƒ‰ƒ“ƒ_ƒ€‚Å
+			// è‡ªæ©Ÿç‹™ã„ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã‚’ãƒ©ãƒ³ãƒ€ãƒ ã§
 			timing = rand() % 100 + 1;
-			// ƒ^ƒCƒ}[‚ªˆê’è’l‚ğ’´‚¦‚½‚çƒ{ƒ€‚ğ¶¬
+			// ã‚¿ã‚¤ãƒãƒ¼ãŒä¸€å®šå€¤ã‚’è¶…ãˆãŸã‚‰ãƒœãƒ ã‚’ç”Ÿæˆ
 			if (mWaitTimer > 180)
 			{
 				if (timing % 3 == 0)
@@ -230,88 +230,88 @@ void PlayGameLayer::Update()
 				}
 			}
 
-			// ¶¬‚µ‚½‚·‚×‚Ä‚Ìƒ{ƒ€‚ğXV
+			// ç”Ÿæˆã—ãŸã™ã¹ã¦ã®ãƒœãƒ ã‚’æ›´æ–°
 			for (int i = 0; i < mBombs.size(); i++)
 			{
 				mBombs[i]->Update();
 			}
 		}
 
-		// ƒ{ƒ€‚Æ°‚Ì‚ ‚½‚è”»’è
+		// ãƒœãƒ ã¨åºŠã®ã‚ãŸã‚Šåˆ¤å®š
 		for (int i = 0; i < mBombs.size(); i++)
 		{
-			// À•W‚©‚ç”z—ñ‚Ì—v‘f”Ô†‚ğZo
+			// åº§æ¨™ã‹ã‚‰é…åˆ—ã®è¦ç´ ç•ªå·ã‚’ç®—å‡º
 			Vector3 bombPos = Vector3(0, 0, 0);
 			bombPos.x = floorf(mBombs[i]->GetPos().x + mOffset_x);
 			bombPos.z = floorf(mBombs[i]->GetPos().z + mOffset_z);
 
-			// ƒ{ƒ€‚Æ°‚ªÚG‚µ‚Ä‚¢‚½‚ç
+			// ãƒœãƒ ã¨åºŠãŒæ¥è§¦ã—ã¦ã„ãŸã‚‰
 			if (mBombs[i]->GetPos().y < 0)
 			{
-				// °‚Ì‘®«‚ğŠm”F
+				// åºŠã®å±æ€§ã‚’ç¢ºèª
 				switch (mMap->GetAttribute(bombPos.x, bombPos.z))
 				{
-					// ƒNƒbƒL[°‚È‚ç
+					// ã‚¯ãƒƒã‚­ãƒ¼åºŠãªã‚‰
 				case COOKIE:
-					// ƒNƒbƒL[°‚©‚çŒŠ‚Ì°‚É‘ã“ü
+					// ã‚¯ãƒƒã‚­ãƒ¼åºŠã‹ã‚‰ç©´ã®åºŠã«ä»£å…¥
 					mMap->Set(bombPos.x, bombPos.z, mChip[HOLE]);
 					break;
-					// ƒlƒbƒg‚È‚ç
+					// ãƒãƒƒãƒˆãªã‚‰
 				case NET:
-					// ƒ{ƒ€‚ğÁ‚·
+					// ãƒœãƒ ã‚’æ¶ˆã™
 					mBombs.pop_back();
 					break;
-					// ‚»‚êˆÈŠO‚È‚ç
+					// ãã‚Œä»¥å¤–ãªã‚‰
 				default:
-					// ‰½‚à‚µ‚È‚¢
+					// ä½•ã‚‚ã—ãªã„
 					break;
 				}
 			}
 		}
 
-		// ƒLƒƒƒ‰ƒNƒ^[‚ÌˆÚ“®
+		// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ç§»å‹•
 		mKuma->Move();
-		// •à”‚ğæ“¾
+		// æ­©æ•°ã‚’å–å¾—
 		mCount = mKuma->GetCount();
 
-		// ƒLƒƒƒ‰ƒNƒ^[‚ÌÀ•W
+		// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®åº§æ¨™
 		Vector3 chpos = Vector3(0, 0, 0);
 		chpos.x = floorf(mKuma->GetPos().x + mOffset_x);
 		chpos.z = floorf(mKuma->GetPos().z + mOffset_z);
 
-		// ƒLƒƒƒ‰ƒNƒ^[‚Ì‚¢‚é°‚Ì‘®«‚ğŠm”F
+		// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ã„ã‚‹åºŠã®å±æ€§ã‚’ç¢ºèª
 		switch (mMap->GetAttribute(chpos.x, chpos.z))
 		{
-			// ŒŠ°‚È‚ç
+			// ç©´åºŠãªã‚‰
 		case HOLE:
 			w++;
 			while (w < 600)
 			{
-				// —‰º‚·‚é
+				// è½ä¸‹ã™ã‚‹
 				mKuma->Fall();
 				w++;
 			}
 			if (mKuma->GetPos().y <= -25.0f)
 			{
-				// ƒQ[ƒ€‚ğI—¹‚·‚é
+				// ã‚²ãƒ¼ãƒ ã‚’çµ‚äº†ã™ã‚‹
 				mSceneFlag = true;
 			}
 			break;
-			// ƒlƒbƒg‚È‚ç
+			// ãƒãƒƒãƒˆãªã‚‰
 		case NET:
-			// ƒQ[ƒ€‚ğI—¹‚·‚é
+			// ã‚²ãƒ¼ãƒ ã‚’çµ‚äº†ã™ã‚‹
 			mSceneFlag = true;
 			break;
-			// ‚»‚êˆÈŠO‚È‚ç
+			// ãã‚Œä»¥å¤–ãªã‚‰
 		default:
-			// ‰½‚à‚µ‚È‚¢
+			// ä½•ã‚‚ã—ãªã„
 			break;
 		}
 
-		// ƒ{ƒ€‚ÆƒLƒƒƒ‰ƒNƒ^[‚Ì‚ ‚½‚è”»’è
+		// ãƒœãƒ ã¨ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ã‚ãŸã‚Šåˆ¤å®š
 		for (int i = 0; i < mBombs.size(); i++)
 		{
-			// ƒ{ƒ€‚ÆƒvƒŒƒCƒ„[‚Ì‚ ‚½‚è”»’è
+			// ãƒœãƒ ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚ãŸã‚Šåˆ¤å®š
 			if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
 				mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
 				mBombs[i]->GetPos().y < 0)
@@ -321,76 +321,76 @@ void PlayGameLayer::Update()
 			}
 		}
 
-		// ƒAƒCƒeƒ€‚ÆƒLƒƒƒ‰ƒNƒ^[‚Ì‚ ‚½‚è”»’è
+		// ã‚¢ã‚¤ãƒ†ãƒ ã¨ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®ã‚ãŸã‚Šåˆ¤å®š
 		if (mItem->GetPos().x < mKuma->GetPos().x + 0.5f && mItem->GetPos().x + 0.5f > mKuma->GetPos().x &&
 			mItem->GetPos().z < mKuma->GetPos().z + 0.5f && mItem->GetPos().z + 0.5f > mKuma->GetPos().z)
 		{
-			// ƒQ[ƒ€‚ğI—¹‚·‚é
+			// ã‚²ãƒ¼ãƒ ã‚’çµ‚äº†ã™ã‚‹
 			mSceneFlag = true;
-			// ƒQ[ƒ€ƒNƒŠƒA
+			// ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
 			mResultFlag = true;
 		}
 
 
-		// ƒIƒuƒWƒFƒNƒg‚Ì’†S‚ğZo
+		// ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ä¸­å¿ƒã‚’ç®—å‡º
 		oc = Vector3((1.0f / 2.0f), (1.0f / 2.0f), (1.0f / 2.0f));
-		// ƒJ[ƒ\ƒ‹‚ÌXV
+		// ã‚«ãƒ¼ã‚½ãƒ«ã®æ›´æ–°
 		mCursor->GetCursor()->Update();
-		// ƒ}ƒEƒXƒŒƒC‚ÆƒtƒB[ƒ‹ƒh‚Ì‚ ‚½‚è”»’èiPD‚P‚V‚Tj
+		// ãƒã‚¦ã‚¹ãƒ¬ã‚¤ã¨ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®ã‚ãŸã‚Šåˆ¤å®šï¼ˆPï¼ï¼‘ï¼—ï¼•ï¼‰
 		mCursor->GetCursor()->IntersectSegmentPlane
 		(mCursor->GetCursor()->GetNear(), mCursor->GetCursor()->GetFar(), Vector3(0, 0, 0), Vector3(1, 0, 0), Vector3(0, 0, 1), &t, &mResult);
-		// ƒJ[ƒ\ƒ‹‚ÌÀ•W‚ÌXV
+		// ã‚«ãƒ¼ã‚½ãƒ«ã®åº§æ¨™ã®æ›´æ–°
 		mCursorPos = mResult;
-		// ŒvZ‚µ‚½‚à‚Ì‚ğfloorf‚ÅŠÛ‚ß‚é
+		// è¨ˆç®—ã—ãŸã‚‚ã®ã‚’floorfã§ä¸¸ã‚ã‚‹
 		mMapOffset_x = floorf(mCursorPos.x + mOffset_x);
 		mMapOffset_z = floorf(mCursorPos.z + mOffset_z);
-		// ƒ}ƒbƒvƒ`ƒbƒv‚Ì’†S‚ğŒvZ
+		// ãƒãƒƒãƒ—ãƒãƒƒãƒ—ã®ä¸­å¿ƒã‚’è¨ˆç®—
 		cx = 1.0f / 2.0f;
 		cz = 1.0f / 2.0f;
-		// ŠÛ‚ß‚½‚à‚Ì‚©‚ç‚¸‚ç‚µ‚Ä‚¢‚é•ª‚ğˆø‚­i+0.5f...ƒ}ƒbƒvƒ`ƒbƒv‚Ì’†Sj
+		// ä¸¸ã‚ãŸã‚‚ã®ã‹ã‚‰ãšã‚‰ã—ã¦ã„ã‚‹åˆ†ã‚’å¼•ãï¼ˆ+0.5f...ãƒãƒƒãƒ—ãƒãƒƒãƒ—ã®ä¸­å¿ƒï¼‰
 		mResult.x = static_cast<float>(mMapOffset_x) + cx - mOffset_x;
 		mResult.z = static_cast<float>(mMapOffset_z) + cz - mOffset_z;
-		// À•W‚ğİ’è
+		// åº§æ¨™ã‚’è¨­å®š
 		Vector3 cpos = mResult;
-		// ‚™À•W‚ğ­‚µ‚‚­‚·‚é
+		// ï½™åº§æ¨™ã‚’å°‘ã—é«˜ãã™ã‚‹
 		cpos.y += 0.01f;
-		// ƒJ[ƒ\ƒ‹À•W‚Ìİ’è
+		// ã‚«ãƒ¼ã‚½ãƒ«åº§æ¨™ã®è¨­å®š
 		mCursor->SetPos(cpos);
 
-		// ƒ}ƒEƒX‚ª‰EƒNƒŠƒbƒN‚µ‚½‚ç
+		// ãƒã‚¦ã‚¹ãŒå³ã‚¯ãƒªãƒƒã‚¯ã—ãŸã‚‰
 		if (g_mouseTracker->rightButton)
 		{
-			// ƒ}ƒEƒXÀ•W‚ª”z—ñ‚Ì”ÍˆÍ“à‚É‚ ‚Á‚½‚ç
+			// ãƒã‚¦ã‚¹åº§æ¨™ãŒé…åˆ—ã®ç¯„å›²å†…ã«ã‚ã£ãŸã‚‰
 			if (mMapOffset_x >= 0 && mMapOffset_x < mMapSize_x &&
 				mMapOffset_z >= 0 && mMapOffset_z < mMapSize_z)
 			{
-				// ƒtƒB[ƒ‹ƒh‚Ì‘®«‚ğ•Ï‚¦‚é
+				// ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã®å±æ€§ã‚’å¤‰ãˆã‚‹
 				mMap->Set(mMapOffset_x, mMapOffset_z, mChip[NET]);
 			}
 		}
 	}
 
 #pragma region Debug
-	// F1ƒL[‚ª‰Ÿ‚³‚ê‚½‚ç
+	// F1ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰
 	if (g_key.F2)
 	{
-		// ƒV[ƒ“‚ğ‘JˆÚ‚·‚é
+		// ã‚·ãƒ¼ãƒ³ã‚’é·ç§»ã™ã‚‹
 		mSceneFlag = true;
 	}
 
-	// EscapeƒL[‚ğ‰Ÿ‚µ‚½‚ç
+	// Escapeã‚­ãƒ¼ã‚’æŠ¼ã—ãŸã‚‰
 	if (g_key.Escape)
 	{
-		// ƒEƒCƒ“ƒhƒE‚ğ•Â‚¶‚é
+		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
 		PostQuitMessage(0);
 	}
-#pragma endregion ƒfƒoƒbƒO—p‹@”\
+#pragma endregion ãƒ‡ãƒãƒƒã‚°ç”¨æ©Ÿèƒ½
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: •`‰æ                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æç”»                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayGameLayer::Draw()
@@ -398,33 +398,33 @@ void PlayGameLayer::Draw()
 	Matrix view = pScene->GetCamera()->CreateViewMatrix();
 	Matrix proj = pScene->GetCamera()->CreateProjectionMatrix();
 
-	// ƒ}ƒbƒv‚Ì•`‰æ
+	// ãƒãƒƒãƒ—ã®æç”»
 	mMap->Draw(view, proj);
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ÌÀ•WŒvZ
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®åº§æ¨™è¨ˆç®—
 	mCursor->GetCursor()->Calc(view, proj);
 	mCursor->Calc();
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚Ì•`‰æ
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®æç”»
 	mCursor->Draw(view, proj);
-	// ƒ{ƒ€‚Ì•`‰æ
+	// ãƒœãƒ ã®æç”»
 	for (int i = 0; i< mBombs.size(); i++)
 	{
 		mBombs[i]->Draw(view, proj);
 	}
-	// ƒLƒƒƒ‰ƒNƒ^[‚Ì•`‰æ
+	// ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ã®æç”»
 	mKuma->Draw(view, proj);
-	// ƒAƒCƒeƒ€‚Ì•`‰æ
+	// ã‚¢ã‚¤ãƒ†ãƒ ã®æç”»
 	mItem->Draw(view, proj);
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: I—¹                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: çµ‚äº†                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayGameLayer::Finalize()
 {
-	// ƒ}ƒbƒvƒ`ƒbƒv‚Ì”jŠü
+	// ãƒãƒƒãƒ—ãƒãƒƒãƒ—ã®ç ´æ£„
 	delete mChip[MapChipAttribute::COOKIE];
 	delete mChip[MapChipAttribute::HOLE];
 	delete mChip[MapChipAttribute::NET];

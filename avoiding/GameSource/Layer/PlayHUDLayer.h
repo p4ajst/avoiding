@@ -1,62 +1,62 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : HUDLayer.h                                                                           //
-// @ brief	 : ƒwƒbƒhƒAƒbƒvƒfƒBƒXƒvƒŒƒC•”•ª‚ÌƒNƒ‰ƒX                                                 //
+// @ brief	 : ãƒ˜ãƒƒãƒ‰ã‚¢ãƒƒãƒ—ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤éƒ¨åˆ†ã®ã‚¯ãƒ©ã‚¹                                                 //
 // @ date	 : 2017/06/30                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
 #include <memory>
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/Texture.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "Layer.h"
 #include "../Scene/PauseScreen.h"
 #include "../Scene/GameStartScreen.h"
 
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class PlayHUDLayer :public Layer
 {
 private:
-	// ƒeƒNƒXƒ`ƒƒ
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£
 	std::shared_ptr<Texture> pTexture;
-	// ‰æ‘œ•`‰æ
+	// ç”»åƒæç”»
 	std::unique_ptr<Texture> mNum;
 	std::unique_ptr<Texture> mBiscuitBefore;
 	std::unique_ptr<Texture> mBiscuitAfter;
 	std::unique_ptr<PauseScreen> mPause;
 	std::unique_ptr<GameStartScreen> mStart;
-	// •`‰æ”ÍˆÍ
+	// æç”»ç¯„å›²
 	RECT mBisrect;
-	// ƒ|[ƒY’†‚©H
+	// ãƒãƒ¼ã‚ºä¸­ã‹ï¼Ÿ
 	bool mPauseFlag;
-	// ƒXƒ^[ƒgƒJƒEƒ“ƒ^[’†‚©H
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ã‚¿ãƒ¼ä¸­ã‹ï¼Ÿ
 	bool mStartFlag;
-	// ƒJ[ƒ\ƒ‹‚ª‰æ‘œ‚Ì•`‰æ”ÍˆÍ“à‚É‚ ‚é‚©H
+	// ã‚«ãƒ¼ã‚½ãƒ«ãŒç”»åƒã®æç”»ç¯„å›²å†…ã«ã‚ã‚‹ã‹ï¼Ÿ
 	bool mpFrag;
-	// ƒJƒEƒ“ƒ^
+	// ã‚«ã‚¦ãƒ³ã‚¿
 	int mCount;
 
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize(Scene* scene);
-	// XV
+	// æ›´æ–°
 	void Update();
-	// •`‰æ
+	// æç”»
 	void Draw();
 	//void DrawNum();
 
-	// I—¹
+	// çµ‚äº†
 	void Finalize();
-	// ƒJƒEƒ“ƒ^‚ÌƒZƒbƒg
+	// ã‚«ã‚¦ãƒ³ã‚¿ã®ã‚»ãƒƒãƒˆ
 	void SetCount(int cnt) { mCount = cnt; }
-	// ƒtƒ‰ƒO‚Ìæ“¾
+	// ãƒ•ãƒ©ã‚°ã®å–å¾—
 	bool GetPauseFlag() { return mPauseFlag; }
 	bool GetStartFlag() { return mStartFlag; }
 };

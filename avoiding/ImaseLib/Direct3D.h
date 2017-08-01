@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: Direct3D.h
 //
-// Direct3D‚ÉŠÖ‚·‚éŠÖ”ŒQ
+// Direct3Dã«é–¢ã™ã‚‹é–¢æ•°ç¾¤
 //
 // Date: 2015.6.24
 // Author: Hideyasu Imase
@@ -13,18 +13,18 @@
 #include <d3d11.h>
 
 //////////////////////////////
-// ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾	//
+// é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€	//
 //////////////////////////////
 HRESULT Direct3D_InitDevice(HWND hWnd);
 HRESULT Direct3D_InitBackBuffer();
 void Direct3D_CleanupDevice();
 
 //////////////////////////////
-// ƒOƒ[ƒoƒ‹•Ï”			//
+// ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°			//
 //////////////////////////////
-extern Microsoft::WRL::ComPtr<ID3D11Device>				g_pd3dDevice;			// DirectX11‚ÌƒfƒoƒCƒX
-extern Microsoft::WRL::ComPtr<ID3D11DeviceContext>		g_pImmediateContext;	// ƒRƒ“ƒeƒLƒXƒg
-extern Microsoft::WRL::ComPtr<IDXGISwapChain>			g_pSwapChain;			// ƒXƒƒbƒvƒ`ƒFƒCƒ“
-extern Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	g_pRenderTargetView;	// ƒŒƒ“ƒ_[ƒ^[ƒQƒbƒgƒrƒ…[
-extern Microsoft::WRL::ComPtr<ID3D11Texture2D>			g_pDepthStencil;		// [“xƒXƒeƒ“ƒVƒ‹
-extern Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	g_pDepthStencilView;	// [“xƒXƒeƒ“ƒVƒ‹ƒrƒ…[
+extern Microsoft::WRL::ComPtr<ID3D11Device>				g_pd3dDevice;			// DirectX11ã®ãƒ‡ãƒã‚¤ã‚¹
+extern Microsoft::WRL::ComPtr<ID3D11DeviceContext>		g_pImmediateContext;	// ã‚³ãƒ³ãƒ†ã‚­ã‚¹ãƒˆ
+extern Microsoft::WRL::ComPtr<IDXGISwapChain>			g_pSwapChain;			// ã‚¹ãƒ¯ãƒƒãƒ—ãƒã‚§ã‚¤ãƒ³
+extern Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	g_pRenderTargetView;	// ãƒ¬ãƒ³ãƒ€ãƒ¼ã‚¿ãƒ¼ã‚²ãƒƒãƒˆãƒ“ãƒ¥ãƒ¼
+extern Microsoft::WRL::ComPtr<ID3D11Texture2D>			g_pDepthStencil;		// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«
+extern Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	g_pDepthStencilView;	// æ·±åº¦ã‚¹ãƒ†ãƒ³ã‚·ãƒ«ãƒ“ãƒ¥ãƒ¼

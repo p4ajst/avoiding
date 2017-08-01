@@ -1,84 +1,84 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : GameStartScreen.cpp                                                                  //
-// @ brief	 : ƒQ[ƒ€ŠJn‘O‚ÌƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÉŠÖ‚·‚éƒNƒ‰ƒX                                           //
+// @ brief	 : ã‚²ãƒ¼ãƒ é–‹å§‹å‰ã®ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹                                           //
 // @ date	 : 2017/07/18                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <simplemath.h>
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/Direct3D.h"
 #include "../../ImaseLib/DirectXTK.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "GameStartScreen.h"
 
-/* –¼‘O‹óŠÔ */
+/* åå‰ç©ºé–“ */
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-/* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ‰Šú‰»ˆ—                                                                           //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: åˆæœŸåŒ–å‡¦ç†                                                                           //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Initialize()
 {
-	// ƒJƒEƒ“ƒ^‚Ì‰Šú‰»
+	// ã‚«ã‚¦ãƒ³ã‚¿ã®åˆæœŸåŒ–
 	mStartCounter = 0;
-	// ƒtƒ‰ƒO‚Ì‰Šú‰»
+	// ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
 	mStartFlag = false;
-	// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`‚Ì‰Šú‰»
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒã®åˆæœŸåŒ–
 	pSprites = make_unique<SpriteBatch>(g_pImmediateContext.Get());
-	// ‰æ‘œ‚Ì‰Šú‰»
+	// ç”»åƒã®åˆæœŸåŒ–
 	mWhite = make_unique<Texture>(L"Resources\\screen.png");
 	mNumber = make_unique<Texture>(L"Resources\\number.png");
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: XVˆ—                                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æ›´æ–°å‡¦ç†                                                                             //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Update()
 {
 	auto cnt = 180;
-	// ƒtƒ‰ƒO‚ª‹U‚Å‚ ‚é‚È‚ç
+	// ãƒ•ãƒ©ã‚°ãŒå½ã§ã‚ã‚‹ãªã‚‰
 	if (!mStartFlag)
 	{
-		// ƒJƒEƒ“ƒ^‚ği‚ß‚é
+		// ã‚«ã‚¦ãƒ³ã‚¿ã‚’é€²ã‚ã‚‹
 		cnt--;
-		// ƒJƒEƒ“ƒ^‚ª‚U‚O‚ÅŠ„‚èØ‚ê‚½‚ç
+		// ã‚«ã‚¦ãƒ³ã‚¿ãŒï¼–ï¼ã§å‰²ã‚Šåˆ‡ã‚ŒãŸã‚‰
 		if (cnt % 60 == 0)
 		{
-			// ‰½•b‚©ŒvZ‚µ‚Ä‘ã“ü
+			// ä½•ç§’ã‹è¨ˆç®—ã—ã¦ä»£å…¥
 			mStartCounter = cnt / 60;
 		}
-		// ƒJƒEƒ“ƒ^‚ª‚O‚æ‚è¬‚³‚­‚È‚Á‚½‚ç
+		// ã‚«ã‚¦ãƒ³ã‚¿ãŒï¼ã‚ˆã‚Šå°ã•ããªã£ãŸã‚‰
 		if (mStartCounter < 0)
 		{
-			// ƒtƒ‰ƒO‚ğ^‚É‚·‚é
+			// ãƒ•ãƒ©ã‚°ã‚’çœŸã«ã™ã‚‹
 			mStartFlag = true;
 		}
 	}
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: •`‰æˆ—                                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æç”»å‡¦ç†                                                                             //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Render()
 {
-	// ‰æ‘œ‚Ì•`‰æ”ÍˆÍ
+	// ç”»åƒã®æç”»ç¯„å›²
 	RECT rect = { 0,0,1280,960 };
 	auto x = mStartCounter * TextureSize;
 	auto w = x + TextureSize;
@@ -86,31 +86,31 @@ void GameStartScreen::Render()
 
 	pSprites->Begin(SpriteSortMode_Deferred, nullptr, nullptr, nullptr, nullptr, [=]
 	{
-		// ‰æ‘œ‚Ì”¼“§–¾ˆ—
+		// ç”»åƒã®åŠé€æ˜å‡¦ç†
 		g_pImmediateContext->OMSetBlendState(g_state->NonPremultiplied(), nullptr, 0xFFFFFFFF);
 	});
 	pSprites->Draw(mWhite->m_pTexture, rect, Colors::White);
 	/*
-		ID3D11ShaderResourceView* texture...ƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^
-		FXMVECTOR position...‰æ–Ê‚Ì•`‰æ‚ÌŠî“_i‚Ç‚±‚É•`‰æ‚·‚é‚©j
-		RECT const* sourceRectangle...Œ³‚ÌƒeƒNƒXƒ`ƒƒ‚Ì‚Ç‚Ì•”•ª‚ğ•`‰æ‚·‚é‚©
-		FXMVECTOR color...F
-		float rotation...‰ñ“]Šp
-		XMFLOAT2 const& origin...•`‰æ‚·‚é‰æ‘œ‚ÌŠî“_
-		GXMVECTOR scale...Šg‘å—¦
+		ID3D11ShaderResourceView* texture...ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ãƒã‚¤ãƒ³ã‚¿
+		FXMVECTOR position...ç”»é¢ã®æç”»ã®åŸºç‚¹ï¼ˆã©ã“ã«æç”»ã™ã‚‹ã‹ï¼‰
+		RECT const* sourceRectangle...å…ƒã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã©ã®éƒ¨åˆ†ã‚’æç”»ã™ã‚‹ã‹
+		FXMVECTOR color...è‰²
+		float rotation...å›è»¢è§’
+		XMFLOAT2 const& origin...æç”»ã™ã‚‹ç”»åƒã®åŸºç‚¹
+		GXMVECTOR scale...æ‹¡å¤§ç‡
 		SpriteEffects effects
 		float layerDepth
 	 */
 	//pSprites->Draw(mNumber->m_pTexture, Vector2(640.0f,480.0f),&crect,Colors::White,0.0f,Vector2(32.0f,32.0f),Vector2(1.0f, 1.0f));
 	DrawNum(pSprites.get(), mNumber->m_pTexture, mStartCounter, 640.0f, 480.f);
-	// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`‚ÌI‚í‚è
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒã®çµ‚ã‚ã‚Š
 	pSprites->End();
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: I—¹ˆ—                                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: çµ‚äº†å‡¦ç†                                                                             //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Finalize()

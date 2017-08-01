@@ -1,20 +1,20 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : GameLayer.h                                                                          //
-// @ brief	 : ƒQ[ƒ€•”•ª‚ÌƒNƒ‰ƒX                                                                   //
+// @ brief	 : ã‚²ãƒ¼ãƒ éƒ¨åˆ†ã®ã‚¯ãƒ©ã‚¹                                                                   //
 // @ date	 : 2017/06/30                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <simplemath.h>
 #include <Effects.h>
 #include <memory>
 #include <vector>
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "Layer.h"
 
 #include "../Object/Bomb.h"
@@ -26,86 +26,86 @@
 #include "../Utility/CSVReader.h"
 #include "../Utility/MouseCursor.h"
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class PlayGameLayer : public Layer
 {
-	/* ƒƒ“ƒo•Ï” */
-	// ƒGƒtƒFƒNƒgƒtƒ@ƒNƒgƒŠ
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¯ãƒˆãƒª
 	std::shared_ptr<DirectX::EffectFactory> mEf;
-	// DGSLƒGƒtƒFƒNƒgƒtƒ@ƒNƒgƒŠ
+	// DGSLã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¯ãƒˆãƒª
 	std::shared_ptr<DirectX::DGSLEffectFactory> mDef;
 
-	// ƒ{ƒ€
+	// ãƒœãƒ 
 	std::shared_ptr<Bomb> mBomb;
 	std::vector<std::shared_ptr<Bomb>> mBombs;
-	// ‚­‚Ü‚«‚ã‚ñ
+	// ãã¾ãã‚…ã‚“
 	std::shared_ptr<Character> mKuma;
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«
 	std::shared_ptr<Cursor> mCursor;
-	// ƒAƒCƒeƒ€
+	// ã‚¢ã‚¤ãƒ†ãƒ 
 	std::shared_ptr<Item> mItem;
-	// ƒ}ƒbƒv
+	// ãƒãƒƒãƒ—
 	std::shared_ptr<Map> mMap;
-	// ƒ}ƒbƒvƒ`ƒbƒv
+	// ãƒãƒƒãƒ—ãƒãƒƒãƒ—
 	MapChip* mChip[MapChipAttribute::ATTRIBUTE_NUM];
 
-	// ƒ{ƒ€‚Ìƒ‚ƒfƒ‹
+	// ãƒœãƒ ã®ãƒ¢ãƒ‡ãƒ«
 	std::shared_ptr<DirectX::Model> mBombModel;
-	// ƒNƒbƒL[°‚Ìƒ‚ƒfƒ‹
+	// ã‚¯ãƒƒã‚­ãƒ¼åºŠã®ãƒ¢ãƒ‡ãƒ«
 	std::shared_ptr<DirectX::Model> mCookieModel;
-	// ŒŠ‚Ìƒ‚ƒfƒ‹
+	// ç©´ã®ãƒ¢ãƒ‡ãƒ«
 	std::shared_ptr<DirectX::Model> mHoleModel;
-	// –Ô‚Ìƒ‚ƒfƒ‹
+	// ç¶²ã®ãƒ¢ãƒ‡ãƒ«
 	std::shared_ptr<DirectX::Model> mNetModel;
 
-	// ƒ}ƒEƒXƒJ[ƒ\ƒ‹‚ÌÀ•W
+	// ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ã®åº§æ¨™
 	DirectX::SimpleMath::Vector3 mCursorPos;
-	// ƒ}ƒEƒXƒŒƒC‚ÆƒtƒB[ƒ‹ƒh‚Æ‚Ì‚ ‚½‚è”»’è‚ÌŠÖ”‚Ì–ß‚è’l
+	// ãƒã‚¦ã‚¹ãƒ¬ã‚¤ã¨ãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã¨ã®ã‚ãŸã‚Šåˆ¤å®šã®é–¢æ•°ã®æˆ»ã‚Šå€¤
 	DirectX::SimpleMath::Vector3 mResult;
-	// ƒJ[ƒ\ƒ‹‚ÌÀ•W{‚¸‚ç‚µ‚Ä‚¢‚é•ª
+	// ã‚«ãƒ¼ã‚½ãƒ«ã®åº§æ¨™ï¼‹ãšã‚‰ã—ã¦ã„ã‚‹åˆ†
 	int mMapOffset_x;
 	int mMapOffset_z;
 
-	// CSV“Ç‚İ‚İ
+	// CSVèª­ã¿è¾¼ã¿
 	std::shared_ptr<CSVReader> mCSV;
-	// ƒ}ƒbƒvƒf[ƒ^
+	// ãƒãƒƒãƒ—ãƒ‡ãƒ¼ã‚¿
 	std::vector<std::vector<int>> mMapData;
-	// ƒ}ƒbƒvƒTƒCƒY
+	// ãƒãƒƒãƒ—ã‚µã‚¤ã‚º
 	int mMapSize_x;
 	int mMapSize_z;
-	// ƒ}ƒbƒvƒ`ƒbƒv‚Ì‚¸‚ç‚µ‚Ä‚é•ªiƒIƒtƒZƒbƒgj
+	// ãƒãƒƒãƒ—ãƒãƒƒãƒ—ã®ãšã‚‰ã—ã¦ã‚‹åˆ†ï¼ˆã‚ªãƒ•ã‚»ãƒƒãƒˆï¼‰
 	float mOffset_x;
 	float mOffset_z;
 
-	// ƒ{ƒ€‚Ì¶¬ƒ^ƒCƒ}[
+	// ãƒœãƒ ã®ç”Ÿæˆã‚¿ã‚¤ãƒãƒ¼
 	float mWaitTimer;
 
-	// ƒV[ƒ“Ø‘Ö—p•Ï”
+	// ã‚·ãƒ¼ãƒ³åˆ‡æ›¿ç”¨å¤‰æ•°
 	bool mSceneFlag;
 	
-	// •`‰æ‰æ‘œ•ÏX—p
+	// æç”»ç”»åƒå¤‰æ›´ç”¨
 	bool mResultFlag;
-	// ƒ|[ƒY’†‚©
+	// ãƒãƒ¼ã‚ºä¸­ã‹
 	bool mPauseFlag;
-	// ƒXƒ^[ƒgƒtƒ‰ƒO
+	// ã‚¹ã‚¿ãƒ¼ãƒˆãƒ•ãƒ©ã‚°
 	bool mStartFlag;
-	// ƒJƒEƒ“ƒ^
+	// ã‚«ã‚¦ãƒ³ã‚¿
 	int mCount;
 public:
-	/* ƒƒ“ƒoŠÖ” */
-	// ‰Šú‰»
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
+	// åˆæœŸåŒ–
 	void Initialize(Scene* scene);
 	void Initialize(Scene* scene, int width, int height);
-	// XV
+	// æ›´æ–°
 	void Update();
-	// •`‰æ
+	// æç”»
 	void Draw();
-	// I—¹
+	// çµ‚äº†
 	void Finalize();
-	// İ’è
+	// è¨­å®š
 	void SetPauseFlag(bool flag) { mPauseFlag = flag; }
 	void SetStartFlag(bool flag) { mStartFlag = flag; }
-	// æ“¾
+	// å–å¾—
 	bool GetResultFlag() { return mResultFlag; }
 	bool GetFlag() { return mSceneFlag; }
 	int GetCount() { return mCount; }
