@@ -9,14 +9,14 @@
 /* 多重インクルードの防止 */
 #pragma once
 
+/* ヘッダファイルのインクルード */
 // 標準ライブラリ
 #include <memory>
 #include <SpriteBatch.h>
 // 先生のフレームワーク
 #include "../../ImaseLib/Texture.h"
-
-/* 定数定義 */
-static const int TextureSize = 64;
+// 自作ヘッダファイル
+#include "../Utility/Common.h"
 
 /* クラス宣言 */
 class GameStartScreen

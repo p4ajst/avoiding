@@ -18,8 +18,6 @@
 #include "../Scene/PauseScreen.h"
 #include "../Scene/GameStartScreen.h"
 
-/* 定数定義 */
-static const int NumTextureSize = 64;
 
 /* クラス宣言 */
 class PlayHUDLayer :public Layer
@@ -52,7 +50,8 @@ public:
 	void Update();
 	// 描画
 	void Draw();
-	void DrawNum();
+	//void DrawNum();
+
 	// 終了
 	void Finalize();
 	// カウンタのセット

@@ -163,7 +163,9 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mSceneFlag = false;
 	// 描画画像変更用変数の初期化
 	mResultFlag = false;
+	// ポーズであるか
 	mPauseFlag = false;
+	// スタートカウント中であるか
 	mStartFlag = false;
 
 	// カウンタの初期化
@@ -190,6 +192,8 @@ void PlayGameLayer::Update()
 	float t = -1;
 	// 自機狙いタイミング
 	auto timing = 0;
+	//// スタートカウント中であるなら
+	//if(mStartFlag)
 
 	// ポーズ中でないなら
 	if (!mPauseFlag)

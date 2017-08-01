@@ -113,6 +113,7 @@
     <ClCompile Include="GameSource\Stage\Map.cpp" />
     <ClCompile Include="GameSource\Stage\MapChip.cpp" />
     <ClCompile Include="GameSource\Utility\Camera.cpp" />
+    <ClCompile Include="GameSource\Utility\Common.cpp" />
     <ClCompile Include="GameSource\Utility\CSVReader.cpp" />
     <ClCompile Include="GameSource\Utility\MouseCursor.cpp" />
     <ClCompile Include="ImaseLib\DebugCamera.cpp" />

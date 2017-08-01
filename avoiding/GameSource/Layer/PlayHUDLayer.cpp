@@ -7,8 +7,11 @@
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
 /* ヘッダファイルのインクルード */
+// 先生のフレームワーク
 #include "../../ImaseLib/DirectXTK.h"
+// 自作ヘッダファイル
 #include "PlayHUDLayer.h"
+#include "../Utility/Common.h"
 
 /* 名前空間 */
 using namespace std;
@@ -111,7 +114,8 @@ void PlayHUDLayer::Draw()
 	{
 		mStart->Render();
 	}
-	DrawNum();
+	//DrawNum();
+	DrawNum(pScene->GetSprite().get(), mNum->m_pTexture, mCount, 160.0f, 32.0f);
 }
 
 // ----------------------------------------------------------------------------------------------- //
@@ -120,69 +124,69 @@ void PlayHUDLayer::Draw()
 // @ return : なし                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
-void PlayHUDLayer::DrawNum()
-{
-
-	// 作業用
-	auto num = mCount;
-	// 文字数
-	auto sn = 0;
-	// 座標
-	auto x = 160.0f;
-	auto y = 32.0f;
-	// 画像の中心点
-	auto ox = NumTextureSize / 2.0f;
-	auto oy = NumTextureSize / 2.0f;
-	// 画像の描画範囲
-	RECT crect = { 0, 0, NumTextureSize, NumTextureSize };
-
-
-	if (num == 0)
-	{
-		/*
-			ID3D11ShaderResourceView* texture...テクスチャのポインタ
-			FXMVECTOR position...画面の描画の基点（どこに描画するか）
-			RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
-			FXMVECTOR color...色
-			float rotation...回転角
-			XMFLOAT2 const& origin...描画する画像の基点
-			GXMVECTOR scale...拡大率
-			SpriteEffects effects
-			float layerDepth
-		*/
-		pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(x, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
-	}
-	else
-	{
-		while (num)
-		{
-
-			int l = (num % 10) * NumTextureSize;
-			int t = 0;
-			int r = l + NumTextureSize;
-			int b = NumTextureSize;
-
-			int px = x - sn * NumTextureSize;
-
-			// 画像の描画範囲
-			crect = { l,t,r,b };
-			/*
-				ID3D11ShaderResourceView* texture...テクスチャのポインタ
-				FXMVECTOR position...画面の描画の基点（どこに描画するか）
-				RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
-				FXMVECTOR color...色
-				float rotation...回転角
-				XMFLOAT2 const& origin...描画する画像の基点
-				GXMVECTOR scale...拡大率
-				SpriteEffects effects
-				float layerDepth
-			*/
-			pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(px, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
-			num /= 10;
-			sn++;
-		}
-	}
-}
+//void PlayHUDLayer::DrawNum()
+//{
+//
+//	// 作業用
+//	auto num = mCount;
+//	// 文字数
+//	auto sn = 0;
+//	// 座標
+//	auto x = 160.0f;
+//	auto y = 32.0f;
+//	// 画像の中心点
+//	auto ox = TextureSize / 2.0f;
+//	auto oy = TextureSize / 2.0f;
+//	// 画像の描画範囲
+//	RECT crect = { 0, 0, TextureSize, NumTextureSize };
+//
+//
+//	if (num == 0)
+//	{
+//		/*
+//			ID3D11ShaderResourceView* texture...テクスチャのポインタ
+//			FXMVECTOR position...画面の描画の基点（どこに描画するか）
+//			RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
+//			FXMVECTOR color...色
+//			float rotation...回転角
+//			XMFLOAT2 const& origin...描画する画像の基点
+//			GXMVECTOR scale...拡大率
+//			SpriteEffects effects
+//			float layerDepth
+//		*/
+//		pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(x, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
+//	}
+//	else
+//	{
+//		while (num)
+//		{
+//
+//			int l = (num % 10) * NumTextureSize;
+//			int t = 0;
+//			int r = l + NumTextureSize;
+//			int b = NumTextureSize;
+//
+//			int px = x - sn * NumTextureSize;
+//
+//			// 画像の描画範囲
+//			crect = { l,t,r,b };
+//			/*
+//				ID3D11ShaderResourceView* texture...テクスチャのポインタ
+//				FXMVECTOR position...画面の描画の基点（どこに描画するか）
+//				RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
+//				FXMVECTOR color...色
+//				float rotation...回転角
+//				XMFLOAT2 const& origin...描画する画像の基点
+//				GXMVECTOR scale...拡大率
+//				SpriteEffects effects
+//				float layerDepth
+//			*/
+//			pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(px, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
+//			num /= 10;
+//			sn++;
+//		}
+//	}
+//}
 
 // ----------------------------------------------------------------------------------------------- //
 // @ brief	: 終了                                                                                 //
