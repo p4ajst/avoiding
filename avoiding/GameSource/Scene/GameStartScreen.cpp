@@ -31,7 +31,7 @@ using namespace DirectX::SimpleMath;
 void GameStartScreen::Initialize()
 {
 	// カウンタの初期化
-	mStartCounter = 3;
+	mStartCounter = 0;
 	// フラグの初期化
 	mStartFlag = false;
 	// スプライトバッチの初期化
@@ -49,11 +49,18 @@ void GameStartScreen::Initialize()
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Update()
 {
+	auto cnt = 180;
 	// フラグが偽であるなら
 	if (!mStartFlag)
 	{
 		// カウンタを進める
-		mStartCounter--;
+		cnt--;
+		// カウンタが６０で割り切れたら
+		if (cnt % 60 == 0)
+		{
+			// 何秒か計算して代入
+			mStartCounter = cnt / 60;
+		}
 		// カウンタが０より小さくなったら
 		if (mStartCounter < 0)
 		{
@@ -98,11 +105,6 @@ void GameStartScreen::Render()
 	DrawNum(pSprites.get(), mNumber->m_pTexture, mStartCounter, 640.0f, 480.f);
 	// スプライトバッチの終わり
 	pSprites->End();
-
-	// 
-	// 
-	// 
-	// 
 }
 
 // ----------------------------------------------------------------------------------------------- //

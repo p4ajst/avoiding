@@ -27,26 +27,40 @@ using namespace DirectX::SimpleMath;
 // ----------------------------------------------------------------------------------------------- // 
 void PlayHUDLayer::Initialize(Scene* scene)
 {
+	// 現在のシーンを代入
 	pScene = scene;
+	// 数字のテクスチャの生成
 	mNum = make_unique<Texture>(L"Resources\\number.png");
+	// ビスケットのテクスチャの生成
 	mBiscuitBefore = make_unique<Texture>(L"Resources\\Biscuit_before.png");
+	// ビスケットのテクスチャの生成
 	mBiscuitAfter = make_unique<Texture>(L"Resources\\Biscuit_after.png");
+	// ポーズ画面の生成
 	mPause = make_unique<PauseScreen>();
+	// ポーズ画面がnullptrでなければ
 	if (mPause != nullptr)
 	{
+		// ポーズ画面の初期化
 		mPause->Initialize();
 	}
+	// スタートスクリーンの生成
 	mStart = make_unique<GameStartScreen>();
+	// スタートスクリーンがnullptrでなければ
 	if (mStart != nullptr)
 	{
+		// スタートスクリーンの初期化
 		mStart->Initialize();
 	}
+	// ビスケットの描画範囲の設定
 	mBisrect.left = 1211;
 	mBisrect.top = 40;
 	mBisrect.right = 1275;
 	mBisrect.bottom = 104;
+	// ポーズしているか
 	mPauseFlag = false;
+	// スタートカウント中であるか
 	mStartFlag = false;
+	// ビスケットの描画範囲内にマウスカーソルがあるか
 	mpFrag = false;
 }
 
@@ -58,6 +72,8 @@ void PlayHUDLayer::Initialize(Scene* scene)
 // ----------------------------------------------------------------------------------------------- // 
 void PlayHUDLayer::Update()
 {
+	// スタートスクリーンの更新
+	mStart->Update();
 	// ビスケットの範囲内にカーソルがあれば
 	if (g_mouse.x >= mBisrect.left && g_mouse.x <= mBisrect.right &&
 		g_mouse.y >= mBisrect.top && g_mouse.y  <= mBisrect.bottom)
@@ -75,6 +91,7 @@ void PlayHUDLayer::Update()
 			}
 			else
 			{
+				// フラグを切り替える
 				mPauseFlag = false;
 			}
 		}
@@ -85,8 +102,8 @@ void PlayHUDLayer::Update()
 		// フラグを切り替えない
 		mpFrag = false;
 	}
+	// ポーズ画面の更新
 	mPause->Update();
-	mStart->Update();
 }
 
 
@@ -98,95 +115,33 @@ void PlayHUDLayer::Update()
 // ----------------------------------------------------------------------------------------------- // 
 void PlayHUDLayer::Draw()
 {
+	// ビスケットの描画範囲内にマウスカーソルがなければ
 	if (!mpFrag)
 	{
+		// ビスケットの画像を描画
 		pScene->GetSprite()->Draw(mBiscuitBefore->m_pTexture, mBisrect, Colors::White);
 	}
+	// そうでなければ
 	else
 	{
+		// ビスケットの画像を描画
 		pScene->GetSprite()->Draw(mBiscuitAfter->m_pTexture, mBisrect, Colors::White);
 	}
+	// ポーズ中であれば
 	if (mPauseFlag)
 	{
+		// ポーズ画面を描画
 		mPause->Render();
 	}
+	// スタートカウント中であれば
 	if (mStartFlag)
 	{
+		// スタートスクリーンの描画
 		mStart->Render();
 	}
-	//DrawNum();
+	// 歩数を描画
 	DrawNum(pScene->GetSprite().get(), mNum->m_pTexture, mCount, 160.0f, 32.0f);
 }
-
-// ----------------------------------------------------------------------------------------------- //
-// @ brief	: 数字描画                                                                             //
-// @ param	: なし                                                                                 //
-// @ return : なし                                                                                 //
-// @ note	:                                                                                      //
-// ----------------------------------------------------------------------------------------------- // 
-//void PlayHUDLayer::DrawNum()
-//{
-//
-//	// 作業用
-//	auto num = mCount;
-//	// 文字数
-//	auto sn = 0;
-//	// 座標
-//	auto x = 160.0f;
-//	auto y = 32.0f;
-//	// 画像の中心点
-//	auto ox = TextureSize / 2.0f;
-//	auto oy = TextureSize / 2.0f;
-//	// 画像の描画範囲
-//	RECT crect = { 0, 0, TextureSize, NumTextureSize };
-//
-//
-//	if (num == 0)
-//	{
-//		/*
-//			ID3D11ShaderResourceView* texture...テクスチャのポインタ
-//			FXMVECTOR position...画面の描画の基点（どこに描画するか）
-//			RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
-//			FXMVECTOR color...色
-//			float rotation...回転角
-//			XMFLOAT2 const& origin...描画する画像の基点
-//			GXMVECTOR scale...拡大率
-//			SpriteEffects effects
-//			float layerDepth
-//		*/
-//		pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(x, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
-//	}
-//	else
-//	{
-//		while (num)
-//		{
-//
-//			int l = (num % 10) * NumTextureSize;
-//			int t = 0;
-//			int r = l + NumTextureSize;
-//			int b = NumTextureSize;
-//
-//			int px = x - sn * NumTextureSize;
-//
-//			// 画像の描画範囲
-//			crect = { l,t,r,b };
-//			/*
-//				ID3D11ShaderResourceView* texture...テクスチャのポインタ
-//				FXMVECTOR position...画面の描画の基点（どこに描画するか）
-//				RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
-//				FXMVECTOR color...色
-//				float rotation...回転角
-//				XMFLOAT2 const& origin...描画する画像の基点
-//				GXMVECTOR scale...拡大率
-//				SpriteEffects effects
-//				float layerDepth
-//			*/
-//			pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(px, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
-//			num /= 10;
-//			sn++;
-//		}
-//	}
-//}
 
 // ----------------------------------------------------------------------------------------------- //
 // @ brief	: 終了                                                                                 //
