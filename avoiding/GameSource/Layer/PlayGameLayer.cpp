@@ -53,7 +53,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	// CSV読み込み変数の生成
 	mCSV = make_shared<CSVReader>();
 	// CSV読み込み
-	mCSV->ReadCSV(L"Resources\\mapdata3.csv");
+	mCSV->ReadCSV(L"Resources\\mapdata4.csv");
 	// 読み込んだデータの取得
 	mMapData = mCSV->GetData();
 	// マップサイズを取得

@@ -12,12 +12,12 @@
 // ステージの属性
 enum MapChipAttribute
 {
+	// クッキー床
+	COOKIE,
 	// 穴
 	HOLE,
 	// ネット
 	NET,
-	// クッキー床
-	COOKIE,
 	// 数
 	ATTRIBUTE_NUM
 };
