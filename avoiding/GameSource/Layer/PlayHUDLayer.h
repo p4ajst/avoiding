@@ -50,12 +50,12 @@ public:
 	void Update();
 	// 描画
 	void Draw();
-	//void DrawNum();
 
 	// 終了
 	void Finalize();
 	// カウンタのセット
 	void SetCount(int cnt) { mCount = cnt; }
+	void SetStartFlag(bool flag) { mStartFlag = flag; }
 	// フラグの取得
 	bool GetPauseFlag() { return mPauseFlag; }
 	bool GetStartFlag() { return mStartFlag; }

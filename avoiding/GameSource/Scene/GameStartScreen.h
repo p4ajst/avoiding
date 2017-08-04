@@ -22,15 +22,16 @@
 class GameStartScreen
 {
 	/* メンバ変数 */
-	// カウンタ
-	int mStartCounter;
-	// 開始フラグ
-	bool mStartFlag;
 	// スプライトバッチ
 	std::unique_ptr<DirectX::SpriteBatch> pSprites;
 	// 画像描画変数
 	std::unique_ptr<Texture> mWhite;
 	std::unique_ptr<Texture> mNumber;
+	// カウンタ
+	int mStartCounter;
+	int mCnt;
+	// 開始フラグ
+	bool mStartFlag;
 public:
 	/* メンバ関数 */
 	// 初期化

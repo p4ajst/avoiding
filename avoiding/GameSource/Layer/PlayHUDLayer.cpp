@@ -104,6 +104,8 @@ void PlayHUDLayer::Update()
 	}
 	// ポーズ画面の更新
 	mPause->Update();
+	// スタートスクリーンの更新
+	mStart->Update();
 }
 
 
@@ -134,7 +136,7 @@ void PlayHUDLayer::Draw()
 		mPause->Render();
 	}
 	// スタートカウント中であれば
-	if (mStartFlag)
+	if (!mStartFlag)
 	{
 		// スタートスクリーンの描画
 		mStart->Render();

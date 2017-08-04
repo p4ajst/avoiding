@@ -48,6 +48,7 @@ void PlayScene::Initialize(int width, int height)
 	mHUD = make_unique<PlayHUDLayer>();
 	// HUDレイヤーの初期化
 	mHUD->Initialize(this);
+	// リザルトの文字フラグ
 	mResultFlag = false;
 }
 
@@ -69,6 +70,7 @@ void PlayScene::Update()
 	mGame->SetStartFlag(mHUD->GetStartFlag());
 	mGame->Update();
 	// HUDレイヤーの更新
+	mHUD->SetStartFlag(mGame->GetStartFlag());
 	mHUD->Update();
 }
 

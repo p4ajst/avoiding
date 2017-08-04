@@ -26,6 +26,13 @@
 #include "../Utility/CSVReader.h"
 #include "../Utility/MouseCursor.h"
 
+/* 列挙体宣言 */
+enum PlayGameState
+{
+	START,
+	PLAY
+};
+
 /* クラス宣言 */
 class PlayGameLayer : public Layer
 {
@@ -89,6 +96,7 @@ class PlayGameLayer : public Layer
 	bool mPauseFlag;
 	// スタートフラグ
 	bool mStartFlag;
+	bool msFlag;
 	// カウンタ
 	int mCount;
 public:
@@ -107,6 +115,7 @@ public:
 	void SetStartFlag(bool flag) { mStartFlag = flag; }
 	// 取得
 	bool GetResultFlag() { return mResultFlag; }
+	bool GetStartFlag() { return mStartFlag; }
 	bool GetFlag() { return mSceneFlag; }
 	int GetCount() { return mCount; }
 };

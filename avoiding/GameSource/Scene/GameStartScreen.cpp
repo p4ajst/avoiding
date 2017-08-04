@@ -30,15 +30,16 @@ using namespace DirectX::SimpleMath;
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Initialize()
 {
-	// カウンタの初期化
-	mStartCounter = 0;
-	// フラグの初期化
-	mStartFlag = false;
 	// スプライトバッチの初期化
 	pSprites = make_unique<SpriteBatch>(g_pImmediateContext.Get());
 	// 画像の初期化
 	mWhite = make_unique<Texture>(L"Resources\\screen.png");
 	mNumber = make_unique<Texture>(L"Resources\\number.png");
+	// カウンタの初期化
+	mStartCounter = 5;
+	mCnt = 300;
+	// フラグの初期化
+	mStartFlag = false;
 }
 
 // ----------------------------------------------------------------------------------------------- //
@@ -49,17 +50,16 @@ void GameStartScreen::Initialize()
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Update()
 {
-	auto cnt = 180;
 	// フラグが偽であるなら
 	if (!mStartFlag)
 	{
 		// カウンタを進める
-		cnt--;
+		mCnt--;
 		// カウンタが６０で割り切れたら
-		if (cnt % 60 == 0)
+		if (mCnt % 60 == 0)
 		{
 			// 何秒か計算して代入
-			mStartCounter = cnt / 60;
+			mStartCounter = mCnt / 60;
 		}
 		// カウンタが０より小さくなったら
 		if (mStartCounter < 0)
@@ -89,20 +89,27 @@ void GameStartScreen::Render()
 		// 画像の半透明処理
 		g_pImmediateContext->OMSetBlendState(g_state->NonPremultiplied(), nullptr, 0xFFFFFFFF);
 	});
-	pSprites->Draw(mWhite->m_pTexture, rect, Colors::White);
-	/*
-		ID3D11ShaderResourceView* texture...テクスチャのポインタ
-		FXMVECTOR position...画面の描画の基点（どこに描画するか）
-		RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
-		FXMVECTOR color...色
-		float rotation...回転角
-		XMFLOAT2 const& origin...描画する画像の基点
-		GXMVECTOR scale...拡大率
-		SpriteEffects effects
-		float layerDepth
-	 */
 	//pSprites->Draw(mNumber->m_pTexture, Vector2(640.0f,480.0f),&crect,Colors::White,0.0f,Vector2(32.0f,32.0f),Vector2(1.0f, 1.0f));
-	DrawNum(pSprites.get(), mNumber->m_pTexture, mStartCounter, 640.0f, 480.f);
+	
+	// スタートフラグが偽なら
+	if (!mStartFlag)
+	{
+		// 半透明画像の描画
+		pSprites->Draw(mWhite->m_pTexture, rect, Colors::White);
+		/*
+			ID3D11ShaderResourceView* texture...テクスチャのポインタ
+			FXMVECTOR position...画面の描画の基点（どこに描画するか）
+			RECT const* sourceRectangle...元のテクスチャのどの部分を描画するか
+			FXMVECTOR color...色
+			float rotation...回転角
+			XMFLOAT2 const& origin...描画する画像の基点
+			GXMVECTOR scale...拡大率
+			SpriteEffects effects
+			float layerDepth
+		*/
+		// 数字の描画
+		DrawNum(pSprites.get(), mNumber->m_pTexture, mStartCounter, 640.0f, 480.f);
+	}
 	// スプライトバッチの終わり
 	pSprites->End();
 }
