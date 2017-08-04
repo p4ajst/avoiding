@@ -24,16 +24,16 @@ using namespace DirectX::SimpleMath;
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 MouseCursor::MouseCursor(int width, int height)
-	:mNear(width / 2, height / 2, 0)
-	, mFar(width / 2, height / 2, 1)
-	, mNearClip(0, 0, 0)
-	, mFarClip(0, 0, 0)
+	:mNear((float)width / 2.0f, (float)height / 2.0f, 0.0f)
+	, mFar((float)width / 2.0f, (float)height / 2.0f, 1.0f)
+	, mNearClip(0.0f, 0.0f, 0.0f)
+	, mFarClip (0.0f, 0.0f, 0.0f)
 	, mViewPort
 	(
-		width / 2,           0, 0, 0,
-		        0, -height / 2, 0, 0,
-		        0,           0, 1, 0,
-		width / 2,  height / 2, 0, 1
+		(float)width / 2.0f,                    0.0f, 0.0f, 0.0f,
+		               0.0f, (float)(-height) / 2.0f, 0.0f, 0.0f,
+		               0.0f,                    0.0f, 1.0f, 0.0f,
+		(float)width / 2.0f,    (float)height / 2.0f, 0.0f, 1.0f
 	)
 {
 }
@@ -73,11 +73,11 @@ void MouseCursor::Initialize()
 void MouseCursor::Update()
 {
 	// 一番遠いスクリーン上の座標の設定
-	mNear.x = g_mouse.x;
-	mNear.y = g_mouse.y;
+	mNear.x = (float)g_mouse.x;
+	mNear.y = (float)g_mouse.y;
 	// 一番遠いスクリーン上の座標の設定
-	mFar.x = g_mouse.x;
-	mFar.y = g_mouse.y;
+	mFar.x = (float)g_mouse.x;
+	mFar.y = (float)g_mouse.y;
 	// ビューポートの逆行列を利用してニアクリップをトランスフォームする
 	mNearClip = Vector3::Transform(mNear, mInvertViewPort);
 	// ビューポートの逆行列を利用してファークリップをトランスフォームする

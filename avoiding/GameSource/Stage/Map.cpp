@@ -120,7 +120,7 @@ Vector3 Map::GetPos(int x, int z, int ox, int oz)
 	// OFFSET引いた分を足す
 	x += ox;
 	z += oz;
-	return Vector3(x, 0.0f, z);
+	return Vector3((float)x, 0.0f, (float)z);
 }
 
 // ----------------------------------------------------------------------------------------------- //

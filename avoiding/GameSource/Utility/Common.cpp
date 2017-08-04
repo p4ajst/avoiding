@@ -142,7 +142,7 @@ void DrawNum(SpriteBatch* sprite, ID3D11ShaderResourceView* resource, int n, flo
 			int b = TextureSize;
 
 			// 座標の設定
-			int px = x - sn * TextureSize;
+			float px = x - sn * TextureSize;
 
 			// 画像の描画範囲
 			crect = { l,t,r,b };

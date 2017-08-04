@@ -104,7 +104,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	kposs.x = floorf(kpos.x + mOffset_x);
 	kposs.z = floorf(kpos.z + mOffset_z);
 	// 移動可能マスになるまで
-	while (mMap->GetAttribute(kposs.x, kposs.z) != COOKIE)
+	while (mMap->GetAttribute((int)(kposs.x), (int)(kposs.z)) != COOKIE)
 	{
 		// 座標をランダムで設定
 		kpos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
@@ -132,7 +132,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	iposs.x = floorf(ipos.x + mOffset_x);
 	iposs.z = floorf(ipos.z + mOffset_z);
 	// 移動可能マスになるまで
-	while (mMap->GetAttribute(iposs.x, iposs.z) != COOKIE)
+	while (mMap->GetAttribute((int)(iposs.x), (int)(iposs.z)) != COOKIE)
 	{
 		// 座標をランダムで設定
 		ipos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
@@ -250,14 +250,14 @@ void PlayGameLayer::Update()
 				}
 
 				// 生成したすべてのボムを更新
-				for (int i = 0; i < mBombs.size(); i++)
+				for (int i = 0; i < (int)(mBombs.size()); i++)
 				{
 					mBombs[i]->Update();
 				}
 			}
 
 			// ボムと床のあたり判定
-			for (int i = 0; i < mBombs.size(); i++)
+			for (int i = 0; i < (int)(mBombs.size()); i++)
 			{
 				// 座標から配列の要素番号を算出
 				Vector3 bombPos = Vector3(0, 0, 0);
@@ -268,12 +268,12 @@ void PlayGameLayer::Update()
 				if (mBombs[i]->GetPos().y < 0)
 				{
 					// 床の属性を確認
-					switch (mMap->GetAttribute(bombPos.x, bombPos.z))
+					switch (mMap->GetAttribute((int)(bombPos.x), (int)(bombPos.z)))
 					{
 						// クッキー床なら
 					case COOKIE:
 						// クッキー床から穴の床に代入
-						mMap->Set(bombPos.x, bombPos.z, mChip[HOLE]);
+						mMap->Set((int)(bombPos.x), (int)(bombPos.z), mChip[HOLE]);
 						break;
 						// ネットなら
 					case NET:
@@ -299,7 +299,7 @@ void PlayGameLayer::Update()
 			chpos.z = floorf(mKuma->GetPos().z + mOffset_z);
 
 			// キャラクターのいる床の属性を確認
-			switch (mMap->GetAttribute(chpos.x, chpos.z))
+			switch (mMap->GetAttribute((int)(chpos.x), (int)(chpos.z)))
 			{
 				// 穴床なら
 			case HOLE:
@@ -328,7 +328,7 @@ void PlayGameLayer::Update()
 			}
 
 			// ボムとキャラクターのあたり判定
-			for (int i = 0; i < mBombs.size(); i++)
+			for (int i = 0; i < (int)(mBombs.size()); i++)
 			{
 				// ボムとプレイヤーのあたり判定
 				if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
@@ -359,8 +359,8 @@ void PlayGameLayer::Update()
 			// カーソルの座標の更新
 			mCursorPos = mResult;
 			// 計算したものをfloorfで丸める
-			mMapOffset_x = floorf(mCursorPos.x + mOffset_x);
-			mMapOffset_z = floorf(mCursorPos.z + mOffset_z);
+			mMapOffset_x = (int)(floorf(mCursorPos.x + mOffset_x));
+			mMapOffset_z = (int)(floorf(mCursorPos.z + mOffset_z));
 			// マップチップの中心を計算
 			cx = 1.0f / 2.0f;
 			cz = 1.0f / 2.0f;
@@ -388,10 +388,6 @@ void PlayGameLayer::Update()
 					mMap->Set(mMapOffset_x, mMapOffset_z, mChip[NET]);
 				}
 			}
-			break;
-		}
-		default:
-		{
 			break;
 		}
 	}
@@ -799,7 +795,7 @@ void PlayGameLayer::Draw()
 	// マウスカーソルの描画
 	mCursor->Draw(view, proj);
 	// ボムの描画
-	for (int i = 0; i< mBombs.size(); i++)
+	for (int i = 0; i< (int)(mBombs.size()); i++)
 	{
 		mBombs[i]->Draw(view, proj);
 	}
