@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: DirectXTK.h
 //
-// DirectXTK‚ÉŠÖ‚·‚éŠÖ”ŒQ
+// DirectXTKã«é–¢ã™ã‚‹é–¢æ•°ç¾¤
 //
 // Date: 2015.8.27
 // Author: Hideyasu Imase
@@ -18,31 +18,31 @@
 #include <CommonStates.h>
 
 //////////////////////////////
-// ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾	//
+// é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€	//
 //////////////////////////////
 void DirectXTK_Initialize();
 void DirectXTK_UpdateInputState();
 void DirectXTK_ResetScrollWheelValue();
 
 //////////////////////////////
-// ƒOƒ[ƒoƒ‹•Ï”			//
+// ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°			//
 //////////////////////////////
 
-// ƒL[ƒ{[ƒhŠÖŒW
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰é–¢ä¿‚
 extern DirectX::Keyboard::State g_key;
 extern std::unique_ptr<DirectX::Keyboard::KeyboardStateTracker> g_keyTracker;
 
-// ƒ}ƒEƒXŠÖŒW
+// ãƒã‚¦ã‚¹é–¢ä¿‚
 extern DirectX::Mouse::State g_mouse;
 extern std::unique_ptr<DirectX::Mouse::ButtonStateTracker> g_mouseTracker;
 
-// ƒRƒ‚ƒ“ƒXƒe[ƒg
+// ã‚³ãƒ¢ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆ
 extern std::unique_ptr < DirectX::CommonStates> g_state;
 
-// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`
+// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ
 extern std::unique_ptr<DirectX::SpriteBatch> g_spriteBatch;
 
-// ƒXƒvƒ‰ƒCƒgƒtƒHƒ“ƒg
+// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ã‚©ãƒ³ãƒˆ
 extern std::unique_ptr<DirectX::SpriteFont> g_spriteFont;
 
 

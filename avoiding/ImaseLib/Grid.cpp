@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: Grid.cpp
 //
-// ƒOƒŠƒbƒh‚ğ•`‰æ‚·‚éƒNƒ‰ƒX
+// ã‚°ãƒªãƒƒãƒ‰ã‚’æç”»ã™ã‚‹ã‚¯ãƒ©ã‚¹
 //
 // Date: 2015.9.2
 // Author: Hideyasu Imase
@@ -17,17 +17,17 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 //--------------------------------------------------------------------------------------
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //--------------------------------------------------------------------------------------
 Grid::Grid(int w, int h, int size) : m_pInputLayout(nullptr), m_w(w), m_h(h), m_size(size), m_offx(0), m_offy(0)
 {
-	// ƒGƒtƒFƒNƒgƒIƒuƒWƒFƒNƒg¶¬
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ
 	m_basicEffect.reset(new BasicEffect(g_pd3dDevice.Get()));
-	// ’¸“_ƒJƒ‰[(—LŒø)
+	// é ‚ç‚¹ã‚«ãƒ©ãƒ¼(æœ‰åŠ¹)
 	m_basicEffect->SetVertexColorEnabled(true);
-	// ƒvƒŠƒ~ƒeƒBƒuƒIƒuƒWƒFƒNƒg¶¬
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ
 	m_primitiveBatch.reset(new PrimitiveBatch<VertexPositionColor>(g_pImmediateContext.Get()));
-	// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg¶¬
+	// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç”Ÿæˆ
 	void const* shaderByteCode;
 	size_t byteCodeLength;
 	m_basicEffect->GetVertexShaderBytecode(&shaderByteCode, &byteCodeLength);
@@ -38,22 +38,22 @@ Grid::Grid(int w, int h, int size) : m_pInputLayout(nullptr), m_w(w), m_h(h), m_
 }
 
 //--------------------------------------------------------------------------------------
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //--------------------------------------------------------------------------------------
 Grid::~Grid()
 {
-	// “ü—ÍƒŒƒCƒAƒEƒg‚ğ‰ğ•ú‚·‚é
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’è§£æ”¾ã™ã‚‹
 	if (m_pInputLayout) m_pInputLayout->Release();
 }
 
 //--------------------------------------------------------------------------------------
-// •`‰æ
+// æç”»
 //--------------------------------------------------------------------------------------
 void Grid::Render()
 {
 	Matrix world, view, proj;
 
-	// ‚Q‚c—ps—ñ‚ğì¬‚µ‚ÄƒGƒtƒFƒNƒg‚ÖƒZƒbƒg
+	// ï¼’ï¼¤ç”¨è¡Œåˆ—ã‚’ä½œæˆã—ã¦ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã¸ã‚»ãƒƒãƒˆ
 	world = Matrix::Identity;
 	view = Matrix::Identity;
 	proj = Matrix::CreateTranslation(0.5f, 0.5f, 0.0f) * Matrix::CreateOrthographicOffCenter(0.0f, (float)m_w, (float)m_h, 0.0f, 0.0f, 100.0f);
@@ -66,14 +66,14 @@ void Grid::Render()
 
 	m_primitiveBatch->Begin();
 
-	// cü‚ğ•`‰æ
+	// ç¸¦ç·šã‚’æç”»
 	for (int i = 0; i < m_w / m_size + 1; i++)
 	{
 		VertexPositionColor v1(Vector3(static_cast<float>(m_size * i) + m_offx, 0.0f, 0.0f), Colors::DarkGreen);
 		VertexPositionColor v2(Vector3(static_cast<float>(m_size * i) + m_offx, static_cast<float>(m_h), 0.0f), Colors::DarkGreen);
 		m_primitiveBatch->DrawLine(v1, v2);
 	}
-	// ‰¡ü‚ğ•`‰æ
+	// æ¨ªç·šã‚’æç”»
 	for (int i = 0; i < m_h / m_size + 1; i++)
 	{
 		VertexPositionColor v1(Vector3(0.0f, static_cast<float>(m_size * i) + m_offy, 0.0f), Colors::DarkGreen);
@@ -85,17 +85,17 @@ void Grid::Render()
 }
 
 //--------------------------------------------------------------------------------------
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //--------------------------------------------------------------------------------------
 GridFloor::GridFloor(float size, int divs) : m_pInputLayout(nullptr), m_size(size), m_divs(divs)
 {
-	// ƒGƒtƒFƒNƒgƒIƒuƒWƒFƒNƒg¶¬
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ
 	m_basicEffect.reset(new BasicEffect(g_pd3dDevice.Get()));
-	// ’¸“_ƒJƒ‰[(—LŒø)
+	// é ‚ç‚¹ã‚«ãƒ©ãƒ¼(æœ‰åŠ¹)
 	m_basicEffect->SetVertexColorEnabled(true);
-	// ƒvƒŠƒ~ƒeƒBƒuƒIƒuƒWƒFƒNƒg¶¬
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆç”Ÿæˆ
 	m_primitiveBatch.reset(new PrimitiveBatch<VertexPositionColor>(g_pImmediateContext.Get()));
-	// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg¶¬
+	// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆç”Ÿæˆ
 	void const* shaderByteCode;
 	size_t byteCodeLength;
 	m_basicEffect->GetVertexShaderBytecode(&shaderByteCode, &byteCodeLength);
@@ -106,16 +106,16 @@ GridFloor::GridFloor(float size, int divs) : m_pInputLayout(nullptr), m_size(siz
 }
 
 //--------------------------------------------------------------------------------------
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //--------------------------------------------------------------------------------------
 GridFloor::~GridFloor()
 {
-	// “ü—ÍƒŒƒCƒAƒEƒg‚ğ‰ğ•ú‚·‚é
+	// å…¥åŠ›ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚’è§£æ”¾ã™ã‚‹
 	if (m_pInputLayout) m_pInputLayout->Release();
 }
 
 //--------------------------------------------------------------------------------------
-// •`‰æ
+// æç”»
 //--------------------------------------------------------------------------------------
 void GridFloor::Render(Matrix view, Matrix proj, GXMVECTOR color)
 {

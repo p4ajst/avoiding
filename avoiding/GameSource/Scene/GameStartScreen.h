@@ -1,47 +1,48 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : GameStartScreen.h                                                                    //
-// @ brief	 : ƒQ[ƒ€ŠJn‘O‚ÌƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÉŠÖ‚·‚éƒNƒ‰ƒX                                           //
+// @ brief	 : ã‚²ãƒ¼ãƒ é–‹å§‹å‰ã®ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹                                           //
 // @ date	 : 2017/07/18                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
 
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <memory>
 #include <SpriteBatch.h>
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/Texture.h"
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
+#include "../Utility/Common.h"
 
-/* ’è”’è‹` */
-static const int TextureSize = 64;
-
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class GameStartScreen
 {
-	/* ƒƒ“ƒo•Ï” */
-	// ƒJƒEƒ“ƒ^
-	int mStartCounter;
-	// ŠJnƒtƒ‰ƒO
-	bool mStartFlag;
-	// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ
 	std::unique_ptr<DirectX::SpriteBatch> pSprites;
-	// ‰æ‘œ•`‰æ•Ï”
+	// ç”»åƒæç”»å¤‰æ•°
 	std::unique_ptr<Texture> mWhite;
 	std::unique_ptr<Texture> mNumber;
+	// ã‚«ã‚¦ãƒ³ã‚¿
+	int mStartCounter;
+	int mCnt;
+	// é–‹å§‹ãƒ•ãƒ©ã‚°
+	bool mStartFlag;
 public:
-	/* ƒƒ“ƒoŠÖ” */
-	// ‰Šú‰»
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
+	// åˆæœŸåŒ–
 	void Initialize();
-	// XV
+	// æ›´æ–°
 	void Update();
-	// •`‰æ
+	// æç”»
 	void Render();
-	// I—¹
+	// çµ‚äº†
 	void Finalize();
-	// ƒtƒ‰ƒO‚Ìæ“¾
+	// ãƒ•ãƒ©ã‚°ã®å–å¾—
 	bool GetFlag() { return mStartFlag; }
 };
 

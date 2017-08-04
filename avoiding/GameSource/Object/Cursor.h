@@ -1,37 +1,37 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Cursor.h                                                                             //
-// @ brief	 : ƒJ[ƒ\ƒ‹‚ÉŠÖ‚·‚éƒNƒ‰ƒX                                                           //
+// @ brief	 : ã‚«ãƒ¼ã‚½ãƒ«ã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹                                                           //
 // @ date	 : 2017/06/25                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "Actor.h"
 #include "../Utility/MouseCursor.h"
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class Cursor :public Actor
 {
-	/* ƒƒ“ƒo•Ï” */
-	// ƒ}ƒEƒX§Œä
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+	// ãƒã‚¦ã‚¹åˆ¶å¾¡
 	std::shared_ptr<MouseCursor> mMouseCursor;
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Cursor() = default;
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Cursor() = default;
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize(int width, int height);
-	// XV
+	// æ›´æ–°
 	void Update();
 	void Update(float ox, float oz);
-	// •`‰æ
+	// æç”»
 	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
-	// æ“¾
+	// å–å¾—
 	std::shared_ptr<MouseCursor> GetCursor() { return mMouseCursor; }
 };

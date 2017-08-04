@@ -1,53 +1,53 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : ResultHUDLayer.h                                                                     //
-// @ brief	 : ƒwƒbƒhƒAƒbƒvƒfƒBƒXƒvƒŒƒC•”•ª‚ÌƒNƒ‰ƒX                                                 //
+// @ brief	 : ãƒ˜ãƒƒãƒ‰ã‚¢ãƒƒãƒ—ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤éƒ¨åˆ†ã®ã‚¯ãƒ©ã‚¹                                                 //
 // @ date	 : 2017/07/10                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/Texture.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "Layer.h"
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class ResultHUDLayer : public Layer
 {
-	/* ƒƒ“ƒo•Ï” */
-	// ƒV[ƒ“‘JˆÚ—p•Ï”
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+	// ã‚·ãƒ¼ãƒ³é·ç§»ç”¨å¤‰æ•°
 	bool mSceneFlag;
-	// •`‰æ‰æ‘œ•ÏX—p
+	// æç”»ç”»åƒå¤‰æ›´ç”¨
 	bool mResultFlag;
-	// ‰æ‘œ•`‰æ—p•Ï”
+	// ç”»åƒæç”»ç”¨å¤‰æ•°
 	std::unique_ptr<Texture> mBeforeFrog;
 	std::unique_ptr<Texture> mAfterFrog;
 	std::unique_ptr<Texture> mBeforeDoor;
 	std::unique_ptr<Texture> mAfterDoor;
 	std::unique_ptr<Texture> mGameClear;
 	std::unique_ptr<Texture> mGameOver;
-	// ”»’è—pƒtƒ‰ƒO
+	// åˆ¤å®šç”¨ãƒ•ãƒ©ã‚°
 	bool mfFlag;
 	bool mdFlag;
-	// ‰æ‘œ‚Ì•`‰æ”ÍˆÍ
+	// ç”»åƒã®æç”»ç¯„å›²
 	RECT mFrog;
 	RECT mDoor;
 	RECT mDoorA;
 
 public:
-	/* ƒƒ“ƒoŠÖ” */
-	// ‰Šú‰»ˆ—
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
+	// åˆæœŸåŒ–å‡¦ç†
 	void Initialize(Scene* scene);
-	// XVˆ—
+	// æ›´æ–°å‡¦ç†
 	void Update();
-	// •`‰æˆ—
+	// æç”»å‡¦ç†
 	void Draw();
-	// I—¹ˆ—
+	// çµ‚äº†å‡¦ç†
 	void Finalize();
-	// ƒtƒ‰ƒO‚Ìİ’è
+	// ãƒ•ãƒ©ã‚°ã®è¨­å®š
 	void SetResultFlag(bool flag) { mResultFlag = flag; }
-	// æ“¾
+	// å–å¾—
 	bool GetFlag() { return mSceneFlag; }
 };

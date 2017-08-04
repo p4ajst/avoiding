@@ -1,49 +1,49 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Scene.h                                                                              //
-// @ brief	 : ƒV[ƒ“‚ÌŠî’êƒNƒ‰ƒX                                                                   //
+// @ brief	 : ã‚·ãƒ¼ãƒ³ã®åŸºåº•ã‚¯ãƒ©ã‚¹                                                                   //
 // @ date	 : 2017/05/02                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚ğ–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã‚’é˜²æ­¢ */
 #pragma once 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <simplemath.h>
 #include <SpriteBatch.h>
 #include <memory>
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "../Utility/Camera.h"
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class Scene
 {
-	/* ƒƒ“ƒo•Ï” */
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
 protected:
-	// ‘JˆÚ”»’è—p•Ï”
+	// é·ç§»åˆ¤å®šç”¨å¤‰æ•°
 	bool mSceneFlag;
-	// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ
 	std::shared_ptr<DirectX::SpriteBatch> pSprite;
-	// ƒJƒƒ‰
+	// ã‚«ãƒ¡ãƒ©
 	std::shared_ptr<Camera> pCamera;
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Scene() = default;
-	// ‰¼‘zƒfƒXƒgƒ‰ƒNƒ^
+	// ä»®æƒ³ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	virtual ~Scene() = default;
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	virtual void Initialize(int width, int height) = 0;
-	// XV
+	// æ›´æ–°
 	virtual void Update() = 0;
-	// •`‰æ
+	// æç”»
 	virtual void Render() = 0;
-	// I—¹
+	// çµ‚äº†
 	virtual void Finalize() = 0;
-	// ƒV[ƒ“‘JˆÚ
+	// ã‚·ãƒ¼ãƒ³é·ç§»
 	virtual Scene* Change() = 0;
-	// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`‚Ìæ“¾
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒã®å–å¾—
 	std::shared_ptr<DirectX::SpriteBatch> GetSprite() { return pSprite; }
-	// ƒJƒƒ‰‚Ìæ“¾
+	// ã‚«ãƒ¡ãƒ©ã®å–å¾—
 	std::shared_ptr<Camera>GetCamera() { return pCamera; }
 };

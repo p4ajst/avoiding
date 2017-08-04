@@ -1,66 +1,66 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Actor.h                                                                              //
-// @ brief	 : “oê•¨‚ÌŠî’êƒNƒ‰ƒX                                                                   //
+// @ brief	 : ç™»å ´ç‰©ã®åŸºåº•ã‚¯ãƒ©ã‚¹                                                                   //
 // @ date	 : 2017/06/25                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <simplemath.h>
-// ‚c‚f‚r‚kƒGƒtƒFƒNƒgƒtƒ@ƒNƒgƒŠ‚ğg‚¤ˆ×
+// ï¼¤ï¼§ï¼³ï¼¬ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¯ãƒˆãƒªã‚’ä½¿ã†ç‚º
 #include <Effects.h>
-// ƒXƒ}[ƒgƒ|ƒCƒ“ƒ^‚ğg‚¤ˆ×
+// ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿ã‚’ä½¿ã†ç‚º
 #include <memory>
-// ƒ‚ƒfƒ‹‚ğg‚¤ˆ×
+// ãƒ¢ãƒ‡ãƒ«ã‚’ä½¿ã†ç‚º
 #include <Model.h>
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class Actor
 {
-	/* ƒƒ“ƒo•Ï” */
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
 protected:
-	// DGSLƒGƒtƒFƒNƒgƒtƒ@ƒNƒgƒŠ
+	// DGSLã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒ•ã‚¡ã‚¯ãƒˆãƒª
 	std::shared_ptr<DirectX::DGSLEffectFactory>  mDef;
-	// ƒ‚ƒfƒ‹
+	// ãƒ¢ãƒ‡ãƒ«
 	std::shared_ptr<DirectX::Model> mModel;
-	// À•W
+	// åº§æ¨™
 	DirectX::SimpleMath::Vector3 mPosition;
-	// Šp“x
+	// è§’åº¦
 	float mAngle;
-	// Šg‘å—¦
+	// æ‹¡å¤§ç‡
 	float mScalingFactor;
-	// ƒ[ƒJƒ‹ƒ[ƒ‹ƒhs—ñ
+	// ãƒ­ãƒ¼ã‚«ãƒ«ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	DirectX::SimpleMath::Matrix mLocalWorld;
 
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Actor() = default;
-	// ‰¼‘zƒfƒXƒgƒ‰ƒNƒ^
+	// ä»®æƒ³ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	virtual ~Actor() = default;
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize();
-	// XV
+	// æ›´æ–°
 	void Update();
-	// •`‰æ
+	// æç”»
 	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
-	// I—¹
+	// çµ‚äº†
 	void Finalize();
-	// ƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	// ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	void LoadModel(wchar_t* filename);
-	// s—ñŒvZ
+	// è¡Œåˆ—è¨ˆç®—
 	void Calc();
-	// ƒƒ“ƒo•Ï”‚Ìİ’è
+	// ãƒ¡ãƒ³ãƒå¤‰æ•°ã®è¨­å®š
 	void SetModel(std::shared_ptr<DirectX::Model> model) { mModel = model; }
 	void SetPos(DirectX::SimpleMath::Vector3 pos) { mPosition = pos; }
 	void SetAngle(float angle) { mAngle = angle; }
 	void SetScale(float scale) { mScalingFactor = scale; }
-	// ƒƒ“ƒo•Ï”‚Ìæ“¾
+	// ãƒ¡ãƒ³ãƒå¤‰æ•°ã®å–å¾—
 	std::shared_ptr<DirectX::Model> GetModel() { return mModel; }
 	DirectX::SimpleMath::Vector3 GetPos() { return mPosition; }
 	float GetAngle() { return mAngle; }

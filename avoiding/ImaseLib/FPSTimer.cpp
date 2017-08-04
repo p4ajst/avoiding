@@ -1,13 +1,13 @@
-//--------------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // File: FPSTimer.cpp
 //
-// FPS���������N���X
+// FPS制御をするクラス
 //
-// �g�����FWaitFrame�֐��Ńt���[���X�V�̃^�C�~���O�𒲐����܂�
-//         �������������������ꍇ�͒�����WaitFrame�֐����甲���܂�
+// 使い方：WaitFrame関数でフレーム更新のタイミングを調整します
+//         処理落ちが発生した場合は直ちにWaitFrame関数から抜けます
 //
-// �Q�lURL�Fhttp://sourceforge.jp/projects/nyx-lib/scm/svn/blobs/146/Nyx/branches/v4/Nyx/Source/Timer/FPSTimer.cpp
-// �Q�l���ЁFWindows �v���t�F�b�V���i�� �Q�[���v���O���~���O
+// 参考URL：http://sourceforge.jp/projects/nyx-lib/scm/svn/blobs/146/Nyx/branches/v4/Nyx/Source/Timer/FPSTimer.cpp
+// 参考書籍：Windows プロフェッショナル ゲームプログラミング
 //
 // Date: 2015.2.16
 // Author: Hideyasu Imase
@@ -24,9 +24,9 @@ FPSTimer::FPSTimer(int fps)
 , m_nowFPS(0)
 , m_frames(0)
 {
-	// ������\�p�t�H�[�}���X�J�E���^�̎��g�����擾
+	// 高分解能パフォーマンスカウンタの周波数を取得
 	QueryPerformanceFrequency(&m_freq); 
-	// FPS�̐ݒ�
+	// FPSの設定
 	SetFPS(fps);
 }
 
@@ -44,12 +44,12 @@ void FPSTimer::SetFPS(int fps)
 	}
 	else
 	{
-		// 0x00010000 ���Pms�ƍl��1/60(16.66ms)��DWORD�^�ŕ\������
+		// 0x00010000 が１msと考え1/60(16.66ms)をDWORD型で表現する
 		m_fpsWait = 1000 * 0x10000 / fps;
 	}
 }
 
-// PC�N������̌o�ߎ��Ԃ�Ԃ�(ms)
+// PC起動からの経過時間を返す(ms)
 DWORD FPSTimer::GetNowTime()
 {
 	if (m_fps == 0) return 0;
@@ -62,27 +62,27 @@ DWORD FPSTimer::GetNowTime()
 
 void FPSTimer::WaitFrame()
 {
-	// fpsWait��0�̏ꍇ�͑҂��Ȃ�
+	// fpsWaitが0の場合は待たない
 	if (m_fpsWait == 0) return;
 
 	DWORD nowTime = GetNowTime();
 
-	// fpsWaitTT�ɂ͑҂����Ԃ̏����ȉ��̏�񂪓����Ă���
+	// fpsWaitTTには待ち時間の少数以下の情報が入っている
 	m_fpsWaitTT = (m_fpsWaitTT & 0xffff) + m_fpsWait;
 
-	// �҂����Ԃ����߂�i0x0000****��ʂQ�o�C�g���������j
+	// 待ち時間を求める（0x0000****上位２バイトが整数部）
 	DWORD waitTime = m_fpsWaitTT >> 16;
 
-	// �o�ߎ��ԁi���݂̎��ԁ|�`�悵�����ԁj���Z�o����
+	// 経過時間（現在の時間－描画した時間）を算出する
 	DWORD elapsedTime = nowTime - m_lastDrawTime;
 
-	// �҂����Ԃ��o�ߎ��Ԃ��z���Ă���̂ő҂K�v�͂Ȃ�
+	// 待ち時間を経過時間が越えているので待つ必要はない
 	if (elapsedTime >= waitTime)
 	{
-		// �`�悵�����Ԃ����݂̎��Ԃɂ��Ċ֐��𔲂���
+		// 描画した時間を現在の時間にして関数を抜ける
 		m_lastDrawTime = nowTime;
 
-		// ���݂�FPS���擾
+		// 現在のFPSを取得
 		if (nowTime - m_beforeTime >= 1000)
 		{
 			m_beforeTime = nowTime;
@@ -95,21 +95,21 @@ void FPSTimer::WaitFrame()
 	}
 
 	//////////////////////////////////////////////////////////////
-	//	�܂����̃t���[���X�V�܂Ŏ��Ԃ�����̂ő҂��Ƃɂ���	//
+	//	まだ次のフレーム更新まで時間があるので待つことにする	//
 	//////////////////////////////////////////////////////////////
 
-	// Sleep�֐��ő҂��Ƃɂ��邪�덷4ms�ȓ��̏ꍇ��Sleep���Ȃ�
+	// Sleep関数で待つことにするが誤差4ms以内の場合はSleepしない
 	if (waitTime - elapsedTime >= 4)
 	{
 		Sleep(waitTime - elapsedTime - 3);
 	}
-	// Sleep�֐��Ő��m�ȑ҂����Ԃ��w��ł��Ȃ��̂ł����ł���Ƀ��[�v���đ҂�
+	// Sleep関数で正確な待ち時間を指定できないのでここでさらにループして待つ
 	while (GetNowTime() - m_lastDrawTime < waitTime);
 
-	// waitTime���ԑ҂������Ƃɂ��āA�Ō�ɕ`�悵�����Ԃ��X�V
+	// waitTime時間待ったことにして、最後に描画した時間を更新
 	m_lastDrawTime += waitTime;
 
-	// ���݂�FPS���擾
+	// 現在のFPSを取得
 	if (nowTime - m_beforeTime >= 1000)
 	{
 		m_beforeTime = nowTime;
@@ -120,7 +120,7 @@ void FPSTimer::WaitFrame()
 
 }
 
-// ���݂�FPS�i1�b������̃t���[�����j���擾����
+// 現在のFPS（1秒あたりのフレーム数）を取得する
 int FPSTimer::GetNowFPS()
 {
 	return m_nowFPS;

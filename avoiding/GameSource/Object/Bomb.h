@@ -1,58 +1,58 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Bomb.h                                                                               //
-// @ brief	 : ”š’e‚ÉŠÖ‚·‚éƒNƒ‰ƒX                                                                   //
+// @ brief	 : çˆ†å¼¾ã«é–¢ã™ã‚‹ã‚¯ãƒ©ã‚¹                                                                   //
 // @ date	 : 2017/06/25                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
 #include <vector>
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "Actor.h"
 #include "../Stage/Map.h"
 
-/* ’è”’è‹` */
-// d—Í
+/* å®šæ•°å®šç¾© */
+// é‡åŠ›
 static const float GRAVITY = 0.980665f;
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class Bomb :public Actor
 {
-	/* ƒƒ“ƒo•Ï” */
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
 private:
-	// ƒ{ƒ€‚Ì”z—ñ
+	// ãƒœãƒ ã®é…åˆ—
 	std::vector<std::shared_ptr<Bomb>> mBombs;
-	// ‘¬“x
+	// é€Ÿåº¦
 	DirectX::SimpleMath::Vector3 mVelocity;
 	// map
 	std::shared_ptr<Map> mMap;
-	// —‰ºŠÔ
+	// è½ä¸‹æ™‚é–“
 	float mTime;
-	// ƒtƒ‰ƒO
+	// ãƒ•ãƒ©ã‚°
 	bool mFlag;
 
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Bomb() = default;
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Bomb() = default;
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	void Initialize();
-	// XV
+	// æ›´æ–°
 	void Update();
-	// ©—R—‰º
+	// è‡ªç”±è½ä¸‹
 	void FreeFall();
-	// À•W‚É‘¬“x‚ğ‘«‚·
+	// åº§æ¨™ã«é€Ÿåº¦ã‚’è¶³ã™
 	void AddPos();
-	// İ’è
+	// è¨­å®š
 	void SetVel(DirectX::SimpleMath::Vector3 vel) { mVelocity = vel; }
 	//void SetFlag(bool flag) { mFlag = flag; }
-	// æ“¾
+	// å–å¾—
 	DirectX::SimpleMath::Vector3 GetVel() { return mVelocity; }
 	bool GetFlag() { return mFlag; }
 };

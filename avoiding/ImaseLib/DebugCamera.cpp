@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: DebugCamera.cpp
 //
-// ƒfƒoƒbƒO—pƒJƒƒ‰ƒNƒ‰ƒX
+// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹
 //
 // Date: 2015.11.23
 // Author: Hideyasu Imase
@@ -14,30 +14,30 @@ using namespace DirectX::SimpleMath;
 const float DebugCamera::DEFAULT_CAMERA_DISTANCE = 5.0f;
 
 //--------------------------------------------------------------------------------------
-// XV
+// æ›´æ–°
 //--------------------------------------------------------------------------------------
 void DebugCamera::Update()
 {
-	// ƒ}ƒEƒX‚Ì¶ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½
+	// ãƒã‚¦ã‚¹ã®å·¦ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸ
 	if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::ButtonState::PRESSED)
 	{
-		// ƒ}ƒEƒX‚ÌÀ•W‚ğæ“¾
+		// ãƒã‚¦ã‚¹ã®åº§æ¨™ã‚’å–å¾—
 		m_x = g_mouse.x;
 		m_y = g_mouse.y;
 	}
 	else if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::ButtonState::RELEASED)
 	{
-		// Œ»İ‚Ì‰ñ“]‚ğ•Û‘¶
+		// ç¾åœ¨ã®å›è»¢ã‚’ä¿å­˜
 		m_xAngle = m_xTmp;
 		m_yAngle = m_yTmp;
 	}
-	// ƒ}ƒEƒX‚Ìƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚Ä‚¢‚½‚çƒJƒƒ‰‚ğˆÚ“®‚³‚¹‚é
+	// ãƒã‚¦ã‚¹ã®ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚Œã¦ã„ãŸã‚‰ã‚«ãƒ¡ãƒ©ã‚’ç§»å‹•ã•ã›ã‚‹
 	if (g_mouse.leftButton)
 	{
 		Motion(g_mouse.x, g_mouse.y);
 	}
 
-	// ƒ}ƒEƒX‚ÌƒtƒHƒC[ƒ‹’l‚ğæ“¾
+	// ãƒã‚¦ã‚¹ã®ãƒ•ã‚©ã‚¤ãƒ¼ãƒ«å€¤ã‚’å–å¾—
 	m_scrollWheelValue = g_mouse.scrollWheelValue;
 	if (m_scrollWheelValue > 0)
 	{
@@ -45,7 +45,7 @@ void DebugCamera::Update()
 		DirectXTK_ResetScrollWheelValue();
 	}
 
-	// ƒrƒ…[s—ñ‚ğZo‚·‚é
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’ç®—å‡ºã™ã‚‹
 	Matrix rotY = Matrix::CreateRotationY(m_yTmp);
 	Matrix rotX = Matrix::CreateRotationX(m_xTmp);
 
@@ -63,19 +63,19 @@ void DebugCamera::Update()
 }
 
 //--------------------------------------------------------------------------------------
-// s—ñ‚Ì¶¬
+// è¡Œåˆ—ã®ç”Ÿæˆ
 //--------------------------------------------------------------------------------------
 void DebugCamera::Motion(int x, int y)
 {
-	// ƒ}ƒEƒXƒ|ƒCƒ“ƒ^‚ÌˆÊ’u‚Ìƒhƒ‰ƒbƒOŠJnˆÊ’u‚©‚ç‚Ì•ÏˆÊ (‘Š‘Î’l)
+	// ãƒã‚¦ã‚¹ãƒã‚¤ãƒ³ã‚¿ã®ä½ç½®ã®ãƒ‰ãƒ©ãƒƒã‚°é–‹å§‹ä½ç½®ã‹ã‚‰ã®å¤‰ä½ (ç›¸å¯¾å€¤)
 	float dx = (x - m_x) * m_sx;
 	float dy = (y - m_y) * m_sy;
 
 	if (dx != 0.0f || dy != 0.0f)
 	{
-		// ‚x²‚Ì‰ñ“]
+		// ï¼¹è»¸ã®å›è»¢
 		float yAngle = dx * XM_PI;
-		// ‚w²‚Ì‰ñ“]
+		// ï¼¸è»¸ã®å›è»¢
 		float xAngle = dy * XM_PI;
 
 		m_xTmp = m_xAngle + xAngle;

@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: Line.h
 //
-// ƒ‰ƒCƒ“‚ğ•`‰æ‚·‚éƒNƒ‰ƒX
+// ãƒ©ã‚¤ãƒ³ã‚’æç”»ã™ã‚‹ã‚¯ãƒ©ã‚¹
 //
 // Date: 2015.10.18
 // Author: Hideyasu Imase
@@ -15,53 +15,53 @@
 #include <SimpleMath.h>
 #include <DirectXColors.h>
 
-// ƒ‰ƒCƒ“ƒNƒ‰ƒX
+// ãƒ©ã‚¤ãƒ³ã‚¯ãƒ©ã‚¹
 class LineBatch
 {
-	// ƒGƒtƒFƒNƒg
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	std::unique_ptr<DirectX::BasicEffect> m_basicEffect;
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒoƒbƒ`
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒãƒƒãƒ
 	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColor>> m_primitiveBatch;
 
-	// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
+	// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 	ID3D11InputLayout* m_pInputLayout;
 
-	// ‰æ–ÊƒTƒCƒY
+	// ç”»é¢ã‚µã‚¤ã‚º
 	int m_w, m_h;
 
-	// ƒOƒŠƒbƒhƒTƒCƒY
+	// ã‚°ãƒªãƒƒãƒ‰ã‚µã‚¤ã‚º
 	int m_size;
 
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	LineBatch(int w, int h, int size);
 
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~LineBatch();
 
-	// •`‰æŠJn
+	// æç”»é–‹å§‹
 	void Begin();
 	void Begin(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
 
-	// •`‰æI—¹
+	// æç”»çµ‚äº†
 	void End();
 
-	// •`‰æ
+	// æç”»
 	void Draw(float x1, float y1, float x2, float y2, DirectX::XMVECTOR color = DirectX::Colors::White);
 
-	// •`‰æ
+	// æç”»
 	void Draw(DirectX::SimpleMath::Vector2 p1, DirectX::SimpleMath::Vector2 p2, DirectX::XMVECTOR color = DirectX::Colors::White);
 
-	// •`‰æ
+	// æç”»
 	void DrawLine(DirectX::SimpleMath::Vector2 p1, DirectX::XMVECTOR color = DirectX::Colors::White);
 
-	// •`‰æ
+	// æç”»
 	void DrawLine(DirectX::SimpleMath::Vector2 p1, DirectX::SimpleMath::Vector2 p2, DirectX::XMVECTOR color = DirectX::Colors::White);
 
-	// •`‰æ
+	// æç”»
 	void Draw(DirectX::SimpleMath::Vector3 p, DirectX::XMVECTOR color = DirectX::Colors::White);
 
-	// •`‰æ
+	// æç”»
 	void Draw(DirectX::SimpleMath::Vector3 p1, DirectX::SimpleMath::Vector3 p3, DirectX::XMVECTOR color = DirectX::Colors::White);
 };

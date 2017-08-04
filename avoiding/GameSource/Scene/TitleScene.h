@@ -1,45 +1,45 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : TitleScene.h                                                                         //
-// @ brief	 : ƒ^ƒCƒgƒ‹ƒV[ƒ“‚Ìƒwƒbƒ_ƒtƒ@ƒCƒ‹                                                       //
+// @ brief	 : ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«                                                       //
 // @ date	 : 2017/05/02                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
 #include <memory>
 #include <Effects.h>
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/Texture.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹iŠî’êƒNƒ‰ƒX‚Ìƒwƒbƒ_ƒtƒ@ƒCƒ‹j
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ï¼ˆåŸºåº•ã‚¯ãƒ©ã‚¹ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ï¼‰
 #include "Scene.h"
 #include "../Layer/TitleBackGroundLayer.h"
 #include "../Layer/TitleGameLayer.h"
 #include "../Layer/TitleHUDLayer.h"
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class TitleScene :public Scene
 {
-	/* ƒƒ“ƒo•Ï” */
-	// ”wŒiƒŒƒCƒ„[
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+	// èƒŒæ™¯ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	std::unique_ptr<TitleBackGroundLayer> mBackGround;
-	// ƒQ[ƒ€ƒŒƒCƒ„[
+	// ã‚²ãƒ¼ãƒ ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	std::unique_ptr<TitleGameLayer> mGame;
-	// HUDƒŒƒCƒ„[
+	// HUDãƒ¬ã‚¤ãƒ¤ãƒ¼
 	std::unique_ptr<TitleHUDLayer> mHUD;
 
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ‰Šú‰»ˆ—
+	// åˆæœŸåŒ–å‡¦ç†
 	void Initialize(int width, int height);
-	// XVˆ—
+	// æ›´æ–°å‡¦ç†
 	void Update();
-	// •`‰æˆ—
+	// æç”»å‡¦ç†
 	void Render();
-	// I—¹ˆ—
+	// çµ‚äº†å‡¦ç†
 	void Finalize();
-	// ƒV[ƒ“‘JˆÚ
+	// ã‚·ãƒ¼ãƒ³é·ç§»
 	Scene* Change();
 };

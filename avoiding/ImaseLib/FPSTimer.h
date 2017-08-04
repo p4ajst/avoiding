@@ -1,11 +1,11 @@
-//--------------------------------------------------------------------------------------
+﻿//--------------------------------------------------------------------------------------
 // File: FPSTimer.h
 //
-// FPS���������N���X
+// FPS制御をするクラス
 //
-// �g�����FWaitFrame�֐��Ńt���[���X�V�̃^�C�~���O�𒲐����܂�
-//         �������������������ꍇ�͒�����WaitFrame�֐����甲���܂�
-//		   �����̃o�[�W�����͕`��X�L�b�v�Ȃǂ͍l���Ă��܂���
+// 使い方：WaitFrame関数でフレーム更新のタイミングを調整します
+//         処理落ちが発生した場合は直ちにWaitFrame関数から抜けます
+//		   ※このバージョンは描画スキップなどは考えていません
 //
 // Date: 2015.2.16
 // Author: Hideyasu Imase
@@ -21,36 +21,36 @@ namespace ImaseLib
 	private:
 
 #pragma region
-		LARGE_INTEGER m_freq;	// ������\�p�t�H�[�}���X�J�E���^�̎��g��
-		int m_fps;				// FPS�i�P�b������̃t���[�����j
+		LARGE_INTEGER m_freq;	// 高分解能パフォーマンスカウンタの周波数
+		int m_fps;				// FPS（１秒あたりのフレーム数）
 		DWORD m_fpsWait;		// fpsWait = 1000 * 0x10000 / fps
-		DWORD m_fpsWaitTT;		// fpsWait�̏��������̌덷������ϐ�
-		DWORD m_lastDrawTime;	// �Ō�ɕ`�悵������
+		DWORD m_fpsWaitTT;		// fpsWaitの少数部分の誤差を入れる変数
+		DWORD m_lastDrawTime;	// 最後に描画した時間
 
-		// FPS�v���p�ϐ�
+		// FPS計測用変数
 		int m_nowFPS;
 		int m_frames;
 		DWORD m_beforeTime;
 
-		// ���݂̎��Ԃ��擾����
+		// 現在の時間を取得する
 		DWORD GetNowTime();
 #pragma endregion
 
 	public:
 
-		// ������FPS�i�P�b�Ԃ�����̃t���[�����j���w�肷��
+		// 引数にFPS（１秒間あたりのフレーム数）を指定する
 		FPSTimer(int fps);
 
-		// �ݒ肳��Ă���FPS���擾����
+		// 設定されているFPSを取得する
 		int GetFPS();
 
-		// FPS��ύX����
+		// FPSを変更する
 		void SetFPS(int fps);
 
-		// ���̃t���[���܂ő҂��߂̊֐�
+		// 次のフレームまで待つための関数
 		void WaitFrame();
 
-		// ���݂�FPS���擾����
+		// 現在のFPSを取得する
 		int GetNowFPS();
 
 	};

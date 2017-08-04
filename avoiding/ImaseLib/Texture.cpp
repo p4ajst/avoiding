@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: Texture.cpp
 //
-// ƒeƒNƒXƒ`ƒƒƒNƒ‰ƒX
+// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚¯ãƒ©ã‚¹
 //
 // Date: 2015.9.2
 // Author: Hideyasu Imase
@@ -10,16 +10,16 @@
 #include "Texture.h"
 #include "Direct3D.h"
 
-// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Texture::Texture(const wchar_t* fname)
 {
-	// ƒeƒNƒXƒ`ƒƒì¬
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ä½œæˆ
 	DirectX::CreateWICTextureFromFile(g_pd3dDevice.Get(), fname, nullptr, &m_pTexture);
 }
 
-// ƒfƒXƒgƒ‰ƒNƒ^
+// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 Texture::~Texture()
 {
-	// ƒeƒNƒXƒ`ƒƒ‚Ì‰ð•ú
+	// ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®è§£æ”¾
 	m_pTexture->Release();
 }

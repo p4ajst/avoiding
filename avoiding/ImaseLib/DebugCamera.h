@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: DebugCamera.h
 //
-// ƒfƒoƒbƒO—pƒJƒƒ‰ƒNƒ‰ƒX
+// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹
 //
 // Date: 2015.11.23
 // Author: Hideyasu Imase
@@ -11,27 +11,27 @@
 #include "DirectXTK.h"
 #include <SimpleMath.h>
 
-// ƒfƒoƒbƒO—pƒJƒƒ‰ƒNƒ‰ƒX
+// ãƒ‡ãƒãƒƒã‚°ç”¨ã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹
 class DebugCamera
 {
-	// ƒJƒƒ‰‚Ì‹——£
+	// ã‚«ãƒ¡ãƒ©ã®è·é›¢
 	static const float DEFAULT_CAMERA_DISTANCE;
 
-	// ‰¡‰ñ“]
+	// æ¨ªå›è»¢
 	float m_yAngle, m_yTmp;
 
-	// c‰ñ“]
+	// ç¸¦å›è»¢
 	float m_xAngle, m_xTmp;
 
-	// ƒhƒ‰ƒbƒO‚³‚ê‚½À•W
+	// ãƒ‰ãƒ©ãƒƒã‚°ã•ã‚ŒãŸåº§æ¨™
 	int m_x, m_y;
 
 	float m_sx, m_sy;
 
-	// ¶¬‚³‚ê‚½ƒrƒ…[s—ñ
+	// ç”Ÿæˆã•ã‚ŒãŸãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 	DirectX::SimpleMath::Matrix m_view;
 
-	// ƒXƒNƒ[ƒ‹ƒtƒHƒC[ƒ‹’l
+	// ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ•ã‚©ã‚¤ãƒ¼ãƒ«å€¤
 	int m_scrollWheelValue;
 
 private:
@@ -39,17 +39,17 @@ private:
 	void Motion(int x, int y);
 
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	DebugCamera(int w, int h)
 		: m_yAngle(0.0f), m_yTmp(0.0f), m_xAngle(0.0f), m_xTmp(0.0f), m_x(0), m_y(0), m_scrollWheelValue(0)
 	{
-		// ‰æ–ÊƒTƒCƒY‚É‘Î‚·‚é‘Š‘Î“I‚ÈƒXƒP[ƒ‹‚É’²®
+		// ç”»é¢ã‚µã‚¤ã‚ºã«å¯¾ã™ã‚‹ç›¸å¯¾çš„ãªã‚¹ã‚±ãƒ¼ãƒ«ã«èª¿æ•´
 		m_sx = 1.0f / (float)w;
 		m_sy = 1.0f / (float)h;
 		m_view = DirectX::SimpleMath::Matrix::Identity;
 	}
 
-	// XV
+	// æ›´æ–°
 	void Update();
 
 	DirectX::SimpleMath::Matrix GetCameraMatrix()
