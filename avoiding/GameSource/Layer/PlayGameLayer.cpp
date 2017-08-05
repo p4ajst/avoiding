@@ -53,12 +53,12 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	// CSV読み込み変数の生成
 	mCSV = make_shared<CSVReader>();
 	// CSV読み込み
-	mCSV->ReadCSV(L"Resources\\mapdata3.csv");
+	mCSV->ReadCSV(L"Resources\\mapdata4.csv");
 	// 読み込んだデータの取得
 	mMapData = mCSV->GetData();
 	// マップサイズを取得
 	mMapSize_x = mMapData[0].size();
-	mMapSize_z = mMapData.size() - 1;
+	mMapSize_z = mMapData.size();
 	// マップのオフセットを算出
 	mOffset_x = mMapSize_x / 2.0f;
 	mOffset_z = mMapSize_z / 2.0f;
@@ -183,6 +183,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 // ----------------------------------------------------------------------------------------------- // 
 void PlayGameLayer::Update()
 {
+	// プレイヤーの落下カウンタ
 	int w = 0;
 
 	// マップチップの中心
@@ -196,20 +197,19 @@ void PlayGameLayer::Update()
 	// 自機狙いタイミング
 	auto timing = 0;
 
-
-	//// キャラクターの座標
-	//Vector3 chpos = Vector3(0, 0, 0);
-	//// カーソルの座標
-	//Vector3 cpos = Vector3(0,0,0);
-
+	// フラグのステートが
 	switch (msFlag)
 	{
+		// スタートならば
 		case PlayGameState::START:
 		{
+			// スタートフラグを変える
 			mStartFlag = false;
+			// フラグのステートをプレイに変える
 			msFlag = PLAY;
 			break;
 		}
+		// プレイならば
 		case PlayGameState::PLAY:
 		{
 			// ポーズ中でないなら
@@ -298,33 +298,65 @@ void PlayGameLayer::Update()
 			chpos.x = floorf(mKuma->GetPos().x + mOffset_x);
 			chpos.z = floorf(mKuma->GetPos().z + mOffset_z);
 
-			// キャラクターのいる床の属性を確認
-			switch (mMap->GetAttribute((int)(chpos.x), (int)(chpos.z)))
+			// フィールドの範囲外に行ったら
+			if (chpos.x < 0.0f || chpos.x >= mMapSize_x ||
+				chpos.z < 0.0f || chpos.z >= mMapSize_z)
 			{
-				// 穴床なら
-			case HOLE:
+				// 落下カウンタを増やす
 				w++;
+				// 落下カウンタが600より小さかったら
 				while (w < 600)
 				{
 					// 落下する
 					mKuma->Fall();
+					// 落下カウンタを増やす
 					w++;
 				}
+				// -25.0f落下したら
 				if (mKuma->GetPos().y <= -25.0f)
 				{
 					// ゲームを終了する
 					mSceneFlag = true;
+					// 落下カウンタを初期化
+					w = 0;
 				}
-				break;
-				// ネットなら
-			case NET:
-				// ゲームを終了する
-				mSceneFlag = true;
-				break;
-				// それ以外なら
-			default:
-				// 何もしない
-				break;
+			}
+			else
+			{
+				// キャラクターのいる床の属性を確認
+				switch (mMap->GetAttribute((int)(chpos.x), (int)(chpos.z)))
+				{
+					// 穴床なら
+				case HOLE:
+					// 落下カウンタを増やす
+					w++;
+					// 落下カウンタが600より小さかったら
+					while (w < 600)
+					{
+						// 落下する
+						mKuma->Fall();
+						// 落下カウンタを増やす
+						w++;
+					}
+					// -25.0f落下したら
+					if (mKuma->GetPos().y <= -25.0f)
+					{
+						// ゲームを終了する
+						mSceneFlag = true;
+						// 落下カウンタを初期化
+						w = 0;
+					}
+					break;
+					// ネットなら
+				case NET:
+					// ゲームを終了する
+					mSceneFlag = true;
+					break;
+					// それ以外なら
+				default:
+					// 何もしない
+					break;
+				}
 			}
 
 			// ボムとキャラクターのあたり判定
@@ -335,6 +367,7 @@ void PlayGameLayer::Update()
 					mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
 					mBombs[i]->GetPos().y < 0)
 				{
+					// ゲームを終了する
 					mSceneFlag = true;
 				}
 			}
@@ -391,373 +424,6 @@ void PlayGameLayer::Update()
 			break;
 		}
 	}
-
-/*
-	auto flag = START;
-
-	switch (flag)
-	{
-	case START:
-		mStartFlag = false;
-		break;
-	case PLAY:
-		// ポーズ中でないなら
-		if (!mPauseFlag)
-		{
-			// 自機狙いタイマーをカウント
-			// タイマーをカウントアップさせる
-			mWaitTimer++;
-			// 自機狙いタイミングをランダムで
-			timing = rand() % 100 + 1;
-			// タイマーが一定値を超えたらボムを生成
-			if (mWaitTimer > 180)
-			{
-				if (timing % 3 == 0)
-				{
-					mBomb = make_shared<Bomb>();
-					mBomb->Initialize();
-					mBomb->SetModel(mBombModel);
-					Vector3 pos = mKuma->GetPos();
-					pos.y = 50;
-					mBomb->SetPos(pos);
-					mBombs.push_back(mBomb);
-					mWaitTimer = 0;
-				}
-				else
-				{
-					mBomb = make_shared<Bomb>();
-					mBomb->Initialize();
-					mBomb->SetModel(mBombModel);
-					Vector3 pos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-					pos.y = 50;
-					mBomb->SetPos(pos);
-					mBombs.push_back(mBomb);
-					mWaitTimer = 0;
-				}
-			}
-
-			// 生成したすべてのボムを更新
-			for (int i = 0; i < mBombs.size(); i++)
-			{
-				mBombs[i]->Update();
-			}
-		}
-
-		// ボムと床のあたり判定
-		for (int i = 0; i < mBombs.size(); i++)
-		{
-			// 座標から配列の要素番号を算出
-			Vector3 bombPos = Vector3(0, 0, 0);
-			bombPos.x = floorf(mBombs[i]->GetPos().x + mOffset_x);
-			bombPos.z = floorf(mBombs[i]->GetPos().z + mOffset_z);
-
-			// ボムと床が接触していたら
-			if (mBombs[i]->GetPos().y < 0)
-			{
-				// 床の属性を確認
-				switch (mMap->GetAttribute(bombPos.x, bombPos.z))
-				{
-					// クッキー床なら
-				case COOKIE:
-					// クッキー床から穴の床に代入
-					mMap->Set(bombPos.x, bombPos.z, mChip[HOLE]);
-					break;
-					// ネットなら
-				case NET:
-					// ボムを消す
-					mBombs.pop_back();
-					break;
-					// それ以外なら
-				default:
-					// 何もしない
-					break;
-				}
-			}
-		}
-
-		// キャラクターの移動
-		mKuma->Move();
-		// 歩数を取得
-		mCount = mKuma->GetCount();
-
-		// キャラクターの座標
-		Vector3 chpos = Vector3(0, 0, 0);
-		chpos.x = floorf(mKuma->GetPos().x + mOffset_x);
-		chpos.z = floorf(mKuma->GetPos().z + mOffset_z);
-
-		// キャラクターのいる床の属性を確認
-		switch (mMap->GetAttribute(chpos.x, chpos.z))
-		{
-			// 穴床なら
-		case HOLE:
-			w++;
-			while (w < 600)
-			{
-				// 落下する
-				mKuma->Fall();
-				w++;
-			}
-			if (mKuma->GetPos().y <= -25.0f)
-			{
-				// ゲームを終了する
-				mSceneFlag = true;
-			}
-			break;
-			// ネットなら
-		case NET:
-			// ゲームを終了する
-			mSceneFlag = true;
-			break;
-			// それ以外なら
-		default:
-			// 何もしない
-			break;
-		}
-
-		// ボムとキャラクターのあたり判定
-		for (int i = 0; i < mBombs.size(); i++)
-		{
-			// ボムとプレイヤーのあたり判定
-			if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
-				mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
-				mBombs[i]->GetPos().y < 0)
-			{
-				mSceneFlag = true;
-
-			}
-		}
-
-		// アイテムとキャラクターのあたり判定
-		if (mItem->GetPos().x < mKuma->GetPos().x + 0.5f && mItem->GetPos().x + 0.5f > mKuma->GetPos().x &&
-			mItem->GetPos().z < mKuma->GetPos().z + 0.5f && mItem->GetPos().z + 0.5f > mKuma->GetPos().z)
-		{
-			// ゲームを終了する
-			mSceneFlag = true;
-			// ゲームクリア
-			mResultFlag = true;
-		}
-
-		// オブジェクトの中心を算出
-		oc = Vector3((1.0f / 2.0f), (1.0f / 2.0f), (1.0f / 2.0f));
-		// カーソルの更新
-		mCursor->GetCursor()->Update();
-		// マウスレイとフィールドのあたり判定（P．１７５）
-		mCursor->GetCursor()->IntersectSegmentPlane
-		(mCursor->GetCursor()->GetNear(), mCursor->GetCursor()->GetFar(), Vector3(0, 0, 0), Vector3(1, 0, 0), Vector3(0, 0, 1), &t, &mResult);
-		// カーソルの座標の更新
-		mCursorPos = mResult;
-		// 計算したものをfloorfで丸める
-		mMapOffset_x = floorf(mCursorPos.x + mOffset_x);
-		mMapOffset_z = floorf(mCursorPos.z + mOffset_z);
-		// マップチップの中心を計算
-		cx = 1.0f / 2.0f;
-		cz = 1.0f / 2.0f;
-		// 丸めたものからずらしている分を引く（+0.5f...マップチップの中心）
-		mResult.x = static_cast<float>(mMapOffset_x) + cx - mOffset_x;
-		mResult.z = static_cast<float>(mMapOffset_z) + cz - mOffset_z;
-		// 座標を設定
-		Vector3 cpos = mResult;
-		// ｙ座標を少し高くする
-		cpos.y += 0.01f;
-		// カーソル座標の設定
-		mCursor->SetPos(cpos);
-
-		// マウスが右クリックしたら
-		if (g_mouseTracker->rightButton)
-		{
-			// マウス座標が配列の範囲内にあったら
-			if (mMapOffset_x >= 0 && mMapOffset_x < mMapSize_x &&
-				mMapOffset_z >= 0 && mMapOffset_z < mMapSize_z)
-			{
-				// フィールドの属性を変える
-				mMap->Set(mMapOffset_x, mMapOffset_z, mChip[NET]);
-			}
-		}
-		break;
-	default:
-		break;
-	}
-*/
-
-/*
-	// スタートカウント中でないなら
-	if (!mStartFlag)
-	{
-		// ポーズ中でないなら
-		if (!mPauseFlag)
-		{
-			// 自機狙いタイマーをカウント
-			// タイマーをカウントアップさせる
-			mWaitTimer++;
-			// 自機狙いタイミングをランダムで
-			timing = rand() % 100 + 1;
-			// タイマーが一定値を超えたらボムを生成
-			if (mWaitTimer > 180)
-			{
-				if (timing % 3 == 0)
-				{
-					mBomb = make_shared<Bomb>();
-					mBomb->Initialize();
-					mBomb->SetModel(mBombModel);
-					Vector3 pos = mKuma->GetPos();
-					pos.y = 50;
-					mBomb->SetPos(pos);
-					mBombs.push_back(mBomb);
-					mWaitTimer = 0;
-				}
-				else
-				{
-					mBomb = make_shared<Bomb>();
-					mBomb->Initialize();
-					mBomb->SetModel(mBombModel);
-					Vector3 pos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-					pos.y = 50;
-					mBomb->SetPos(pos);
-					mBombs.push_back(mBomb);
-					mWaitTimer = 0;
-				}
-			}
-	
-			// 生成したすべてのボムを更新
-			for (int i = 0; i < mBombs.size(); i++)
-			{
-				mBombs[i]->Update();
-			}
-		}
-	
-		// ボムと床のあたり判定
-		for (int i = 0; i < mBombs.size(); i++)
-		{
-			// 座標から配列の要素番号を算出
-			Vector3 bombPos = Vector3(0, 0, 0);
-			bombPos.x = floorf(mBombs[i]->GetPos().x + mOffset_x);
-			bombPos.z = floorf(mBombs[i]->GetPos().z + mOffset_z);
-	
-			// ボムと床が接触していたら
-			if (mBombs[i]->GetPos().y < 0)
-			{
-				// 床の属性を確認
-				switch (mMap->GetAttribute(bombPos.x, bombPos.z))
-				{
-					// クッキー床なら
-				case COOKIE:
-					// クッキー床から穴の床に代入
-					mMap->Set(bombPos.x, bombPos.z, mChip[HOLE]);
-					break;
-					// ネットなら
-				case NET:
-					// ボムを消す
-					mBombs.pop_back();
-					break;
-					// それ以外なら
-				default:
-					// 何もしない
-					break;
-				}
-			}
-		}
-	
-		// キャラクターの移動
-		mKuma->Move();
-		// 歩数を取得
-		mCount = mKuma->GetCount();
-	
-		// キャラクターの座標
-		Vector3 chpos = Vector3(0, 0, 0);
-		chpos.x = floorf(mKuma->GetPos().x + mOffset_x);
-		chpos.z = floorf(mKuma->GetPos().z + mOffset_z);
-	
-		// キャラクターのいる床の属性を確認
-		switch (mMap->GetAttribute(chpos.x, chpos.z))
-		{
-			// 穴床なら
-		case HOLE:
-			w++;
-			while (w < 600)
-			{
-				// 落下する
-				mKuma->Fall();
-				w++;
-			}
-			if (mKuma->GetPos().y <= -25.0f)
-			{
-				// ゲームを終了する
-				mSceneFlag = true;
-			}
-			break;
-			// ネットなら
-		case NET:
-			// ゲームを終了する
-			mSceneFlag = true;
-			break;
-			// それ以外なら
-		default:
-			// 何もしない
-			break;
-		}
-	 
-		// ボムとキャラクターのあたり判定
-		for (int i = 0; i < mBombs.size(); i++)
-		{
-			// ボムとプレイヤーのあたり判定
-			if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
-				mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
-				mBombs[i]->GetPos().y < 0)
-			{
-				mSceneFlag = true;
-	
-			}
-		}
-
-		// アイテムとキャラクターのあたり判定
-		if (mItem->GetPos().x < mKuma->GetPos().x + 0.5f && mItem->GetPos().x + 0.5f > mKuma->GetPos().x &&
-			mItem->GetPos().z < mKuma->GetPos().z + 0.5f && mItem->GetPos().z + 0.5f > mKuma->GetPos().z)
-		{
-			// ゲームを終了する
-			mSceneFlag = true;
-			// ゲームクリア
-			mResultFlag = true;
-		}
-
-
-		// オブジェクトの中心を算出
-		oc = Vector3((1.0f / 2.0f), (1.0f / 2.0f), (1.0f / 2.0f));
-		// カーソルの更新
-		mCursor->GetCursor()->Update();
-		// マウスレイとフィールドのあたり判定（P．１７５）
-		mCursor->GetCursor()->IntersectSegmentPlane
-		(mCursor->GetCursor()->GetNear(), mCursor->GetCursor()->GetFar(), Vector3(0, 0, 0), Vector3(1, 0, 0), Vector3(0, 0, 1), &t, &mResult);
-		// カーソルの座標の更新
-		mCursorPos = mResult;
-		// 計算したものをfloorfで丸める
-		mMapOffset_x = floorf(mCursorPos.x + mOffset_x);
-		mMapOffset_z = floorf(mCursorPos.z + mOffset_z);
-		// マップチップの中心を計算
-		cx = 1.0f / 2.0f;
-		cz = 1.0f / 2.0f;
-		// 丸めたものからずらしている分を引く（+0.5f...マップチップの中心）
-		mResult.x = static_cast<float>(mMapOffset_x) + cx - mOffset_x;
-		mResult.z = static_cast<float>(mMapOffset_z) + cz - mOffset_z;
-		// 座標を設定
-		Vector3 cpos = mResult;
-		// ｙ座標を少し高くする
-		cpos.y += 0.01f;
-		// カーソル座標の設定
-		mCursor->SetPos(cpos);
-
-		// マウスが右クリックしたら
-		if (g_mouseTracker->rightButton)
-		{
-			// マウス座標が配列の範囲内にあったら
-			if (mMapOffset_x >= 0 && mMapOffset_x < mMapSize_x &&
-				mMapOffset_z >= 0 && mMapOffset_z < mMapSize_z)
-			{
-				// フィールドの属性を変える
-				mMap->Set(mMapOffset_x, mMapOffset_z, mChip[NET]);
-			}
-		}
-	}
-*/
 
 #pragma region Debug
 	// F1キーが押されたら
