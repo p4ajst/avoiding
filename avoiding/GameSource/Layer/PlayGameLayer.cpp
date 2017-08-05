@@ -298,10 +298,9 @@ void PlayGameLayer::Update()
 			chpos.x = floorf(mKuma->GetPos().x + mOffset_x);
 			chpos.z = floorf(mKuma->GetPos().z + mOffset_z);
 
-
 			// フィールドの範囲外に行ったら
-			if (chpos.x < 0.0f || chpos.x > mMapSize_x ||
-				chpos.z < 0.0f || chpos.z > mMapSize_z)
+			if (chpos.x < 0.0f || chpos.x >= mMapSize_x ||
+				chpos.z < 0.0f || chpos.z >= mMapSize_z)
 			{
 				// 落下カウンタを増やす
 				w++;
@@ -359,67 +358,6 @@ void PlayGameLayer::Update()
 					break;
 				}
 			}
-
-
-
-			//// フィールドの範囲外に行ったら
-			//if (chpos.x < 0.0f || chpos.x > mMapSize_x ||
-			//	chpos.z < 0.0f || chpos.z > mMapSize_z)
-			//{
-			//	// 落下カウンタを増やす
-			//	w++;
-			//	// 落下カウンタが600より小さかったら
-			//	while (w < 600)
-			//	{
-			//		// 落下する
-			//		mKuma->Fall();
-			//		// 落下カウンタを増やす
-			//		w++;
-			//	}
-			//	// -25.0f落下したら
-			//	if (mKuma->GetPos().y <= -25.0f)
-			//	{
-			//		// ゲームを終了する
-			//		mSceneFlag = true;
-			//		// 落下カウンタを初期化
-			//		w = 0;
-			//	}
-			//}
-
-			//// キャラクターのいる床の属性を確認
-			//switch (mMap->GetAttribute((int)(chpos.x), (int)(chpos.z)))
-			//{
-			//	// 穴床なら
-			//case HOLE:
-			//	// 落下カウンタを増やす
-			//	w++;
-			//	// 落下カウンタが600より小さかったら
-			//	while (w < 600)
-			//	{
-			//		// 落下する
-			//		mKuma->Fall();
-			//		// 落下カウンタを増やす
-			//		w++;
-			//	}
-			//	// -25.0f落下したら
-			//	if (mKuma->GetPos().y <= -25.0f)
-			//	{
-			//		// ゲームを終了する
-			//		mSceneFlag = true;
-			//		// 落下カウンタを初期化
-			//		w = 0;
-			//	}
-			//	break;
-			//	// ネットなら
-			//case NET:
-			//	// ゲームを終了する
-			//	mSceneFlag = true;
-			//	break;
-			//	// それ以外なら
-			//default:
-			//	// 何もしない
-			//	break;
-			//}
 
 			// ボムとキャラクターのあたり判定
 			for (int i = 0; i < (int)(mBombs.size()); i++)
