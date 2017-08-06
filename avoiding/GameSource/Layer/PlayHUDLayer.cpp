@@ -1,193 +1,154 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : HUDLayer.cpp                                                                         //
-// @ brief	 : ƒwƒbƒhƒAƒbƒvƒfƒBƒXƒvƒŒƒC•”•ª‚ÌƒNƒ‰ƒX                                                 //
+// @ brief	 : ãƒ˜ãƒƒãƒ‰ã‚¢ãƒƒãƒ—ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤éƒ¨åˆ†ã®ã‚¯ãƒ©ã‚¹                                                 //
 // @ date	 : 2017/06/30                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/DirectXTK.h"
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "PlayHUDLayer.h"
+#include "../Utility/Common.h"
 
-/* –¼‘O‹óŠÔ */
+/* åå‰ç©ºé–“ */
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-/* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ‰Šú‰»                                                                               //
-// @ param	: Scene* scene...ƒV[ƒ“‚Ìƒ|ƒCƒ“ƒ^                                                      //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: åˆæœŸåŒ–                                                                               //
+// @ param	: Scene* scene...ã‚·ãƒ¼ãƒ³ã®ãƒã‚¤ãƒ³ã‚¿                                                      //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayHUDLayer::Initialize(Scene* scene)
 {
+	// ç¾åœ¨ã®ã‚·ãƒ¼ãƒ³ã‚’ä»£å…¥
 	pScene = scene;
+	// æ•°å­—ã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç”Ÿæˆ
 	mNum = make_unique<Texture>(L"Resources\\number.png");
+	// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç”Ÿæˆ
 	mBiscuitBefore = make_unique<Texture>(L"Resources\\Biscuit_before.png");
+	// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ç”Ÿæˆ
 	mBiscuitAfter = make_unique<Texture>(L"Resources\\Biscuit_after.png");
+	// ãƒãƒ¼ã‚ºç”»é¢ã®ç”Ÿæˆ
 	mPause = make_unique<PauseScreen>();
+	// ãƒãƒ¼ã‚ºç”»é¢ãŒnullptrã§ãªã‘ã‚Œã°
 	if (mPause != nullptr)
 	{
+		// ãƒãƒ¼ã‚ºç”»é¢ã®åˆæœŸåŒ–
 		mPause->Initialize();
 	}
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®ç”Ÿæˆ
 	mStart = make_unique<GameStartScreen>();
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ãŒnullptrã§ãªã‘ã‚Œã°
 	if (mStart != nullptr)
 	{
+		// ã‚¹ã‚¿ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®åˆæœŸåŒ–
 		mStart->Initialize();
 	}
+	// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®æç”»ç¯„å›²ã®è¨­å®š
 	mBisrect.left = 1211;
 	mBisrect.top = 40;
 	mBisrect.right = 1275;
 	mBisrect.bottom = 104;
+	// ãƒãƒ¼ã‚ºã—ã¦ã„ã‚‹ã‹
 	mPauseFlag = false;
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ãƒˆä¸­ã§ã‚ã‚‹ã‹
 	mStartFlag = false;
+	// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®æç”»ç¯„å›²å†…ã«ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚ã‚‹ã‹
 	mpFrag = false;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: XV                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æ›´æ–°                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayHUDLayer::Update()
 {
-	// ƒrƒXƒPƒbƒg‚Ì”ÍˆÍ“à‚ÉƒJ[ƒ\ƒ‹‚ª‚ ‚ê‚Î
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æ›´æ–°
+	mStart->Update();
+	// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®ç¯„å›²å†…ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚ã‚Œã°
 	if (g_mouse.x >= mBisrect.left && g_mouse.x <= mBisrect.right &&
 		g_mouse.y >= mBisrect.top && g_mouse.y  <= mBisrect.bottom)
 	{
-		// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
+		// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 		mpFrag = true;
-		// ¶ƒNƒŠƒbƒN‚³‚ê‚½‚ç
+		// å·¦ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚‰
 		auto bottom = g_mouseTracker->GetLastState();
 		if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::RELEASED)
 		{
 			if (!mPauseFlag)
 			{
-				// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
+				// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 				mPauseFlag = true;
 			}
 			else
 			{
+				// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 				mPauseFlag = false;
 			}
 		}
 	}
-	// ‚»‚¤‚Å‚È‚¯‚ê‚Î
+	// ãã†ã§ãªã‘ã‚Œã°
 	else
 	{
-		// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚È‚¢
+		// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆãªã„
 		mpFrag = false;
 	}
+	// ãƒãƒ¼ã‚ºç”»é¢ã®æ›´æ–°
 	mPause->Update();
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æ›´æ–°
 	mStart->Update();
 }
 
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: •`‰æ                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æç”»                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayHUDLayer::Draw()
 {
+	// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®æç”»ç¯„å›²å†…ã«ãƒã‚¦ã‚¹ã‚«ãƒ¼ã‚½ãƒ«ãŒãªã‘ã‚Œã°
 	if (!mpFrag)
 	{
+		// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®ç”»åƒã‚’æç”»
 		pScene->GetSprite()->Draw(mBiscuitBefore->m_pTexture, mBisrect, Colors::White);
 	}
+	// ãã†ã§ãªã‘ã‚Œã°
 	else
 	{
+		// ãƒ“ã‚¹ã‚±ãƒƒãƒˆã®ç”»åƒã‚’æç”»
 		pScene->GetSprite()->Draw(mBiscuitAfter->m_pTexture, mBisrect, Colors::White);
 	}
+	// ãƒãƒ¼ã‚ºä¸­ã§ã‚ã‚Œã°
 	if (mPauseFlag)
 	{
+		// ãƒãƒ¼ã‚ºç”»é¢ã‚’æç”»
 		mPause->Render();
 	}
-	if (mStartFlag)
+	// ã‚¹ã‚¿ãƒ¼ãƒˆã‚«ã‚¦ãƒ³ãƒˆä¸­ã§ã‚ã‚Œã°
+	if (!mStartFlag)
 	{
+		// ã‚¹ã‚¿ãƒ¼ãƒˆã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®æç”»
 		mStart->Render();
 	}
-	DrawNum();
+	// æ­©æ•°ã‚’æç”»
+	DrawNum(pScene->GetSprite().get(), mNum->m_pTexture, mCount, 160.0f, 32.0f);
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ”š•`‰æ                                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	:                                                                                      //
-// ----------------------------------------------------------------------------------------------- // 
-void PlayHUDLayer::DrawNum()
-{
-
-	// ì‹Æ—p
-	auto num = mCount;
-	// •¶š”
-	auto sn = 0;
-	// À•W
-	auto x = 160.0f;
-	auto y = 32.0f;
-	// ‰æ‘œ‚Ì’†S“_
-	auto ox = NumTextureSize / 2.0f;
-	auto oy = NumTextureSize / 2.0f;
-	// ‰æ‘œ‚Ì•`‰æ”ÍˆÍ
-	RECT crect = { 0, 0, NumTextureSize, NumTextureSize };
-
-
-	if (num == 0)
-	{
-		/*
-			ID3D11ShaderResourceView* texture...ƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^
-			FXMVECTOR position...‰æ–Ê‚Ì•`‰æ‚ÌŠî“_i‚Ç‚±‚É•`‰æ‚·‚é‚©j
-			RECT const* sourceRectangle...Œ³‚ÌƒeƒNƒXƒ`ƒƒ‚Ì‚Ç‚Ì•”•ª‚ğ•`‰æ‚·‚é‚©
-			FXMVECTOR color...F
-			float rotation...‰ñ“]Šp
-			XMFLOAT2 const& origin...•`‰æ‚·‚é‰æ‘œ‚ÌŠî“_
-			GXMVECTOR scale...Šg‘å—¦
-			SpriteEffects effects
-			float layerDepth
-		*/
-		pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(x, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
-	}
-	else
-	{
-		while (num)
-		{
-
-			int l = (num % 10) * NumTextureSize;
-			int t = 0;
-			int r = l + NumTextureSize;
-			int b = NumTextureSize;
-
-			int px = x - sn * NumTextureSize;
-
-			// ‰æ‘œ‚Ì•`‰æ”ÍˆÍ
-			crect = { l,t,r,b };
-			/*
-				ID3D11ShaderResourceView* texture...ƒeƒNƒXƒ`ƒƒ‚Ìƒ|ƒCƒ“ƒ^
-				FXMVECTOR position...‰æ–Ê‚Ì•`‰æ‚ÌŠî“_i‚Ç‚±‚É•`‰æ‚·‚é‚©j
-				RECT const* sourceRectangle...Œ³‚ÌƒeƒNƒXƒ`ƒƒ‚Ì‚Ç‚Ì•”•ª‚ğ•`‰æ‚·‚é‚©
-				FXMVECTOR color...F
-				float rotation...‰ñ“]Šp
-				XMFLOAT2 const& origin...•`‰æ‚·‚é‰æ‘œ‚ÌŠî“_
-				GXMVECTOR scale...Šg‘å—¦
-				SpriteEffects effects
-				float layerDepth
-			*/
-			pScene->GetSprite()->Draw(mNum->m_pTexture, Vector2(px, y), &crect, Colors::White, 0.0f, Vector2(ox, oy), Vector2(1.0f, 1.0f));
-			num /= 10;
-			sn++;
-		}
-	}
-}
-
-// ----------------------------------------------------------------------------------------------- //
-// @ brief	: I—¹                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: çµ‚äº†                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void PlayHUDLayer::Finalize()

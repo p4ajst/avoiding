@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: DirectXTK.cpp
 //
-// DirectXTK‚ÉŠÖ‚·‚éŠÖ”ŒQ
+// DirectXTKã«é–¢ã™ã‚‹é–¢æ•°ç¾¤
 //
 // Date: 2015.8.27
 // Author: Hideyasu Imase
@@ -12,68 +12,68 @@
 using namespace DirectX;
 
 //////////////////////////////////
-// ƒŠƒ“ƒN‚·‚éƒ‰ƒCƒuƒ‰ƒŠw’è		//
+// ãƒªãƒ³ã‚¯ã™ã‚‹ãƒ©ã‚¤ãƒ–ãƒ©ãƒªæŒ‡å®š		//
 //////////////////////////////////
 #pragma comment(lib, "DirectXTK.lib")
 
 //////////////////////
-// Ã“I•Ï”			//
+// é™çš„å¤‰æ•°			//
 //////////////////////
 static std::unique_ptr<Keyboard> s_keyboard(new Keyboard);
 static std::unique_ptr<Mouse> s_mouse(new Mouse);
 
 //////////////////////
-// ƒOƒ[ƒoƒ‹•Ï”	//
+// ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°	//
 //////////////////////
 
-// ƒL[ƒ{[ƒhŠÖŒW
+// ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰é–¢ä¿‚
 Keyboard::State g_key;
 std::unique_ptr<Keyboard::KeyboardStateTracker> g_keyTracker(new Keyboard::KeyboardStateTracker);
 
-// ƒ}ƒEƒXŠÖŒW
+// ãƒã‚¦ã‚¹é–¢ä¿‚
 Mouse::State g_mouse;
 std::unique_ptr<Mouse::ButtonStateTracker> g_mouseTracker(new Mouse::ButtonStateTracker);
 
-// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`
+// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ
 std::unique_ptr<SpriteBatch> g_spriteBatch;
 
-// ƒXƒvƒ‰ƒCƒgƒtƒHƒ“ƒg
+// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ã‚©ãƒ³ãƒˆ
 std::unique_ptr<SpriteFont> g_spriteFont;
 
-// ƒRƒ‚ƒ“ƒXƒe[ƒg
+// ã‚³ãƒ¢ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆ
 std::unique_ptr <DirectX::CommonStates> g_state;
 
 //--------------------------------------------------------------------------------------
-// ‰Šú‰»
+// åˆæœŸåŒ–
 //--------------------------------------------------------------------------------------
 void DirectXTK_Initialize()
 {
-	// ƒRƒ‚ƒ“ƒXƒe[ƒg‚ğì¬
+	// ã‚³ãƒ¢ãƒ³ã‚¹ãƒ†ãƒ¼ãƒˆã‚’ä½œæˆ
 	g_state.reset(new CommonStates(g_pd3dDevice.Get()));
 
-	// ƒXƒvƒ‰ƒCƒgƒoƒbƒ`
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒƒãƒ
 	g_spriteBatch.reset(new SpriteBatch(g_pImmediateContext.Get()));
 
-	// ƒXƒvƒ‰ƒCƒgƒtƒHƒ“ƒg
+	// ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒ•ã‚©ãƒ³ãƒˆ
 	g_spriteFont.reset(new SpriteFont(g_pd3dDevice.Get(), L"myfile.spritefont"));
 }
 
 //--------------------------------------------------------------------------------------
-// ƒL[“ü—Í‚âƒ}ƒEƒXî•ñ‚ÌXV
+// ã‚­ãƒ¼å…¥åŠ›ã‚„ãƒã‚¦ã‚¹æƒ…å ±ã®æ›´æ–°
 //--------------------------------------------------------------------------------------
 void DirectXTK_UpdateInputState()
 {
-	// ƒL[“ü—Íî•ñ‚ğæ“¾
+	// ã‚­ãƒ¼å…¥åŠ›æƒ…å ±ã‚’å–å¾—
 	g_key = s_keyboard->GetState();
 	g_keyTracker->Update(g_key);
 
-	// ƒ}ƒEƒXî•ñ‚ğæ“¾
+	// ãƒã‚¦ã‚¹æƒ…å ±ã‚’å–å¾—
 	g_mouse = s_mouse->GetState();
 	g_mouseTracker->Update(g_mouse);
 }
 
 //--------------------------------------------------------------------------------------
-// ƒ}ƒEƒX‚ÌƒXƒNƒ[ƒ‹ƒtƒHƒC[ƒ‹’l‚ÌƒŠƒZƒbƒgŠÖ”
+// ãƒã‚¦ã‚¹ã®ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒ•ã‚©ã‚¤ãƒ¼ãƒ«å€¤ã®ãƒªã‚»ãƒƒãƒˆé–¢æ•°
 //--------------------------------------------------------------------------------------
 void DirectXTK_ResetScrollWheelValue()
 {

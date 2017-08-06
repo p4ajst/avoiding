@@ -147,6 +147,9 @@
     <ClCompile Include="GameSource\Scene\GameStartScreen.cpp">
       <Filter>GameSource\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="GameSource\Utility\Common.cpp">
+      <Filter>GameSource\Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImaseLib\FPSTimer.h">

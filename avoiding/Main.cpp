@@ -1,16 +1,16 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: Main.cpp
 //
-// ƒƒCƒ“
+// ãƒ¡ã‚¤ãƒ³
 //
-// ”õlF‚±‚ÌƒvƒƒOƒ‰ƒ€‚ÍDirectX11‚ğg—p‚·‚é‚½‚ß‚ÌÅ’á•K—v‚Æv‚í‚ê‚éˆ—‚ğ‘g‚İ‚ñ‚¾ƒTƒ“ƒvƒ‹‚Å‚·
-//       —]•ª‚Èˆ—‚Í‹Lq‚µ‚Ä‚¢‚Ü‚¹‚ñ‚Ì‚ÅƒIƒŠƒWƒiƒ‹ƒtƒŒ[ƒ€ƒ[ƒN‚Ìƒx[ƒX‚Ég—p‚µ‚Ä‚­‚¾‚³‚¢
+// å‚™è€ƒï¼šã“ã®ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã¯DirectX11ã‚’ä½¿ç”¨ã™ã‚‹ãŸã‚ã®æœ€ä½å¿…è¦ã¨æ€ã‚ã‚Œã‚‹å‡¦ç†ã‚’çµ„ã¿è¾¼ã‚“ã ã‚µãƒ³ãƒ—ãƒ«ã§ã™
+//       ä½™åˆ†ãªå‡¦ç†ã¯è¨˜è¿°ã—ã¦ã„ã¾ã›ã‚“ã®ã§ã‚ªãƒªã‚¸ãƒŠãƒ«ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯ã®ãƒ™ãƒ¼ã‚¹ã«ä½¿ç”¨ã—ã¦ãã ã•ã„
 //
 // Date: 2015.8.27
 // Author: Hideyasu Imase
 //--------------------------------------------------------------------------------------
 
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <d3d11.h>
 #include <Windows.h>
 #include <DirectXColors.h>
@@ -18,137 +18,137 @@
 #include <ctime>
 #include <memory>
 
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "ImaseLib\Direct3D.h"
 #include "ImaseLib\DirectXTK.h"
 #include "ImaseLib\FPSTimer.h"
 #include "ImaseLib\DebugCamera.h"
 
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "GameSource\Game.h"
 
-// –¼‘O‹óŠÔ
+// åå‰ç©ºé–“
 using namespace std;
 using namespace Microsoft::WRL;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 //////////////////
-// ’è”éŒ¾		//
+// å®šæ•°å®£è¨€		//
 //////////////////
-// ƒEƒCƒ“ƒhƒEƒXƒ^ƒCƒ‹
+// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¹ã‚¿ã‚¤ãƒ«
 static const DWORD WINDOW_STYLE = WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
 
-// ‰æ–Ê‰ğ‘œ“x
+// ç”»é¢è§£åƒåº¦
 static const int WINDOW_W = 1280;
 static const int WINDOW_H = 960;
 
 //////////////////////////////
-// ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾	//
+// é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€	//
 //////////////////////////////
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
 //////////////////////
-// ƒOƒ[ƒoƒ‹•Ï”	//
+// ã‚°ãƒ­ãƒ¼ãƒãƒ«å¤‰æ•°	//
 //////////////////////
-HINSTANCE g_hInst = nullptr;	// ƒCƒ“ƒXƒ^ƒ“ƒXƒnƒ“ƒhƒ‹
-HWND g_hWnd = nullptr;	// ƒEƒCƒ“ƒhƒEƒnƒ“ƒhƒ‹
+HINSTANCE g_hInst = nullptr;	// ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+HWND g_hWnd = nullptr;	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒ³ãƒ‰ãƒ«
 
-// ƒQ[ƒ€
+// ã‚²ãƒ¼ãƒ 
 shared_ptr<Game> game;
 
 //--------------------------------------------------------------------------------------
-// ƒƒCƒ“
+// ãƒ¡ã‚¤ãƒ³
 //--------------------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	srand((unsigned int)time(NULL));
 
-	// ƒfƒoƒbƒOƒJƒƒ‰
+	// ãƒ‡ãƒãƒƒã‚°ã‚«ãƒ¡ãƒ©
 	DebugCamera camera(WINDOW_W, WINDOW_H);
 
-	// 1•bŠÔ‚É60ƒtƒŒ[ƒ€‚ÅŒÅ’è‚·‚é
+	// 1ç§’é–“ã«60ãƒ•ãƒ¬ãƒ¼ãƒ ã§å›ºå®šã™ã‚‹
 	ImaseLib::FPSTimer fpsTimer(60);
 
-	// ƒEƒCƒ“ƒhƒE‚Ìì¬
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 	if (FAILED(InitWindow(hInstance, nCmdShow)))
 		return 0;
 
-	// DirectXƒfƒoƒCƒX‚Ì‰Šú‰»
+	// DirectXãƒ‡ãƒã‚¤ã‚¹ã®åˆæœŸåŒ–
 	if (FAILED(Direct3D_InitDevice(g_hWnd)))
 	{
-		// ‰Šú‰»‚É¸”s
+		// åˆæœŸåŒ–ã«å¤±æ•—
 		Direct3D_CleanupDevice();
 		return 0;
 	}
 
-	// DirectXTKŠÖŒW‚Ì‰Šú‰»
+	// DirectXTKé–¢ä¿‚ã®åˆæœŸåŒ–
 	DirectXTK_Initialize();
 
-	// ‰Šú‰»
+	// åˆæœŸåŒ–
 	game = make_shared<Game>();
 	game->Initialize(WINDOW_W,WINDOW_H);
 
-	// ƒƒCƒ“ƒ‹[ƒv
+	// ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
 	MSG msg = { 0 };
 	while (WM_QUIT != msg.message)
 	{
-		// ƒƒbƒZ[ƒW‚ª—ˆ‚Ä‚¢‚é‚©’²‚×‚é
+		// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒæ¥ã¦ã„ã‚‹ã‹èª¿ã¹ã‚‹
 		if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
 		{
-			// ƒƒbƒZ[ƒW‚ª—ˆ‚Ä‚¢‚ê‚ÎƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ‚Ö‘—‚é
+			// ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ãŒæ¥ã¦ã„ã‚Œã°ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ã¸é€ã‚‹
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
 		else
 		{
-			// ƒL[“ü—Í‚âƒ}ƒEƒXî•ñ‚ÌXV
+			// ã‚­ãƒ¼å…¥åŠ›ã‚„ãƒã‚¦ã‚¹æƒ…å ±ã®æ›´æ–°
 			DirectXTK_UpdateInputState();
 
-			// ƒfƒoƒbƒOƒJƒƒ‰‚ÌXV
+			// ãƒ‡ãƒãƒƒã‚°ã‚«ãƒ¡ãƒ©ã®æ›´æ–°
 			camera.Update();
 
-			// XV
+			// æ›´æ–°
 			game->Update();
 
-			// ƒoƒbƒNƒoƒbƒtƒ@‚ÌƒNƒŠƒA
+			// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
 			g_pImmediateContext->ClearRenderTargetView(g_pRenderTargetView.Get(), DirectX::Colors::MidnightBlue);
 
-			// [“xƒoƒbƒtƒ@‚ÌƒNƒŠƒA
+			// æ·±åº¦ãƒãƒƒãƒ•ã‚¡ã®ã‚¯ãƒªã‚¢
 			g_pImmediateContext->ClearDepthStencilView(g_pDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-			// ƒrƒ…[s—ñ‚ğì¬‚·‚é
+			// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’ä½œæˆã™ã‚‹
 			Matrix view = camera.GetCameraMatrix();
 
-			// Ë‰es—ñ‚ğì¬‚·‚é
+			// å°„å½±è¡Œåˆ—ã‚’ä½œæˆã™ã‚‹
 			Matrix proj = Matrix::CreatePerspectiveFieldOfView(XMConvertToRadians(45.0f), WINDOW_W / (float)WINDOW_H, 1.0f, 100.0f);
 	
 			game->Render(view,proj);
 
-			// ‰æ–ÊXV‚ğ‘Ò‚Â
+			// ç”»é¢æ›´æ–°ã‚’å¾…ã¤
 			fpsTimer.WaitFrame();
 
-			// ƒoƒbƒNƒoƒbƒtƒ@‚Æƒtƒƒ“ƒgƒoƒbƒtƒ@‚ğ“ü‚ê‘Ö‚¦‚é
+			// ãƒãƒƒã‚¯ãƒãƒƒãƒ•ã‚¡ã¨ãƒ•ãƒ­ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã‚’å…¥ã‚Œæ›¿ãˆã‚‹
 			g_pSwapChain->Present(0, 0);
 		}
 	}
 
-	// I—¹ˆ—
+	// çµ‚äº†å‡¦ç†
 	game->Finalize();
 
-	// DirectXƒfƒoƒCƒXü‚è‚ÌI—¹ˆ—
+	// DirectXãƒ‡ãƒã‚¤ã‚¹å‘¨ã‚Šã®çµ‚äº†å‡¦ç†
 	Direct3D_CleanupDevice();
 
 	return 0;
 }
 
 //--------------------------------------------------------------------------------------
-// ƒEƒCƒ“ƒhƒE‚Ìì¬
+// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®ä½œæˆ
 //--------------------------------------------------------------------------------------
 HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 {
-	// ƒEƒCƒ“ƒhƒEƒNƒ‰ƒX‚ğ“o˜^‚·‚é
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚¯ãƒ©ã‚¹ã‚’ç™»éŒ²ã™ã‚‹
 	WNDCLASSEX wcex;
 	wcex.cbSize = sizeof(WNDCLASSEX);
 	wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -165,9 +165,9 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 	if (!RegisterClassEx(&wcex))
 		return E_FAIL;
 
-	// ƒEƒCƒ“ƒhƒE‚ğì¬‚·‚é
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’ä½œæˆã™ã‚‹
 	g_hInst = hInstance;
-	RECT rc = { 0, 0, WINDOW_W, WINDOW_H };	// ©ƒEƒCƒ“ƒhƒEƒTƒCƒY
+	RECT rc = { 0, 0, WINDOW_W, WINDOW_H };	// â†ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚º
 	AdjustWindowRect(&rc, WINDOW_STYLE, FALSE);
 	g_hWnd = CreateWindow(L"WindowClass", L"avoiding", WINDOW_STYLE,
 		CW_USEDEFAULT, CW_USEDEFAULT, rc.right - rc.left, rc.bottom - rc.top, nullptr, nullptr, hInstance,
@@ -175,36 +175,36 @@ HRESULT InitWindow(HINSTANCE hInstance, int nCmdShow)
 	if (!g_hWnd)
 		return E_FAIL;
 
-	// ƒEƒCƒ“ƒhƒE‚Ì•\¦
+	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®è¡¨ç¤º
 	ShowWindow(g_hWnd, nCmdShow);
 
 	return S_OK;
 }
 
 //--------------------------------------------------------------------------------------
-// ƒEƒCƒ“ƒhƒEƒvƒƒV[ƒWƒƒ[
+// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒ—ãƒ­ã‚·ãƒ¼ã‚¸ãƒ£ãƒ¼
 //--------------------------------------------------------------------------------------
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message)
 	{
-	case WM_DESTROY:		// ƒEƒCƒ“ƒhƒE‚ª”jŠü‚³‚ê‚½ƒƒbƒZ[ƒW
-		PostQuitMessage(0);	// WM_QUITƒƒbƒZ[ƒW‚ğ‘—o‚·‚éiƒƒCƒ“ƒ‹[ƒv‚ğ”²‚¯‚éj
+	case WM_DESTROY:		// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒç ´æ£„ã•ã‚ŒãŸãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
+		PostQuitMessage(0);	// WM_QUITãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€å‡ºã™ã‚‹ï¼ˆãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—ã‚’æŠœã‘ã‚‹ï¼‰
 		break;
 
-	case WM_ACTIVATEAPP:	// ƒEƒCƒ“ƒhƒE‚ªƒAƒNƒeƒBƒu‰»A”ñƒAƒNƒeƒBƒu‰»‚·‚é‚É—ˆ‚éƒƒbƒZ[ƒW
+	case WM_ACTIVATEAPP:	// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–åŒ–ã€éã‚¢ã‚¯ãƒ†ã‚£ãƒ–åŒ–ã™ã‚‹æ™‚ã«æ¥ã‚‹ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 		Keyboard::ProcessMessage(message, wParam, lParam);
 		Mouse::ProcessMessage(message, wParam, lParam);
 		break;
 
-	case WM_KEYDOWN:		// ƒL[“ü—ÍŠÖŒW‚ÌƒƒbƒZ[ƒW
+	case WM_KEYDOWN:		// ã‚­ãƒ¼å…¥åŠ›é–¢ä¿‚ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 	case WM_SYSKEYDOWN:
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
 		Keyboard::ProcessMessage(message, wParam, lParam);
 		break;
 
-	case WM_INPUT:			// ƒ}ƒEƒXŠÖŒW‚ÌƒƒbƒZ[ƒW
+	case WM_INPUT:			// ãƒã‚¦ã‚¹é–¢ä¿‚ã®ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸
 	case WM_MOUSEMOVE:
 	case WM_LBUTTONDOWN:
 	case WM_LBUTTONUP:
@@ -220,7 +220,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		break;
 
 	default:
-		// ©•ª‚Åˆ—‚µ‚È‚¢ƒƒbƒZ[ƒW‚ÍDefWindowProcŠÖ”‚É”C‚¹‚é
+		// è‡ªåˆ†ã§å‡¦ç†ã—ãªã„ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã¯DefWindowProcé–¢æ•°ã«ä»»ã›ã‚‹
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}
 

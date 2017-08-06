@@ -1,46 +1,46 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : ResultScene.h                                                                        //
-// @ brief	 : ƒŠƒUƒ‹ƒgƒV[ƒ“‚Ìƒwƒbƒ_ƒtƒ@ƒCƒ‹                                                       //
+// @ brief	 : ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«                                                       //
 // @ date	 : 2017/05/02                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹iŠî’êƒNƒ‰ƒX‚Ìƒwƒbƒ_ƒtƒ@ƒCƒ‹j
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ï¼ˆåŸºåº•ã‚¯ãƒ©ã‚¹ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ï¼‰
 #include "Scene.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "../Layer/ResultBackGroundLayer.h"
 #include "../Layer/ResultGameLayer.h"
 #include "../Layer/ResultHUDLayer.h"
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class ResultScene :public Scene
 {
-	/* ƒƒ“ƒo•Ï” */
-	// ”wŒiƒŒƒCƒ„[
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+	// èƒŒæ™¯ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	std::unique_ptr<ResultBackGroundLayer> mBackGround;
-	// ƒQ[ƒ€ƒŒƒCƒ„[
+	// ã‚²ãƒ¼ãƒ ãƒ¬ã‚¤ãƒ¤ãƒ¼
 	std::unique_ptr<ResultGameLayer> mGame;
-	// HUDƒŒƒCƒ„[
+	// HUDãƒ¬ã‚¤ãƒ¤ãƒ¼
 	std::unique_ptr<ResultHUDLayer> mHUD;
-	// •`‰æ‰æ‘œ•ÏX—p
+	// æç”»ç”»åƒå¤‰æ›´ç”¨
 	bool mResultFlag;
 
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ‰Šú‰»ˆ—
+	// åˆæœŸåŒ–å‡¦ç†
 	void Initialize(int width, int height);
-	// XVˆ—
+	// æ›´æ–°å‡¦ç†
 	void Update();
-	// •`‰æˆ—
+	// æç”»å‡¦ç†
 	void Render();
-	// I—¹ˆ—
+	// çµ‚äº†å‡¦ç†
 	void Finalize();
-	// ƒV[ƒ“‘JˆÚ
+	// ã‚·ãƒ¼ãƒ³é·ç§»
 	Scene* Change();
-	// ƒtƒ‰ƒO‚Ìİ’è
+	// ãƒ•ãƒ©ã‚°ã®è¨­å®š
 	void SetResultFlag(bool flag) { mResultFlag = flag; }
 };

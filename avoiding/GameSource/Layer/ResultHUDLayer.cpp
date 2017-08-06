@@ -1,33 +1,33 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : ResultHUDLayer.cpp                                                                   //
-// @ brief	 : ƒwƒbƒhƒAƒbƒvƒfƒBƒXƒvƒŒƒC•”•ª‚ÌƒNƒ‰ƒX                                                 //
+// @ brief	 : ãƒ˜ãƒƒãƒ‰ã‚¢ãƒƒãƒ—ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤éƒ¨åˆ†ã®ã‚¯ãƒ©ã‚¹                                                 //
 // @ date	 : 2017/07/10                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/DirectXTK.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "ResultHUDLayer.h"
 
-/* –¼‘O‹óŠÔ */
+/* åå‰ç©ºé–“ */
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
-/* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ‰Šú‰»ˆ—                                                                           //
-// @ param	: Scene* scene...‚Ç‚ÌƒV[ƒ“‚©                                                          //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: åˆæœŸåŒ–å‡¦ç†                                                                           //
+// @ param	: Scene* scene...ã©ã®ã‚·ãƒ¼ãƒ³ã‹                                                          //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void ResultHUDLayer::Initialize(Scene* scene)
 {
 	pScene = scene;
 
-	// ‰æ‘œ•`‰æ—p•Ï”
+	// ç”»åƒæç”»ç”¨å¤‰æ•°
 	mBeforeFrog = make_unique<Texture>(L"Resources\\frog_before.png");
 	mAfterFrog = make_unique<Texture>(L"Resources\\frog_After.png");
 	mBeforeDoor = make_unique<Texture>(L"Resources\\door_before.png");
@@ -35,10 +35,10 @@ void ResultHUDLayer::Initialize(Scene* scene)
 	mGameClear = make_unique<Texture>(L"Resources\\GameClear.png");
 	mGameOver = make_unique<Texture>(L"Resources\\GameOver.png");
 
-	// ”»’è—pƒtƒ‰ƒO
+	// åˆ¤å®šç”¨ãƒ•ãƒ©ã‚°
 	mfFlag = false;
 	mdFlag = false;
-	// ‰æ‘œ‚Ì•`‰æ”ÍˆÍ
+	// ç”»åƒã®æç”»ç¯„å›²
 	mFrog.left = 200;
 	mFrog.top = 600;
 	mFrog.right = 456;
@@ -52,103 +52,103 @@ void ResultHUDLayer::Initialize(Scene* scene)
 	mDoorA.right = 1120;
 	mDoorA.bottom = 890;
 
-	// ƒV[ƒ“Ø‘Ö—p•Ï”‚Ì‰Šú‰»
+	// ã‚·ãƒ¼ãƒ³åˆ‡æ›¿ç”¨å¤‰æ•°ã®åˆæœŸåŒ–
 	mSceneFlag = false;
-	// •`‰æ—p•Ï”‚Ì‰Šú‰»
+	// æç”»ç”¨å¤‰æ•°ã®åˆæœŸåŒ–
 	mResultFlag = false;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: XVˆ—                                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æ›´æ–°å‡¦ç†                                                                             //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void ResultHUDLayer::Update()
 {
-	// ƒJƒGƒ‹‚Ì”ÍˆÍ“à‚ÉƒJ[ƒ\ƒ‹‚ª‚ ‚ê‚Î
+	// ã‚«ã‚¨ãƒ«ã®ç¯„å›²å†…ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚ã‚Œã°
 	if (g_mouse.x >= mFrog.left && g_mouse.x <= mFrog.right &&
 		g_mouse.y >= mFrog.top && g_mouse.y <= mFrog.bottom)
 	{
-		// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
+		// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 		mfFlag = true;
-		// ¶ƒNƒŠƒbƒN‚³‚ê‚½‚ç
+		// å·¦ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚‰
 		if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::RELEASED)
 		{
-			// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
+			// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 			mSceneFlag = true;
 		}
 	}
-	// ‚»‚¤‚Å‚È‚¯‚ê‚Î
+	// ãã†ã§ãªã‘ã‚Œã°
 	else
 	{
-		// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚È‚¢
+		// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆãªã„
 		mfFlag = false;
 	}
-	// ƒhƒA‚Ì”ÍˆÍ“à‚ÉƒJ[ƒ\ƒ‹‚ª‚ ‚ê‚Î
+	// ãƒ‰ã‚¢ã®ç¯„å›²å†…ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒã‚ã‚Œã°
 	if (g_mouse.x >= mDoor.left && g_mouse.x <= mDoor.right &&
 		g_mouse.y >= mDoor.top && g_mouse.y <= mDoor.bottom)
 	{
-		// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
+		// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 		mdFlag = true;
-		// ¶ƒNƒŠƒbƒN‚³‚ê‚½‚ç
+		// å·¦ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚‰
 		if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::RELEASED)
 		{
-			// ƒEƒCƒ“ƒhƒE‚ğ•Â‚¶‚é
+			// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
 			PostQuitMessage(0);
 		}
 	}
-	// ‚»‚¤‚Å‚È‚¯‚ê‚Î
+	// ãã†ã§ãªã‘ã‚Œã°
 	else
 	{
-		// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚È‚¢
+		// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆãªã„
 		mdFlag = false;
 	}
 }
 
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: •`‰æˆ—                                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æç”»å‡¦ç†                                                                             //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void ResultHUDLayer::Draw()
 {
-	// ‰æ‘œ‚Ì•`‰æ
+	// ç”»åƒã®æç”»
 	
-	// •`‰æˆÊ’uil,t,r,bj;
+	// æç”»ä½ç½®ï¼ˆl,t,r,bï¼‰;
 	RECT rect{ 0,0,1280,480 };
 
-	// ƒŠƒUƒ‹ƒgƒtƒ‰ƒO‚ª^‚Å‚ ‚é‚È‚ç
+	// ãƒªã‚¶ãƒ«ãƒˆãƒ•ãƒ©ã‚°ãŒçœŸã§ã‚ã‚‹ãªã‚‰
 	if (mResultFlag)
 	{
-		// ƒQ[ƒ€ƒNƒŠƒA
+		// ã‚²ãƒ¼ãƒ ã‚¯ãƒªã‚¢
 		pScene->GetSprite()->Draw(mGameClear->m_pTexture, rect, Colors::White);
 	}
-	// ƒŠƒUƒ‹ƒgƒtƒ‰ƒO‚ª‹U‚Å‚ ‚é‚È‚ç
+	// ãƒªã‚¶ãƒ«ãƒˆãƒ•ãƒ©ã‚°ãŒå½ã§ã‚ã‚‹ãªã‚‰
 	else
 	{
-		// ƒQ[ƒ€ƒI[ƒo[
+		// ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼
 		pScene->GetSprite()->Draw(mGameOver->m_pTexture, rect, Colors::White);
 	}
 
-	// ƒJƒGƒ‹ƒtƒ‰ƒO‚ª‹U‚Å‚ ‚é‚È‚ç
+	// ã‚«ã‚¨ãƒ«ãƒ•ãƒ©ã‚°ãŒå½ã§ã‚ã‚‹ãªã‚‰
 	if (!mfFlag)
 	{
 		pScene->GetSprite()->Draw(mBeforeFrog->m_pTexture, mFrog, Colors::White);
 	}
-	// ƒJƒGƒ‹ƒtƒ‰ƒO‚ª^‚Å‚ ‚é‚È‚ç
+	// ã‚«ã‚¨ãƒ«ãƒ•ãƒ©ã‚°ãŒçœŸã§ã‚ã‚‹ãªã‚‰
 	else
 	{
 		pScene->GetSprite()->Draw(mAfterFrog->m_pTexture, mFrog, Colors::White);
 	}
-	// ƒhƒAƒtƒ‰ƒO‚ª‹U‚Å‚ ‚é‚È‚ç
+	// ãƒ‰ã‚¢ãƒ•ãƒ©ã‚°ãŒå½ã§ã‚ã‚‹ãªã‚‰
 	if (!mdFlag)
 	{
 		pScene->GetSprite()->Draw(mBeforeDoor->m_pTexture, mDoorA, Colors::White);
 	}
-	// ƒhƒAƒtƒ‰ƒO^‚Å‚ ‚é‚È‚ç
+	// ãƒ‰ã‚¢ãƒ•ãƒ©ã‚°çœŸã§ã‚ã‚‹ãªã‚‰
 	else
 	{
 		pScene->GetSprite()->Draw(mAfterDoor->m_pTexture, mDoorA, Colors::White);
@@ -156,9 +156,9 @@ void ResultHUDLayer::Draw()
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: I—¹ˆ—                                                                             //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: çµ‚äº†å‡¦ç†                                                                             //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void ResultHUDLayer::Finalize()

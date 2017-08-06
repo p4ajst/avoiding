@@ -1,7 +1,7 @@
-//--------------------------------------------------------------------------------------
+ï»¿//--------------------------------------------------------------------------------------
 // File: Grid.h
 //
-// ƒOƒŠƒbƒh‚ğ•`‰æ‚·‚éƒNƒ‰ƒX
+// ã‚°ãƒªãƒƒãƒ‰ã‚’æç”»ã™ã‚‹ã‚¯ãƒ©ã‚¹
 //
 // Date: 2015.5.13
 // Author: Hideyasu Imase
@@ -15,36 +15,36 @@
 #include <SimpleMath.h>
 
 //--------------------------------------------------------------------------------------
-//@ƒOƒŠƒbƒh•`‰æƒNƒ‰ƒX
+//ã€€ã‚°ãƒªãƒƒãƒ‰æç”»ã‚¯ãƒ©ã‚¹
 //--------------------------------------------------------------------------------------
 class Grid
 {
-	// ƒGƒtƒFƒNƒg
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	std::unique_ptr<DirectX::BasicEffect> m_basicEffect;
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒoƒbƒ`
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒãƒƒãƒ
 	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColor>> m_primitiveBatch;
 
-	// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
+	// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 	ID3D11InputLayout* m_pInputLayout;
 
-	// ƒOƒŠƒbƒh•`‰æƒGƒŠƒA‚Ì•‚Æ‚‚³‚ÆŠiq‚ÌƒTƒCƒY
+	// ã‚°ãƒªãƒƒãƒ‰æç”»ã‚¨ãƒªã‚¢ã®å¹…ã¨é«˜ã•ã¨æ ¼å­ã®ã‚µã‚¤ã‚º
 	int m_w, m_h, m_size;
 
-	// ƒIƒtƒZƒbƒg
+	// ã‚ªãƒ•ã‚»ãƒƒãƒˆ
 	int m_offx, m_offy;
 
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Grid(int w, int h, int size);
 
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Grid();
 
-	// •`‰æ
+	// æç”»
 	void Render();
 
-	// ƒOƒŠƒbƒh‚ÌƒTƒCƒY‚ğİ’è‚·‚éŠÖ”
+	// ã‚°ãƒªãƒƒãƒ‰ã®ã‚µã‚¤ã‚ºã‚’è¨­å®šã™ã‚‹é–¢æ•°
 	void SetGripInfo(int w, int h, int size)
 	{
 		m_w = w;
@@ -52,7 +52,7 @@ public:
 		m_size = size;
 	}
 
-	// ƒIƒtƒZƒbƒg‚Ìİ’è
+	// ã‚ªãƒ•ã‚»ãƒƒãƒˆã®è¨­å®š
 	void SetOffset(int offx, int offy)
 	{
 		m_offx = offx;
@@ -61,33 +61,33 @@ public:
 };
 
 //--------------------------------------------------------------------------------------
-//@ƒOƒŠƒbƒhó‚Ì°•`‰æƒNƒ‰ƒX
+//ã€€ã‚°ãƒªãƒƒãƒ‰çŠ¶ã®åºŠæç”»ã‚¯ãƒ©ã‚¹
 //--------------------------------------------------------------------------------------
 class GridFloor
 {
-	// ƒGƒtƒFƒNƒg
+	// ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	std::unique_ptr<DirectX::BasicEffect> m_basicEffect;
 
-	// ƒvƒŠƒ~ƒeƒBƒuƒoƒbƒ`
+	// ãƒ—ãƒªãƒŸãƒ†ã‚£ãƒ–ãƒãƒƒãƒ
 	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionColor>> m_primitiveBatch;
 
-	// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
+	// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 	ID3D11InputLayout* m_pInputLayout;
 
-	// °‚Ìˆê•Ó‚ÌƒTƒCƒY
+	// åºŠã®ä¸€è¾ºã®ã‚µã‚¤ã‚º
 	float m_size;
 
-	// •ªŠ„”
+	// åˆ†å‰²æ•°
 	int m_divs;
 
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^i°‚Ìˆê•Ó‚ÌƒTƒCƒYAˆê•Ó‚Ì•ªŠ„”j
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ï¼ˆåºŠã®ä¸€è¾ºã®ã‚µã‚¤ã‚ºã€ä¸€è¾ºã®åˆ†å‰²æ•°ï¼‰
 	GridFloor(float size, int divs);
 
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~GridFloor();
 
-	// •`‰æiƒrƒ…[s—ñAË‰es—ñj
+	// æç”»ï¼ˆãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã€å°„å½±è¡Œåˆ—ï¼‰
 	void Render(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj, DirectX::GXMVECTOR color = DirectX::Colors::Gray);
 };
 

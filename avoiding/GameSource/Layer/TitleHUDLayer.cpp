@@ -1,43 +1,43 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : TitleHUDLayer.cpp                                                                    //
-// @ brief	 : ƒwƒbƒhƒAƒbƒvƒfƒBƒXƒvƒŒƒC•”•ª‚ÌƒNƒ‰ƒX                                                 //
+// @ brief	 : ãƒ˜ãƒƒãƒ‰ã‚¢ãƒƒãƒ—ãƒ‡ã‚£ã‚¹ãƒ—ãƒ¬ã‚¤éƒ¨åˆ†ã®ã‚¯ãƒ©ã‚¹                                                 //
 // @ date	 : 2017/07/10                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// æ¶‚ÌƒtƒŒ[ƒ€ƒ[ƒN
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// å…ˆç”Ÿã®ãƒ•ãƒ¬ãƒ¼ãƒ ãƒ¯ãƒ¼ã‚¯
 #include "../../ImaseLib/DirectXTK.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "TitleHUDLayer.h"
-/* –¼‘O‹óŠÔ */
+/* åå‰ç©ºé–“ */
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
-/* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ‰Šú‰»                                                                               //
-// @ param	: Scene* scene...ƒV[ƒ“‚Ìƒ|ƒCƒ“ƒ^                                                      //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: åˆæœŸåŒ–                                                                               //
+// @ param	: Scene* scene...ã‚·ãƒ¼ãƒ³ã®ãƒã‚¤ãƒ³ã‚¿                                                      //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void TitleHUDLayer::Initialize(Scene * scene)
 {
-	// ƒV[ƒ“‘JˆÚ—p•Ï”
+	// ã‚·ãƒ¼ãƒ³é·ç§»ç”¨å¤‰æ•°
 	pScene = scene;
 
-	// ‰æ‘œ•`‰æ—p•Ï”‚Ì¶¬
+	// ç”»åƒæç”»ç”¨å¤‰æ•°ã®ç”Ÿæˆ
 	mGraph = make_unique<Texture>(L"Resources\\Title3.png");
 	mBeforeStart = make_unique<Texture>(L"Resources\\Start_Before.png");
 	mAfterStart = make_unique<Texture>(L"Resources\\Start_After.png");
 	mBeforeEnd = make_unique<Texture>(L"Resources\\End_Before.png");
 	mAfterEnd = make_unique<Texture>(L"Resources\\End_After.png");
-	// ”»’è—pƒtƒ‰ƒO
+	// åˆ¤å®šç”¨ãƒ•ãƒ©ã‚°
 	msFlag = false;
 	meFlag = false;
 
-	// ‰æ‘œ‚Ì•`‰æ”ÍˆÍ
+	// ç”»åƒã®æç”»ç¯„å›²
 	mStart.left   = 425;
 	mStart.top    = 400;
 	mStart.right  = 825;
@@ -48,27 +48,27 @@ void TitleHUDLayer::Initialize(Scene * scene)
 	mEnd.right    = 825;
 	mEnd.bottom   = 860;
 
-	// ƒV[ƒ“Ø‘Ö—p•Ï”‚Ì‰Šú‰»
+	// ã‚·ãƒ¼ãƒ³åˆ‡æ›¿ç”¨å¤‰æ•°ã®åˆæœŸåŒ–
 	mSceneFlag = false;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: XV                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æ›´æ–°                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void TitleHUDLayer::Update()
 {
-	// Start‚Ì”ÍˆÍ‚ÉƒJ[ƒ\ƒ‹‚ª“ü‚Á‚½‚ç
+	// Startã®ç¯„å›²ã«ã‚«ãƒ¼ã‚½ãƒ«ãŒå…¥ã£ãŸã‚‰
 	if (g_mouse.x >= mStart.left && g_mouse.x <= mStart.right &&
 		g_mouse.y >= mStart.top && g_mouse.y <= mStart.bottom)
 	{
 		msFlag = true;
-		// ¶ƒNƒŠƒbƒN‚³‚ê‚½‚ç
+		// å·¦ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚‰
 		if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::RELEASED)
 		{
-			// ƒtƒ‰ƒO‚ğØ‚è‘Ö‚¦‚é
+			// ãƒ•ãƒ©ã‚°ã‚’åˆ‡ã‚Šæ›¿ãˆã‚‹
 			mSceneFlag = true;
 		}
 	}
@@ -80,10 +80,10 @@ void TitleHUDLayer::Update()
 		g_mouse.y >= mEnd.top && g_mouse.y <= mEnd.bottom)
 	{
 		meFlag = true;
-		// ¶ƒNƒŠƒbƒN‚³‚ê‚½‚ç
+		// å·¦ã‚¯ãƒªãƒƒã‚¯ã•ã‚ŒãŸã‚‰
 		if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::RELEASED)
 		{
-			// ƒEƒCƒ“ƒhƒE‚ğ•Â‚¶‚é
+			// ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã‚’é–‰ã˜ã‚‹
 			PostQuitMessage(0);
 		}
 	}
@@ -95,33 +95,33 @@ void TitleHUDLayer::Update()
 
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: •`‰æ                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: æç”»                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void TitleHUDLayer::Draw()
 {
-	// ‰æ‘œ‚Ì•`‰æ”ÍˆÍ
+	// ç”»åƒã®æç”»ç¯„å›²
 	RECT rect{ 0,0,1280,480 };
-	// ‰æ‘œ‚Ì•`‰æ
+	// ç”»åƒã®æç”»
 	pScene->GetSprite()->Draw(mGraph->m_pTexture, rect, DirectX::Colors::White);
-	// ƒXƒ^[ƒgƒtƒ‰ƒO‚ª‹U‚Å‚ ‚é‚È‚ç
+	// ã‚¹ã‚¿ãƒ¼ãƒˆãƒ•ãƒ©ã‚°ãŒå½ã§ã‚ã‚‹ãªã‚‰
 	if (!msFlag)
 	{
 		pScene->GetSprite()->Draw(mBeforeStart->m_pTexture, mStart, DirectX::Colors::White);
 	}
-	// ƒXƒ^[ƒgƒtƒ‰ƒO‚ª^‚Å‚ ‚é‚È‚ç
+	// ã‚¹ã‚¿ãƒ¼ãƒˆãƒ•ãƒ©ã‚°ãŒçœŸã§ã‚ã‚‹ãªã‚‰
 	else
 	{
 		pScene->GetSprite()->Draw(mAfterStart->m_pTexture, mStart, DirectX::Colors::White);
 	}
-	// ƒGƒ“ƒhƒtƒ‰ƒO‚ª‹U‚Å‚ ‚é‚È‚ç
+	// ã‚¨ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°ãŒå½ã§ã‚ã‚‹ãªã‚‰
 	if (!meFlag)
 	{
 		pScene->GetSprite()->Draw(mBeforeEnd->m_pTexture, mEnd, DirectX::Colors::White);
 	}
-	// ƒGƒ“ƒhƒtƒ‰ƒO‚ª^‚Å‚ ‚é‚È‚ç
+	// ã‚¨ãƒ³ãƒ‰ãƒ•ãƒ©ã‚°ãŒçœŸã§ã‚ã‚‹ãªã‚‰
 	else
 	{
 		pScene->GetSprite()->Draw(mAfterEnd->m_pTexture, mEnd, DirectX::Colors::White);
@@ -129,9 +129,9 @@ void TitleHUDLayer::Draw()
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: I—¹                                                                                 //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
+// @ brief	: çµ‚äº†                                                                                 //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
 void TitleHUDLayer::Finalize()

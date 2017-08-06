@@ -1,89 +1,89 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Camera.h                                                                             //
-// @ brief	 : ƒJƒƒ‰ƒNƒ‰ƒX‚Ìƒwƒbƒ_ƒtƒ@ƒCƒ‹                                                         //
+// @ brief	 : ã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«                                                         //
 // @ date	 : 2016/09/01                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
-// @ note	 : ©ìƒJƒƒ‰ƒNƒ‰ƒX                                                                     //
+// @ note	 : è‡ªä½œã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹                                                                     //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ //
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <SimpleMath.h>
 
-/* ŠÖ”‚Ìƒvƒƒgƒ^ƒCƒvéŒ¾ */
-// “àÏ
+/* é–¢æ•°ã®ãƒ—ãƒ­ãƒˆã‚¿ã‚¤ãƒ—å®£è¨€ */
+// å†…ç©
 float Dot(DirectX::SimpleMath::Vector3 v1, DirectX::SimpleMath::Vector3 v2);
-// ŠOÏ
+// å¤–ç©
 DirectX::SimpleMath::Vector3 Cross(DirectX::SimpleMath::Vector3 v1, DirectX::SimpleMath::Vector3 v2);
 
-/* ƒNƒ‰ƒXéŒ¾ */
+/* ã‚¯ãƒ©ã‚¹å®£è¨€ */
 class Camera
 {
-	/* ƒƒ“ƒo•Ï” */
+	/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
 protected:
-	/* ƒrƒ…[s—ñ */
-	// ‹“_
+	/* ãƒ“ãƒ¥ãƒ¼è¡Œåˆ— */
+	// è¦–ç‚¹
 	DirectX::SimpleMath::Vector3 mEye;
-	// ’‹“X(QÆ“_)
+	// æ³¨è¦–åº—(å‚ç…§ç‚¹)
 	DirectX::SimpleMath::Vector3 mRef;
-	// ƒJƒƒ‰‚Ìã•ûŒü
+	// ã‚«ãƒ¡ãƒ©ã®ä¸Šæ–¹å‘
 	DirectX::SimpleMath::Vector3 mUp;
-	// ƒrƒ…[s—ñ
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—
 	DirectX::SimpleMath::Matrix mView;
 
-	/* ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ(Ë‰es—ñ) */
-	// ‚’¼‹–ìŠp
+	/* ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—(å°„å½±è¡Œåˆ—) */
+	// å‚ç›´è¦–é‡è§’
 	float mFovY;
-	// ƒAƒXƒyƒNƒg”ä
+	// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”
 	float mAspect;
-	// ƒjƒAƒNƒŠƒbƒv
+	// ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—
 	float mNearClip;
-	// ƒtƒ@[ƒNƒŠƒbƒv
+	// ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—
 	float mFarClip;
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—
 	DirectX::SimpleMath::Matrix mProjection;
 
-	/* ƒƒ“ƒoŠÖ” */
+	/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 public:
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Camera();
-	// ƒfƒXƒgƒ‰ƒNƒ^
+	// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Camera();
 
-	// XVˆ—
+	// æ›´æ–°å‡¦ç†
 	void Update();
 
-	// ‹“_‚Ìİ’è
+	// è¦–ç‚¹ã®è¨­å®š
 	void SetEye(DirectX::SimpleMath::Vector3 eye) { mEye = eye; }
-	// QÆ“_‚Ìİ’è
+	// å‚ç…§ç‚¹ã®è¨­å®š
 	void SetRef(DirectX::SimpleMath::Vector3 ref) { mRef = ref; }
-	// ã•ûŒüƒxƒNƒgƒ‹‚Ìİ’è
+	// ä¸Šæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã®è¨­å®š
 	void SetUp(DirectX::SimpleMath::Vector3 up) { mUp = up; }
-	// ‹“_‚Ìæ“¾
+	// è¦–ç‚¹ã®å–å¾—
 	DirectX::SimpleMath::Vector3 GetEye() { return mEye; }
-	// QÆ“_‚Ìæ“¾
+	// å‚ç…§ç‚¹ã®å–å¾—
 	DirectX::SimpleMath::Vector3 GetRef() { return mRef; }
-	// ã•ûŒüƒxƒNƒgƒ‹‚Ìæ“¾
+	// ä¸Šæ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã®å–å¾—
 	DirectX::SimpleMath::Vector3 GetUp() { return mUp; }
 
-	// ‚’¼‹–ìŠp‚Ìİ’è
+	// å‚ç›´è¦–é‡è§’ã®è¨­å®š
 	void SetFovY(float fovY) { mFovY = fovY; }
-	// ƒAƒXƒyƒNƒg”ä‚Ìİ’è
+	// ã‚¢ã‚¹ãƒšã‚¯ãƒˆæ¯”ã®è¨­å®š
 	void SetAspect(float aspect) { mAspect = aspect; }
-	// ƒjƒAƒNƒŠƒbƒv‚Ìİ’è
+	// ãƒ‹ã‚¢ã‚¯ãƒªãƒƒãƒ—ã®è¨­å®š
 	void SetNearClip(float nearClip) { mNearClip = nearClip; }
-	// ƒtƒ@[ƒNƒŠƒbƒv‚Ìİ’è
+	// ãƒ•ã‚¡ãƒ¼ã‚¯ãƒªãƒƒãƒ—ã®è¨­å®š
 	void SetFarClip(float farClip) { mFarClip = farClip; }
 
-	// ƒrƒ…[s—ñ‚ğì¬
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’ä½œæˆ
 	DirectX::SimpleMath::Matrix CreateViewMatrix();
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğì¬
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’ä½œæˆ
 	DirectX::SimpleMath::Matrix CreateProjectionMatrix();
 
-	// ƒrƒ…[s—ñ‚ğæ“¾
+	// ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—ã‚’å–å¾—
 	DirectX::SimpleMath::Matrix GetViewMat() { return mView; }
-	// ƒvƒƒWƒFƒNƒVƒ‡ƒ“s—ñ‚ğæ“¾
+	// ãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³è¡Œåˆ—ã‚’å–å¾—
 	DirectX::SimpleMath::Matrix GetProjMat() { return mProjection; }
 };
