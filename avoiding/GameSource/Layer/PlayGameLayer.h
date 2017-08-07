@@ -110,6 +110,12 @@ public:
 	void Draw();
 	// 終了
 	void Finalize();
+	// 初期配置
+	DirectX::SimpleMath::Vector3 InitialPlacement(int mapSize_x, int mapSize_z, float offset_x, float offset_z);
+	// 座標から配列の要素番号を算出
+	DirectX::SimpleMath::Vector3 CalculateElementNumber(DirectX::SimpleMath::Vector3 pos, int offset_x, int offset_z);
+	// マップチップの登録
+	void RegisterMapChip(MapChipAttribute attr, std::shared_ptr<DirectX::Model> model);
 	// 設定
 	void SetPauseFlag(bool flag) { mPauseFlag = flag; }
 	void SetStartFlag(bool flag) { mStartFlag = flag; }

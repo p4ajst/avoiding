@@ -73,12 +73,10 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mNetModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\net1.cmo", *mDef);
 
 	// マップチップの登録
-	mChip[MapChipAttribute::HOLE] = new MapChip(HOLE);
-	mChip[MapChipAttribute::HOLE]->SetModel(mHoleModel);
-	mChip[MapChipAttribute::COOKIE] = new MapChip(COOKIE);
-	mChip[MapChipAttribute::COOKIE]->SetModel(mCookieModel);
-	mChip[MapChipAttribute::NET] = new MapChip(NET);
-	mChip[MapChipAttribute::NET]->SetModel(mNetModel);
+	RegisterMapChip(MapChipAttribute::COOKIE, mCookieModel);
+	RegisterMapChip(MapChipAttribute::HOLE, mHoleModel);
+	RegisterMapChip(MapChipAttribute::NET, mNetModel);
+
 
 	// マップの生成
 	mMap = make_unique<Map>(mMapSize_x, mMapSize_z);
@@ -97,24 +95,9 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mKuma->Initialize();
 	// キャラクターのモデルの読み込み
 	mKuma->LoadModel(L"Resources\\kumakyun2.cmo");
-	// 座標をランダムで設定
-	Vector3 kpos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-	// 座標から配列の要素番号を算出
-	auto kposs = Vector3(0, 0, 0);
-	kposs.x = floorf(kpos.x + mOffset_x);
-	kposs.z = floorf(kpos.z + mOffset_z);
-	// 移動可能マスになるまで
-	while (mMap->GetAttribute((int)(kposs.x), (int)(kposs.z)) != COOKIE)
-	{
-		// 座標をランダムで設定
-		kpos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-		// 座標から配列の要素番号を算出
-		kposs.x = floorf(kpos.x + mOffset_x);
-		kposs.z = floorf(kpos.z + mOffset_z);
-	}
-	kpos.x = kposs.x + 0.5f - mOffset_x;
-	kpos.z = kposs.z + 0.5f - mOffset_z;
-	// 座標をランダムで設定
+	// キャラクターの初期配置
+	auto kpos = InitialPlacement(mMapSize_x,mMapSize_z,mOffset_x,mOffset_z);
+	// 座標を設定
 	mKuma->SetPos(kpos);
 	// 速度の設定
 	mKuma->SetVel(Vector3(0, 0, 0));
@@ -125,23 +108,8 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mItem->Initialize();
 	// アイテムのモデルの読み込み
 	mItem->LoadModel(L"Resources\\PoPcandy.cmo");
-	// 座標をランダムで設定
-	Vector3 ipos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-	// 座標から配列の要素番号を算出
-	auto iposs = Vector3(0, 0, 0);
-	iposs.x = floorf(ipos.x + mOffset_x);
-	iposs.z = floorf(ipos.z + mOffset_z);
-	// 移動可能マスになるまで
-	while (mMap->GetAttribute((int)(iposs.x), (int)(iposs.z)) != COOKIE)
-	{
-		// 座標をランダムで設定
-		ipos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-		// 座標から配列の要素番号を算出
-		iposs.x = floorf(ipos.x + mOffset_x);
-		iposs.z = floorf(ipos.z + mOffset_z);
-	}
-	ipos.x = iposs.x + 0.5f - mOffset_x;
-	ipos.z = iposs.z + 0.5f - mOffset_z;
+	// アイテムの初期配置
+	auto ipos = InitialPlacement(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
 	// ｙ座標を高くする
 	ipos.y = 1;
 	// 座標の設定
@@ -260,20 +228,18 @@ void PlayGameLayer::Update()
 			for (int i = 0; i < (int)(mBombs.size()); i++)
 			{
 				// 座標から配列の要素番号を算出
-				Vector3 bombPos = Vector3(0, 0, 0);
-				bombPos.x = floorf(mBombs[i]->GetPos().x + mOffset_x);
-				bombPos.z = floorf(mBombs[i]->GetPos().z + mOffset_z);
+				auto bpos = CalculateElementNumber(mBombs[i]->GetPos(), mOffset_x, mOffset_z);
 
 				// ボムと床が接触していたら
 				if (mBombs[i]->GetPos().y < 0)
 				{
 					// 床の属性を確認
-					switch (mMap->GetAttribute((int)(bombPos.x), (int)(bombPos.z)))
+					switch (mMap->GetAttribute((int)(bpos.x), (int)(bpos.z)))
 					{
 						// クッキー床なら
 					case COOKIE:
 						// クッキー床から穴の床に代入
-						mMap->Set((int)(bombPos.x), (int)(bombPos.z), mChip[HOLE]);
+						mMap->Set((int)(bpos.x), (int)(bpos.z), mChip[HOLE]);
 						break;
 						// ネットなら
 					case NET:
@@ -292,12 +258,8 @@ void PlayGameLayer::Update()
 			mKuma->Move();
 			// 歩数を取得
 			mCount = mKuma->GetCount();
-
 			// キャラクターの座標
-			Vector3 chpos = Vector3(0, 0, 0);
-			chpos.x = floorf(mKuma->GetPos().x + mOffset_x);
-			chpos.z = floorf(mKuma->GetPos().z + mOffset_z);
-
+			auto chpos = CalculateElementNumber(mKuma->GetPos(), mOffset_x, mOffset_z);
 			// フィールドの範囲外に行ったら
 			if (chpos.x < 0.0f || chpos.x >= mMapSize_x ||
 				chpos.z < 0.0f || chpos.z >= mMapSize_z)
@@ -484,3 +446,75 @@ void PlayGameLayer::Finalize()
 	delete mChip[MapChipAttribute::HOLE];
 	delete mChip[MapChipAttribute::NET];
 }
+
+// ----------------------------------------------------------------------------------------------- //
+// @ brief	: 初期配置                                                                             //
+// @ param	: int mapSize_x...マップのサイズ                                                       //
+// @ param	: int mapSize_z...マップのサイズ                                                       //
+// @ param	: float offset_x...オフセット                                                          //
+// @ param	: float offset_z...オフセット                                                          //
+// @ return : Vector3...座標                                                                       //
+// @ note	:                                                                                      //
+// ----------------------------------------------------------------------------------------------- // 
+Vector3 PlayGameLayer::InitialPlacement(int mapSize_x, int mapSize_z, float offset_x, float offset_z)
+{
+	// 戻り値の変数を定義
+	Vector3 result = Vector3(0, 0, 0);
+	// 作業用の変数を定義
+	Vector3 tmp = Vector3(0, 0, 0);
+
+	// 座標をランダムで設定
+	result = mMap->GetRandomPos(mapSize_x, mapSize_z, offset_x, offset_z);
+
+	// 座標から配列の要素番号を算出
+	tmp = CalculateElementNumber(result, offset_x, offset_z);
+
+	// 移動可能マスになるまで
+	while (mMap->GetAttribute((int)(tmp.x), (int)(tmp.z)))
+	{
+		// 座標をランダムで設定
+		result = mMap->GetRandomPos(mapSize_x, mapSize_z, offset_x, offset_z);
+		// 座標から配列の要素番号を算出
+		tmp.x = floorf(result.x + offset_x);
+		tmp.z = floorf(result.z + offset_z);
+	}
+	// 算出したものに中心までの距離とオフセットを加減
+	result.x = tmp.x + 0.5f - offset_x;
+	result.z = tmp.z + 0.5f - offset_z;
+
+	return result;
+}
+
+// ----------------------------------------------------------------------------------------------- //
+// @ brief	: 座標から配列の要素番号を算出                                                         //
+// @ param	: Vector3 pos...座標                                                                   //
+// @ param	: int offset_x...オフセット                                                            //
+// @ param	: int offset_z...オフセット                                                            //
+// @ return : Vector3...座標                                                                       //
+// @ note	:                                                                                      //
+// ----------------------------------------------------------------------------------------------- // 
+Vector3 PlayGameLayer::CalculateElementNumber(Vector3 pos, int offset_x, int offset_z)
+{
+	// 戻り値の変数を定義
+	Vector3 result = Vector3(0, 0, 0);
+
+	// 座標から配列の要素番号を算出
+	result.x = floorf(pos.x + offset_x);
+	result.z = floorf(pos.z + offset_z);
+
+	return result;
+}
+
+// ----------------------------------------------------------------------------------------------- //
+// @ brief	: マップチップの登録                                                                   //
+// @ param	: MapChipAttribute attr...マップの属性                                                 //
+// @ param	: shared_ptr<DirectX::Model> model...モデル                                            //
+// @ return : なし                                                                                 //
+// @ note	:                                                                                      //
+// ----------------------------------------------------------------------------------------------- // 
+void PlayGameLayer::RegisterMapChip(MapChipAttribute attr, shared_ptr<Model> model)
+{
+	mChip[attr] = new MapChip(attr);
+	mChip[attr]->SetModel(model);
+}
+
