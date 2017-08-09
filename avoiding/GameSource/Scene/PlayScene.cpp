@@ -61,7 +61,7 @@ void PlayScene::Initialize(int width, int height)
 void PlayScene::Update()
 {
 	// 視点の設定
-	pCamera->SetEye(Vector3(0.0f, 15.0f, 25.0f));
+	pCamera->SetEye(Vector3(0.0f, 18.0f, 30.0f));
 	pCamera->SetRef(Vector3(0.0f, 0.0f, 0.0f));
 	// 背景レイヤーの更新
 	mBackGround->Update();
