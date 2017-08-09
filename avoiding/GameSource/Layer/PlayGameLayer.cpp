@@ -53,7 +53,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	// CSV読み込み変数の生成
 	mCSV = make_shared<CSVReader>();
 	// CSV読み込み
-	mCSV->ReadCSV(L"Resources\\mapdata4.csv");
+	mCSV->ReadCSV(L"Resources\\mapdata5.csv");
 	// 読み込んだデータの取得
 	mMapData = mCSV->GetData();
 	// マップサイズを取得
@@ -76,7 +76,6 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	RegisterMapChip(MapChipAttribute::COOKIE, mCookieModel);
 	RegisterMapChip(MapChipAttribute::HOLE, mHoleModel);
 	RegisterMapChip(MapChipAttribute::NET, mNetModel);
-
 
 	// マップの生成
 	mMap = make_unique<Map>(mMapSize_x, mMapSize_z);
