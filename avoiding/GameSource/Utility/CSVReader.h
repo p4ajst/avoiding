@@ -4,7 +4,6 @@
 // @ date	 : 2017/01/11                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
-// @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
 /* 多重インクルードの防止 */
 #pragma once
@@ -30,9 +29,6 @@ class CSVReader
 	// マップのサイズ
 	int mapSize_x;
 	int mapSize_z;
-	/* メンバ関数 */
-	// コンマで区切られた値を取り出す
-	std::vector<int> Split(const std::string& str, char delimiter);
 public:
 	/* メンバ関数 */
 	// コンストラクタ
@@ -41,6 +37,8 @@ public:
 	~CSVReader();
 	// CSVファイルを読み込む
 	bool ReadCSV(wchar_t* filename);
+	// コンマで区切られた値を取り出す
+	std::vector<int> Split(const std::string& str, char delimiter);
 	// 読み込んだファイルの中のデータを取得
 	std::vector<std::vector<int>> GetData() { return mData; }
 };

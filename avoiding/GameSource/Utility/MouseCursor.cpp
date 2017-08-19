@@ -4,7 +4,6 @@
 // @ date	 : 2017/06/25                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
-// @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
 /* ヘッダファイルのインクルード */
 // 先生のフレームワーク
@@ -108,7 +107,7 @@ void MouseCursor::Calc(Matrix view, Matrix proj)
 // @ param	: Plane p...平面                                                                       //
 // @ param	: float* t...方向のある直線に対して平面と交差する値                                    //
 // @ param	: Vector3* q...交差点                                                                  //
-// @ return : bool...交差しているかどうか                                                                      //
+// @ return : bool...交差しているかどうか                                                          //
 // @ note	: リアルタイム衝突判定Ｐ．１７５                                                       //
 // ----------------------------------------------------------------------------------------------- // 
 bool MouseCursor::IntersectSegmentPlane(Vector3 a, Vector3 b, Plane p, float* t, Vector3* q)

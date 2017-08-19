@@ -1,5 +1,5 @@
 ﻿// ------------------------------------------------------------------------------------------------ //
-// @ file	 : ResultBackGroundLayer.cpp                                                                  //
+// @ file	 : ResultBackGroundLayer.cpp                                                            //
 // @ brief	 : 背景部分のクラス                                                                     //
 // @ date	 : 2017/06/30                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
