@@ -19,20 +19,29 @@
 class TitleHUDLayer :public Layer
 {
 	/* メンバ変数 */
+	// 画像描画
+	struct Graph
+	{
+		// 画像描画用変数
+		// 後
+		std::unique_ptr<Texture> graphA;
+		// 前
+		std::unique_ptr<Texture> graphB;
+		// 画像の描画範囲
+		RECT range;
+		// 判定用フラグ
+		bool flag;
+	};
 	// シーン遷移用変数
 	bool mSceneFlag;
+
+	// 画像描画
+	Graph start;
+	Graph end;
+
+
 	// 画像描画用変数
 	std::unique_ptr<Texture> mGraph;
-	std::unique_ptr<Texture> mBeforeStart;
-	std::unique_ptr<Texture> mAfterStart;
-	std::unique_ptr<Texture> mBeforeEnd;
-	std::unique_ptr<Texture> mAfterEnd;
-	// 判定用フラグ
-	bool msFlag;
-	bool meFlag;
-	// 画像の描画範囲
-	RECT mStart;
-	RECT mEnd;
 
 public:
 	/* メンバ関数 */
