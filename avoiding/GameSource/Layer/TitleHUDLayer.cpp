@@ -27,25 +27,27 @@ void TitleHUDLayer::Initialize(Scene * scene)
 	pScene = scene;
 
 	// 画像描画用変数の生成
+	start.graphB = make_unique<Texture>(L"Resources\\Start_Before.png");
+	start.graphA = make_unique<Texture>(L"Resources\\Start_After.png");
+	end.graphB = make_unique<Texture>(L"Resources\\End_Before.png");
+	end.graphA = make_unique<Texture>(L"Resources\\End_After.png");
+
+	// 画像描画用変数の生成
 	mGraph = make_unique<Texture>(L"Resources\\Title3.png");
-	mBeforeStart = make_unique<Texture>(L"Resources\\Start_Before.png");
-	mAfterStart = make_unique<Texture>(L"Resources\\Start_After.png");
-	mBeforeEnd = make_unique<Texture>(L"Resources\\End_Before.png");
-	mAfterEnd = make_unique<Texture>(L"Resources\\End_After.png");
+	
 	// 判定用フラグ
-	msFlag = false;
-	meFlag = false;
+	start.flag = false;
+	end.flag = false;
 
 	// 画像の描画範囲
-	mStart.left   = 425;
-	mStart.top    = 400;
-	mStart.right  = 825;
-	mStart.bottom = 610;
-
-	mEnd.left     = 425;
-	mEnd.top      = 650;
-	mEnd.right    = 825;
-	mEnd.bottom   = 860;
+	start.range.left   = 425;
+	start.range.top    = 400;
+	start.range.right  = 825;
+	start.range.bottom = 610;
+	end.range.left     = 425;
+	end.range.top      = 650;
+	end.range.right    = 825;
+	end.range.bottom   = 860;
 
 	// シーン切替用変数の初期化
 	mSceneFlag = false;
@@ -60,10 +62,10 @@ void TitleHUDLayer::Initialize(Scene * scene)
 void TitleHUDLayer::Update()
 {
 	// Startの範囲にカーソルが入ったら
-	if (g_mouse.x >= mStart.left && g_mouse.x <= mStart.right &&
-		g_mouse.y >= mStart.top && g_mouse.y <= mStart.bottom)
+	if (g_mouse.x >= start.range.left && g_mouse.x <= start.range.right &&
+		g_mouse.y >= start.range.top && g_mouse.y <= start.range.bottom)
 	{
-		msFlag = true;
+		start.flag = true;
 		// 左クリックされたら
 		if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::RELEASED)
 		{
@@ -73,12 +75,12 @@ void TitleHUDLayer::Update()
 	}
 	else
 	{
-		msFlag = false;
+		start.flag = false;
 	}
-	if (g_mouse.x >= mEnd.left && g_mouse.x <= mEnd.right &&
-		g_mouse.y >= mEnd.top && g_mouse.y <= mEnd.bottom)
+	if (g_mouse.x >= end.range.left && g_mouse.x <= end.range.right &&
+		g_mouse.y >= end.range.top && g_mouse.y <= end.range.bottom)
 	{
-		meFlag = true;
+		end.flag = true;
 		// 左クリックされたら
 		if (g_mouseTracker->leftButton == Mouse::ButtonStateTracker::RELEASED)
 		{
@@ -88,7 +90,7 @@ void TitleHUDLayer::Update()
 	}
 	else
 	{
-		meFlag = false;
+		end.flag = false;
 	}
 }
 
@@ -106,24 +108,24 @@ void TitleHUDLayer::Draw()
 	// 画像の描画
 	pScene->GetSprite()->Draw(mGraph->m_pTexture, rect, DirectX::Colors::White);
 	// スタートフラグが偽であるなら
-	if (!msFlag)
+	if (!start.flag)
 	{
-		pScene->GetSprite()->Draw(mBeforeStart->m_pTexture, mStart, DirectX::Colors::White);
+		pScene->GetSprite()->Draw(start.graphB->m_pTexture, start.range, DirectX::Colors::White);
 	}
 	// スタートフラグが真であるなら
 	else
 	{
-		pScene->GetSprite()->Draw(mAfterStart->m_pTexture, mStart, DirectX::Colors::White);
+		pScene->GetSprite()->Draw(start.graphA->m_pTexture, start.range, DirectX::Colors::White);
 	}
 	// エンドフラグが偽であるなら
-	if (!meFlag)
+	if (!end.flag)
 	{
-		pScene->GetSprite()->Draw(mBeforeEnd->m_pTexture, mEnd, DirectX::Colors::White);
+		pScene->GetSprite()->Draw(end.graphB->m_pTexture, end.range, DirectX::Colors::White);
 	}
 	// エンドフラグが真であるなら
 	else
 	{
-		pScene->GetSprite()->Draw(mAfterEnd->m_pTexture, mEnd, DirectX::Colors::White);
+		pScene->GetSprite()->Draw(end.graphA->m_pTexture, end.range, DirectX::Colors::White);
 	}
 }
 
