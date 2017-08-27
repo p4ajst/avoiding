@@ -39,7 +39,6 @@ class TitleHUDLayer :public Layer
 	Graph start;
 	Graph end;
 
-
 	// 画像描画用変数
 	std::unique_ptr<Texture> mGraph;
 

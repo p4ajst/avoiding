@@ -134,7 +134,8 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mPauseFlag = false;
 	// スタートカウント中であるか
 	mStartFlag = true;
-
+	// 落下中であるか
+	mFallFlag = false;
 	// カウンタの初期化
 	mCount = 0;
 
@@ -252,9 +253,12 @@ void PlayGameLayer::Update()
 					}
 				}
 			}
-
-			// キャラクターの移動
-			mKuma->Move();
+			// 落下中でなければ
+			if (!mFallFlag)
+			{
+				// キャラクターの移動
+				mKuma->Move();
+			}
 			// 歩数を取得
 			mCount = mKuma->GetCount();
 			// キャラクターの座標
@@ -268,6 +272,8 @@ void PlayGameLayer::Update()
 				// 落下カウンタが600より小さかったら
 				while (w < 600)
 				{
+					// 落下中にする
+					mFallFlag = true;
 					// 落下する
 					mKuma->Fall();
 					// 落下カウンタを増やす
@@ -278,6 +284,8 @@ void PlayGameLayer::Update()
 				{
 					// ゲームを終了する
 					mSceneFlag = true;
+					// 落下中でなくす
+					mFallFlag = false;
 					// 落下カウンタを初期化
 					w = 0;
 				}
@@ -294,6 +302,8 @@ void PlayGameLayer::Update()
 					// 落下カウンタが600より小さかったら
 					while (w < 600)
 					{
+						// 落下中にする
+						mFallFlag = true;
 						// 落下する
 						mKuma->Fall();
 						// 落下カウンタを増やす
@@ -304,6 +314,8 @@ void PlayGameLayer::Update()
 					{
 						// ゲームを終了する
 						mSceneFlag = true;
+						// 落下中でなくす
+						mFallFlag = false;
 						// 落下カウンタを初期化
 						w = 0;
 					}

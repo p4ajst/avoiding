@@ -97,6 +97,8 @@ class PlayGameLayer : public Layer
 	// スタートフラグ
 	bool mStartFlag;
 	bool msFlag;
+	// 落下中か
+	bool mFallFlag;
 	// カウンタ
 	int mCount;
 public:
