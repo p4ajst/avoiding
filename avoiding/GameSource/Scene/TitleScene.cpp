@@ -66,22 +66,6 @@ void TitleScene::Update()
 	mGame->Update();
 	// HUDレイヤーの更新
 	mHUD->Update();
-
-#pragma region Debug
-	// F1キーが押されたら
-	if (g_key.F1)
-	{
-		// シーンを遷移する
-		mSceneFlag = true;
-	}
-
-	// Escapeキーを押したら
-	if (g_key.Escape)
-	{
-		// ウインドウを閉じる
-		PostQuitMessage(0);
-	}
-#pragma endregion デバッグ用機能
 }
 
 // ----------------------------------------------------------------------------------------------- //

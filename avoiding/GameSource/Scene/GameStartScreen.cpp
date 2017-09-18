@@ -35,8 +35,8 @@ void GameStartScreen::Initialize()
 	mWhite = make_unique<Texture>(L"Resources\\screen.png");
 	mNumber = make_unique<Texture>(L"Resources\\number.png");
 	// カウンタの初期化
-	mStartCounter = 5;
-	mCnt = 300;
+	mStartCounter = 3;
+	mCnt = 180;
 	// フラグの初期化
 	mStartFlag = false;
 }
@@ -121,9 +121,4 @@ void GameStartScreen::Render()
 // ----------------------------------------------------------------------------------------------- // 
 void GameStartScreen::Finalize()
 {
-	// 
-	// 
-	// 
-	// 
-	// 
 }

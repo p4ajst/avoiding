@@ -131,15 +131,12 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mResultFlag = false;
 	// ポーズであるか
 	mPauseFlag = false;
-	// スタートカウント中であるか
+	// ゲーム開始前のカウンタが作動しているか
 	mStartFlag = true;
 	// 落下中であるか
 	mFallFlag = false;
 	// カウンタの初期化
 	mCount = 0;
-
-	// スタートスクリーンのフラグ
-	msFlag = PlayGameState::START;
 }
 
 // ----------------------------------------------------------------------------------------------- //
@@ -164,255 +161,218 @@ void PlayGameLayer::Update()
 	// 自機狙いタイミング
 	auto timing = 0;
 
-	// フラグのステートが
-	switch (msFlag)
+
+	// 自機狙いタイマーをカウント
+	// タイマーをカウントアップさせる
+	mWaitTimer++;
+	// 自機狙いタイミングをランダムで
+	timing = rand() % 100 + 1;
+	// タイマーが一定値を超えたらボムを生成
+	if (mWaitTimer > 180)
 	{
-		// スタートならば
-		case PlayGameState::START:
+		if (timing % 3 == 0)
 		{
-			// スタートフラグを変える
-			mStartFlag = false;
-			// フラグのステートをプレイに変える
-			msFlag = PLAY;
-			break;
+			// ボムを生成
+			mBomb = make_shared<Bomb>();
+			mBomb->Initialize();
+			mBomb->SetModel(mBombModel);
+			Vector3 pos = mKuma->GetPos();
+			pos.y = 50;
+			mBomb->SetPos(pos);
+			mBombs.push_back(mBomb);
+			mWaitTimer = 0;
 		}
-		// プレイならば
-		case PlayGameState::PLAY:
+		else
 		{
-			// ポーズ中でないなら
-			if (!mPauseFlag)
-			{
-				// 自機狙いタイマーをカウント
-				// タイマーをカウントアップさせる
-				mWaitTimer++;
-				// 自機狙いタイミングをランダムで
-				timing = rand() % 100 + 1;
-				// タイマーが一定値を超えたらボムを生成
-				if (mWaitTimer > 180)
-				{
-					if (timing % 3 == 0)
-					{
-						// ボムを生成
-						mBomb = make_shared<Bomb>();
-						mBomb->Initialize();
-						mBomb->SetModel(mBombModel);
-						Vector3 pos = mKuma->GetPos();
-						pos.y = 50;
-						mBomb->SetPos(pos);
-						mBombs.push_back(mBomb);
-						mWaitTimer = 0;
-					}
-					else
-					{
-						// ボムを生成
-						mBomb = make_shared<Bomb>();
-						mBomb->Initialize();
-						mBomb->SetModel(mBombModel);
-						Vector3 pos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
-						pos.y = 50;
-						mBomb->SetPos(pos);
-						mBombs.push_back(mBomb);
-						mWaitTimer = 0;
-					}
-				}
+			// ボムを生成
+			mBomb = make_shared<Bomb>();
+			mBomb->Initialize();
+			mBomb->SetModel(mBombModel);
+			Vector3 pos = mMap->GetRandomPos(mMapSize_x, mMapSize_z, mOffset_x, mOffset_z);
+			pos.y = 50;
+			mBomb->SetPos(pos);
+			mBombs.push_back(mBomb);
+			mWaitTimer = 0;
+		}
+	}
 
-				// 生成したすべてのボムを更新
-				for (int i = 0; i < (int)(mBombs.size()); i++)
-				{
-					mBombs[i]->Update();
-				}
-			}
+	// 生成したすべてのボムを更新
+	for (int i = 0; i < (int)(mBombs.size()); i++)
+	{
+		mBombs[i]->Update();
+	}
+	// ボムと床のあたり判定
+	for (int i = 0; i < (int)(mBombs.size()); i++)
+	{
+		// 座標から配列の要素番号を算出
+		auto bpos = CalculateElementNumber(mBombs[i]->GetPos(), mOffset_x, mOffset_z);
 
-			// ボムと床のあたり判定
-			for (int i = 0; i < (int)(mBombs.size()); i++)
+		// ボムと床が接触していたら
+		if (mBombs[i]->GetPos().y < 0)
+		{
+			// 床の属性を確認
+			switch (mMap->GetAttribute((int)(bpos.x), (int)(bpos.z)))
 			{
-				// 座標から配列の要素番号を算出
-				auto bpos = CalculateElementNumber(mBombs[i]->GetPos(), mOffset_x, mOffset_z);
-
-				// ボムと床が接触していたら
-				if (mBombs[i]->GetPos().y < 0)
-				{
-					// 床の属性を確認
-					switch (mMap->GetAttribute((int)(bpos.x), (int)(bpos.z)))
-					{
-						// クッキー床なら
-					case COOKIE:
-						// クッキー床から穴の床に代入
-						mMap->Set((int)(bpos.x), (int)(bpos.z), mChip[HOLE]);
-						break;
-						// ネットなら
-					case NET:
-						// ボムを消す
-						mBombs.pop_back();
-						break;
-						// それ以外なら
-					default:
-						// 何もしない
-						break;
-					}
-				}
+				// クッキー床なら
+			case COOKIE:
+				// クッキー床から穴の床に代入
+				mMap->Set((int)(bpos.x), (int)(bpos.z), mChip[HOLE]);
+				break;
+				// ネットなら
+			case NET:
+				// ボムを消す
+				mBombs.pop_back();
+				break;
+				// それ以外なら
+			default:
+				// 何もしない
+				break;
 			}
-			// 落下中でなければ
-			if (!mFallFlag)
+		}
+	}
+	// 落下中でなければ
+	if (!mFallFlag)
+	{
+		// キャラクターの移動
+		mKuma->Move();
+	}
+	// 歩数を取得
+	mCount = mKuma->GetCount();
+	// キャラクターの座標
+	auto chpos = CalculateElementNumber(mKuma->GetPos(), mOffset_x, mOffset_z);
+	// フィールドの範囲外に行ったら
+	if (chpos.x < 0.0f || chpos.x >= mMapSize_x ||
+		chpos.z < 0.0f || chpos.z >= mMapSize_z)
+	{
+		// 落下カウンタを増やす
+		w++;
+		// 落下カウンタが600より小さかったら
+		while (w < 600)
+		{
+			// 落下中にする
+			mFallFlag = true;
+			// 落下する
+			mKuma->Fall();
+			// 落下カウンタを増やす
+			w++;
+		}
+		// -25.0f落下したら
+		if (mKuma->GetPos().y <= -25.0f)
+		{
+			// ゲームを終了する
+			mSceneFlag = true;
+			// 落下中でなくす
+			mFallFlag = false;
+			// 落下カウンタを初期化
+			w = 0;
+		}
+	}
+	else
+	{
+		// キャラクターのいる床の属性を確認
+		switch (mMap->GetAttribute((int)(chpos.x), (int)(chpos.z)))
+		{
+			// 穴床なら
+		case HOLE:
+			// 落下カウンタを増やす
+			w++;
+			// 落下カウンタが600より小さかったら
+			while (w < 600)
 			{
-				// キャラクターの移動
-				mKuma->Move();
-			}
-			// 歩数を取得
-			mCount = mKuma->GetCount();
-			// キャラクターの座標
-			auto chpos = CalculateElementNumber(mKuma->GetPos(), mOffset_x, mOffset_z);
-			// フィールドの範囲外に行ったら
-			if (chpos.x < 0.0f || chpos.x >= mMapSize_x ||
-				chpos.z < 0.0f || chpos.z >= mMapSize_z)
-			{
+				// 落下中にする
+				mFallFlag = true;
+				// 落下する
+				mKuma->Fall();
 				// 落下カウンタを増やす
 				w++;
-				// 落下カウンタが600より小さかったら
-				while (w < 600)
-				{
-					// 落下中にする
-					mFallFlag = true;
-					// 落下する
-					mKuma->Fall();
-					// 落下カウンタを増やす
-					w++;
-				}
-				// -25.0f落下したら
-				if (mKuma->GetPos().y <= -25.0f)
-				{
-					// ゲームを終了する
-					mSceneFlag = true;
-					// 落下中でなくす
-					mFallFlag = false;
-					// 落下カウンタを初期化
-					w = 0;
-				}
 			}
-			else
-			{
-				// キャラクターのいる床の属性を確認
-				switch (mMap->GetAttribute((int)(chpos.x), (int)(chpos.z)))
-				{
-					// 穴床なら
-				case HOLE:
-					// 落下カウンタを増やす
-					w++;
-					// 落下カウンタが600より小さかったら
-					while (w < 600)
-					{
-						// 落下中にする
-						mFallFlag = true;
-						// 落下する
-						mKuma->Fall();
-						// 落下カウンタを増やす
-						w++;
-					}
-					// -25.0f落下したら
-					if (mKuma->GetPos().y <= -25.0f)
-					{
-						// ゲームを終了する
-						mSceneFlag = true;
-						// 落下中でなくす
-						mFallFlag = false;
-						// 落下カウンタを初期化
-						w = 0;
-					}
-					break;
-					// ネットなら
-				case NET:
-					// ゲームを終了する
-					mSceneFlag = true;
-					break;
-					// それ以外なら
-				default:
-					// 何もしない
-					break;
-				}
-			}
-
-			// ボムとキャラクターのあたり判定
-			for (int i = 0; i < (int)(mBombs.size()); i++)
-			{
-				// ボムとプレイヤーのあたり判定
-				if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
-					mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
-					mBombs[i]->GetPos().y < 0)
-				{
-					// ゲームを終了する
-					mSceneFlag = true;
-				}
-			}
-
-			// アイテムとキャラクターのあたり判定
-			if (mItem->GetPos().x < mKuma->GetPos().x + 0.5f && mItem->GetPos().x + 0.5f > mKuma->GetPos().x &&
-				mItem->GetPos().z < mKuma->GetPos().z + 0.5f && mItem->GetPos().z + 0.5f > mKuma->GetPos().z)
+			// -25.0f落下したら
+			if (mKuma->GetPos().y <= -25.0f)
 			{
 				// ゲームを終了する
 				mSceneFlag = true;
-				// ゲームクリア
-				mResultFlag = true;
+				// 落下中でなくす
+				mFallFlag = false;
+				// 落下カウンタを初期化
+				w = 0;
 			}
-
-			// オブジェクトの中心を算出
-			oc = Vector3((1.0f / 2.0f), (1.0f / 2.0f), (1.0f / 2.0f));
-			// カーソルの更新
-			mCursor->GetCursor()->Update();
-			// マウスレイとフィールドのあたり判定（P．１７５）
-			mCursor->GetCursor()->IntersectSegmentPlane
-			(mCursor->GetCursor()->GetNear(), mCursor->GetCursor()->GetFar(), Vector3(0, 0, 0), Vector3(1, 0, 0), Vector3(0, 0, 1), &t, &mResult);
-			// カーソルの座標の更新
-			mCursorPos = mResult;
-			// 計算したものをfloorfで丸める
-			mMapOffset_x = (int)(floorf(mCursorPos.x + mOffset_x));
-			mMapOffset_z = (int)(floorf(mCursorPos.z + mOffset_z));
-			// マップチップの中心を計算
-			cx = 1.0f / 2.0f;
-			cz = 1.0f / 2.0f;
-			// 丸めたものからずらしている分を引く（+0.5f...マップチップの中心）
-			mResult.x = static_cast<float>(mMapOffset_x) + cx - mOffset_x;
-			mResult.z = static_cast<float>(mMapOffset_z) + cz - mOffset_z;
-			
-			// カーソルの座標
-			Vector3 cpos = Vector3(0, 0, 0);
-			// 座標を設定
-			cpos = mResult;
-			// ｙ座標を少し高くする
-			cpos.y += 0.01f;
-			// カーソル座標の設定
-			mCursor->SetPos(cpos);
-
-			// マウスが右クリックしたら
-			if (g_mouseTracker->rightButton)
-			{
-				// マウス座標が配列の範囲内にあったら
-				if (mMapOffset_x >= 0 && mMapOffset_x < mMapSize_x &&
-					mMapOffset_z >= 0 && mMapOffset_z < mMapSize_z)
-				{
-					// フィールドの属性を変える
-					mMap->Set(mMapOffset_x, mMapOffset_z, mChip[NET]);
-				}
-			}
+			break;
+			// ネットなら
+		case NET:
+			// ゲームを終了する
+			mSceneFlag = true;
+			break;
+			// それ以外なら
+		default:
+			// 何もしない
 			break;
 		}
 	}
 
-#pragma region Debug
-	// F1キーが押されたら
-	if (g_key.F2)
+	// ボムとキャラクターのあたり判定
+	for (int i = 0; i < (int)(mBombs.size()); i++)
 	{
-		// シーンを遷移する
-		mSceneFlag = true;
+		// ボムとプレイヤーのあたり判定
+		if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
+			mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
+			mBombs[i]->GetPos().y < 0)
+		{
+			// ゲームを終了する
+			mSceneFlag = true;
+		}
 	}
 
-	// Escapeキーを押したら
-	if (g_key.Escape)
+	// アイテムとキャラクターのあたり判定
+	if (mItem->GetPos().x < mKuma->GetPos().x + 0.5f && mItem->GetPos().x + 0.5f > mKuma->GetPos().x &&
+		mItem->GetPos().z < mKuma->GetPos().z + 0.5f && mItem->GetPos().z + 0.5f > mKuma->GetPos().z)
 	{
-		// ウインドウを閉じる
-		PostQuitMessage(0);
+		// ゲームを終了する
+		mSceneFlag = true;
+		// ゲームクリア
+		mResultFlag = true;
 	}
-#pragma endregion デバッグ用機能
+
+	// オブジェクトの中心を算出
+	oc = Vector3((1.0f / 2.0f), (1.0f / 2.0f), (1.0f / 2.0f));
+	// カーソルの更新
+	mCursor->GetCursor()->Update();
+	// マウスレイとフィールドのあたり判定（P．１７５）
+	mCursor->GetCursor()->IntersectSegmentPlane
+	(mCursor->GetCursor()->GetNear(), mCursor->GetCursor()->GetFar(), Vector3(0, 0, 0), Vector3(1, 0, 0), Vector3(0, 0, 1), &t, &mResult);
+	// カーソルの座標の更新
+	mCursorPos = mResult;
+	// 計算したものをfloorfで丸める
+	mMapOffset_x = (int)(floorf(mCursorPos.x + mOffset_x));
+	mMapOffset_z = (int)(floorf(mCursorPos.z + mOffset_z));
+	// マップチップの中心を計算
+	cx = 1.0f / 2.0f;
+	cz = 1.0f / 2.0f;
+	// 丸めたものからずらしている分を引く（+0.5f...マップチップの中心）
+	mResult.x = static_cast<float>(mMapOffset_x) + cx - mOffset_x;
+	mResult.z = static_cast<float>(mMapOffset_z) + cz - mOffset_z;
+
+	// カーソルの座標
+	Vector3 cpos = Vector3(0, 0, 0);
+	// 座標を設定
+	cpos = mResult;
+	// ｙ座標を少し高くする
+	cpos.y += 0.01f;
+	// カーソル座標の設定
+	mCursor->SetPos(cpos);
+
+	// マウスが右クリックしたら
+	if (g_mouseTracker->rightButton)
+	{
+		// マウス座標が配列の範囲内にあったら
+		if (mMapOffset_x >= 0 && mMapOffset_x < mMapSize_x &&
+			mMapOffset_z >= 0 && mMapOffset_z < mMapSize_z)
+		{
+			// フィールドの属性を変える
+			mMap->Set(mMapOffset_x, mMapOffset_z, mChip[NET]);
+		}
+	}
 }
+
 
 // ----------------------------------------------------------------------------------------------- //
 // @ brief	: 描画                                                                                 //

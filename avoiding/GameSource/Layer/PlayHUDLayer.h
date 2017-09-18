@@ -28,14 +28,15 @@ private:
 	std::unique_ptr<Texture> mNum;
 	std::unique_ptr<Texture> mBiscuitBefore;
 	std::unique_ptr<Texture> mBiscuitAfter;
-	std::unique_ptr<PauseScreen> mPause;
-	std::unique_ptr<GameStartScreen> mStart;
+	/*std::unique_ptr<PauseScreen> mPause;
+	std::unique_ptr<GameStartScreen> mStart;*/
 	// 描画範囲
 	RECT mBisrect;
 	// ポーズ中か？
 	bool mPauseFlag;
-	// スタートカウンター中か？
-	bool mStartFlag;
+	//// スタートカウンター中か？
+	//bool mStartFlag;
+
 	// カーソルが画像の描画範囲内にあるか？
 	bool mpFrag;
 	// カウンタ
@@ -54,8 +55,9 @@ public:
 	void Finalize();
 	// カウンタのセット
 	void SetCount(int cnt) { mCount = cnt; }
-	void SetStartFlag(bool flag) { mStartFlag = flag; }
+	//void SetStartFlag(bool flag) { mStartFlag = flag; }
+	
 	// フラグの取得
 	bool GetPauseFlag() { return mPauseFlag; }
-	bool GetStartFlag() { return mStartFlag; }
+	//bool GetStartFlag() { return mStartFlag; }
 };

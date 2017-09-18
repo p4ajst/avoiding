@@ -19,9 +19,20 @@
 #include "../Layer/PlayGameLayer.h"
 #include "../Layer/PlayBackGroundLayer.h"
 
+#include "GameStartScreen.h"
+#include "PauseScreen.h"
+
 /* クラス宣言 */
 class PlayScene :public Scene
 {
+	/* 列挙体 */
+	enum PlayState
+	{
+		START,
+		GAME,
+		PAUSE
+	};
+
 	/* メンバ変数 */
 	// 背景レイヤー
 	std::unique_ptr<PlayBackGroundLayer> mBackGround;
@@ -29,6 +40,12 @@ class PlayScene :public Scene
 	std::unique_ptr<PlayGameLayer> mGame;
 	// HUDレイヤー
 	std::unique_ptr<PlayHUDLayer> mHUD;
+	// ゲーム開始前のカウンタ
+	std::unique_ptr<GameStartScreen> mStart;
+	// ポーズ画面
+	std::unique_ptr<PauseScreen> mPause;
+	// 状態遷移用変数
+	PlayState mState;
 	// 描画判定フラグ
 	bool mResultFlag;
 public:
