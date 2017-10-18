@@ -165,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DebugBase.props" />
+    <None Include="Light.hlsli" />
     <None Include="myfile.spritefont" />
     <None Include="ReleaseBase.props" />
   </ItemGroup>
@@ -198,6 +199,7 @@
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
+    <ShaderGraphContentTask Include="Light.dgsl" />
     <ShaderGraphContentTask Include="Resources\CookieTexture.dgsl">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cso</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Resources\%(Filename).cso</ContentOutput>
@@ -214,6 +216,16 @@
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Resources\%(Filename).cso</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cso</ContentOutput>
     </ShaderGraphContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="PixelLight.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+    </FxCompile>
+    <FxCompile Include="VertexLight.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

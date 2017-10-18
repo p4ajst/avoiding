@@ -271,6 +271,9 @@
     <None Include="ReleaseBase.props">
       <Filter>property</Filter>
     </None>
+    <None Include="Light.hlsli">
+      <Filter>リソース ファイル\Shader</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Resources\cookie.FBX">
@@ -308,5 +311,16 @@
     <ShaderGraphContentTask Include="Resources\NetTexture.dgsl">
       <Filter>リソース ファイル\Shader</Filter>
     </ShaderGraphContentTask>
+    <ShaderGraphContentTask Include="Light.dgsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </ShaderGraphContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="VertexLight.hlsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PixelLight.hlsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

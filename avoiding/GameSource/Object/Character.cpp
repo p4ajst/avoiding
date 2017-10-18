@@ -30,6 +30,13 @@ void Character::Move()
 		mVelocity = Vector3(-1, 0, 0);
 		mPosition += mVelocity;
 		mStepCount += 1;
+		//mAngle = 270;
+		//for (float i = 0; i <1.0f; i += 0.001f)
+		//{
+		//	mVelocity.x = -0.001f;
+		//	mPosition += mVelocity;
+		//}
+		//mStepCount += 1;
 	}
 	if (g_keyTracker->pressed.D)
 	{
