@@ -34,6 +34,7 @@ private:
 	float mTime;
 	// フラグ
 	bool mFlag;
+	
 
 	/* メンバ関数 */
 public:
@@ -49,6 +50,8 @@ public:
 	void FreeFall();
 	// 座標に速度を足す
 	void AddPos();
+	// 描画
+	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
 	// 設定
 	void SetVel(DirectX::SimpleMath::Vector3 vel) { mVelocity = vel; }
 	//void SetFlag(bool flag) { mFlag = flag; }

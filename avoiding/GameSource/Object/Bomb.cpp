@@ -11,6 +11,8 @@
 #include "../../ImaseLib/Direct3D.h"
 // 自作ヘッダファイル
 #include "Bomb.h"
+#include "../Utility/Shader.h"
+
 
 /* 名前空間 */
 using namespace std;
@@ -37,6 +39,9 @@ void Bomb::Initialize()
 	mLocalWorld = Matrix::Identity;
 	mTime = 0;
 	mFlag = true;
+	mnLib::InitShader(L"Resources\\dogbomb1.cmo");
+	mnLib::CreateShader("VertexLight.cso", "PixelLight.cso");
+	mnLib::CreateConstantBuffer();
 }
 
 // ----------------------------------------------------------------------------------------------- //
@@ -76,4 +81,15 @@ void Bomb::FreeFall()
 void Bomb::AddPos()
 {
 	mPosition = mPosition + mVelocity;
+}
+
+// ----------------------------------------------------------------------------------------------- //
+// @ brief	: 描画                                                                                 //
+// @ param	: なし                                                                                 //
+// @ return : なし                                                                                 //
+// @ note	:                                                                                      //
+// ----------------------------------------------------------------------------------------------- // 
+void Bomb::Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj)
+{
+	mnLib::Draw(view, proj);
 }

@@ -12,11 +12,13 @@
 #include "../../ImaseLib/DirectXTK.h"
 // 自作ヘッダファイル
 #include "PlayGameLayer.h"
+#include "../Utility/Shader.h"
 
 /* 名前空間 */
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
+using namespace mnLib;
 
 /* メンバ関数の定義 */
 // ----------------------------------------------------------------------------------------------- //
@@ -138,6 +140,8 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mFallFlag = false;
 	// カウンタの初期化
 	mCount = 0;
+
+	
 }
 
 // ----------------------------------------------------------------------------------------------- //
