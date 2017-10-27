@@ -50,7 +50,7 @@ namespace mnLib
 		float padding1;                          // 空間を埋める	
 		float padding2;                          // 空間を埋める	
 
-												 // Allocate aligned memory.
+		// Allocate aligned memory.
 		static void* operator new(size_t size)
 		{
 			// アライメントを取得
@@ -84,18 +84,46 @@ namespace mnLib
 	struct MatrixesConstants
 	{
 		DirectX::XMMATRIX WorldViewProjection;
-		float Time;
+		float x;
+		float z;
 	};
 #pragma pack(pop)
 
+	class Shader
+	{
+	public:
+		/* メンバ変数 */
+		// コンストラクタ
+		Shader();
+		// デストラクタ
+		~Shader();
+		// コンスタントバッファ
+		std::vector<char> buffer;
+		// 頂点シェーダ
+		Microsoft::WRL::ComPtr<ID3D11VertexShader> vertexShader;
+		// インプットレイアウト
+		Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
+		// ピクセルシェーダ
+		Microsoft::WRL::ComPtr<ID3D11PixelShader> pixelShader;
+		// コンスタントバッファのオブジェクト
+		Microsoft::WRL::ComPtr<ID3D11Buffer> constantBuffer;
+		// コンスタントバッファに渡すデータ
+		std::unique_ptr<MatrixesConstant> matrixesConstant;
+		// モデル
+		std::shared_ptr<DirectX::Model> model;
+		// バイナリローダー
+		BinaryLoader binary;
 
+		/* メンバ関数 */
+		void InitShader(wchar_t* name);
 
-	/* 関数のプロトタイプ宣言 */
-	void InitShader(wchar_t* name);
+		void CreateShader(const char* vertex, const char* pixel);
+		void CreateConstantBuffer();
 
-	void CreateShader(const char* vertex, const char* pixel);
-	void CreateConstantBuffer();
+		void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
 
-	void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
+		std::shared_ptr<DirectX::Model> GetModel() { return model; }
+		void SetModel(wchar_t* filename);
+	};
 }
 

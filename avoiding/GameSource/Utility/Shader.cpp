@@ -17,62 +17,73 @@
 #include "Shader.h"
 
 /* 名前空間 */
+// ComPtrを使う為
+using namespace Microsoft::WRL;
+// unique_ptrを使う為
 using namespace std;
-using namespace DirectX;              
+// DirectXの機能を使う為
+using namespace DirectX;
+// SimpleMathの機能を使う為
 using namespace DirectX::SimpleMath;
+// 自作名前空間
 using namespace mnLib;
 
-
-/* 変数の宣言 */
-// コンスタントバッファ
-std::vector<char> buffer;
-// 頂点シェーダ
-Microsoft::WRL::ComPtr<ID3D11VertexShader> vertexShader;
-// インプットレイアウト
-Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
-// ピクセルシェーダ
-Microsoft::WRL::ComPtr<ID3D11PixelShader> pixelShader;
-// コンスタントバッファのオブジェクト
-Microsoft::WRL::ComPtr<ID3D11Buffer> constantBuffer;
-// コンスタントバッファに渡すデータ
-std::unique_ptr<MatrixesConstant> matrixesConstant;
-// モデル
-std::shared_ptr<DirectX::Model> model;
-// バイナリローダー
-BinaryLoader binary;
+/* メンバ関数の定義 */
 
 
-/* 関数の定義 */
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	:                                                                                      //
-// @ param	:                                                                                      //
-// @ param	:                                                                                      //
-// @ return :                                                                                      //
-// @ note	:                                                                                      //
+// @ brief	: コンストラクタ                                                                       //
+// @ param	: なし                                                                                 //
+// @ return : なし                                                                                 //
+// @ note	: 自作名前空間内の関数                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
-void mnLib::InitShader(wchar_t * name)
+mnLib::Shader::Shader()
+{
+	// モデルに空を入れる
+	model = nullptr;
+}
+
+// ----------------------------------------------------------------------------------------------- //
+// @ brief	: デストラクタ                                                                         //
+// @ param	: なし                                                                                 //
+// @ return : なし                                                                                 //
+// @ note	: 自作名前空間内の関数                                                                 //
+// ----------------------------------------------------------------------------------------------- // 
+mnLib::Shader::~Shader()
+{
+
+}
+
+// ----------------------------------------------------------------------------------------------- //
+// @ brief	: シェーダーを設定するモデルの初期化                                                   //
+// @ param	: wchar_t* name...読み込むモデルのファイル名                                           //
+// @ return : なし                                                                                 //
+// @ note	: 自作名前空間内の関数                                                                 //
+// ----------------------------------------------------------------------------------------------- // 
+void mnLib::Shader::InitShader(wchar_t * name)
 {
 	DGSLEffectFactory fx(g_pd3dDevice.Get());
 	fx.SetDirectory(L"Resources");
 	model = Model::CreateFromCMO(g_pd3dDevice.Get(), name, fx);
 }
 
+
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	:                                                                                      //
-// @ param	:                                                                                      //
-// @ param	:                                                                                      //
-// @ return :                                                                                      //
-// @ note	:                                                                                      //
+// @ brief	: シェーダーを作成する                                                                 //
+// @ param	: const char * vertex...頂点シェーダーのファイル名                                     //
+// @ param	: const char * pixel...ピクセルシェーダのファイル名                                    //
+// @ return : なし                                                                                 //
+// @ note	: 自作名前空間内の関数                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
-void mnLib::CreateShader(const char * vertex, const char * pixel)
+void mnLib::Shader::CreateShader(const char * vertex, const char * pixel)
 {
 	// 頂点シェーダ
 	binary.Load(vertex);
 	// 頂点シェーダの作成（初期化）
 	g_pd3dDevice.Get()->CreateVertexShader(buffer.data(), buffer.size(), nullptr, vertexShader.GetAddressOf());
 	/*
-		インプットレイアウト
-		入力する要素は、座標・法線・接線・色・テクスチャ座標
+	インプットレイアウト
+	入力する要素は、座標・法線・接線・色・テクスチャ座標
 	*/
 	g_pd3dDevice.Get()->CreateInputLayout
 	(
@@ -95,15 +106,13 @@ void mnLib::CreateShader(const char * vertex, const char * pixel)
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	:                                                                                      //
-// @ param	:                                                                                      //
-// @ param	:                                                                                      //
-// @ return :                                                                                      //
-// @ note	:                                                                                      //
+// @ brief	: コンスタントバッファの初期化                                                         //
+// @ param	: なし                                                                                 //
+// @ return : なし                                                                                 //
+// @ note	: 自作名前空間内の関数                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
-void mnLib::CreateConstantBuffer()
+void mnLib::Shader::CreateConstantBuffer()
 {
-	// コンスタントバッファの初期化
 	// コンスタントバッファの情報を入れる
 	D3D11_BUFFER_DESC bufferDesc = {};
 	// サイズ
@@ -124,14 +133,15 @@ void mnLib::CreateConstantBuffer()
 	matrixesConstant.reset(new MatrixesConstant());
 }
 
+
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	:                                                                                      //
-// @ param	:                                                                                      //
-// @ param	:                                                                                      //
-// @ return :                                                                                      //
-// @ note	:                                                                                      //
+// @ brief	: 描画                                                                                 //
+// @ param	: Matrix view...ビュー行列                                                             //
+// @ param	: Matrix proj...射影行列                                                               //
+// @ return : なし                                                                                 //
+// @ note	: 自作名前空間内の関数                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
-void mnLib::Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj)
+void mnLib::Shader::Draw(Matrix view, Matrix proj)
 {
 	// ワールド行列
 	Matrix world = Matrix::Identity;
@@ -169,4 +179,9 @@ void mnLib::Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix p
 		// ピクセルシェーダの設定
 		g_pImmediateContext.Get()->PSSetShader(pixelShader.Get(), nullptr, 0);
 	});
+}
+
+void mnLib::Shader::SetModel(wchar_t * filename)
+{
+	InitShader(filename);
 }

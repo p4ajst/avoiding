@@ -209,7 +209,6 @@
     </MeshContentTask>
   </ItemGroup>
   <ItemGroup>
-    <ShaderGraphContentTask Include="Light.dgsl" />
     <ShaderGraphContentTask Include="Resources\CookieTexture.dgsl">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cso</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Resources\%(Filename).cso</ContentOutput>
@@ -222,16 +221,24 @@
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cso</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Resources\%(Filename).cso</ContentOutput>
     </ShaderGraphContentTask>
+    <ShaderGraphContentTask Include="Resources\Light.dgsl">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cso</ContentOutput>
+    </ShaderGraphContentTask>
     <ShaderGraphContentTask Include="Resources\NetTexture.dgsl">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Resources\%(Filename).cso</ContentOutput>
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cso</ContentOutput>
     </ShaderGraphContentTask>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\PixelLight.hlsl">
+    <FxCompile Include="Resources\Light.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+    </FxCompile>
+    <FxCompile Include="Resources\PixelLight.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
     </FxCompile>
     <FxCompile Include="Resources\VertexLight.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>

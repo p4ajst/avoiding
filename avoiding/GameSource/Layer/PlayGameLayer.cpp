@@ -66,7 +66,10 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mOffset_z = mMapSize_z / 2.0f;
 
 	// ボムのモデルの読み込み
-	mBombModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\dogbomb1.cmo", *mDef);
+	//mShader = make_shared<mnLib::Shader>();
+	//mShader->SetModel(L"Resources\\dogBomb1.cmo");
+	//mBombModel = mShader->GetModel();
+	mBombModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\dogBomb1.cmo", *mDef);
 	// クッキー床のモデルの読み込み
 	mCookieModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\cookie.cmo", *mDef);
 	// 穴のモデルの読み込み
@@ -178,6 +181,8 @@ void PlayGameLayer::Update()
 		if (timing % 3 == 0)
 		{
 			// ボムを生成
+			//mBomb = make_shared<Bomb>(mShader);
+			//mBomb->Initialize();
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);
@@ -190,6 +195,7 @@ void PlayGameLayer::Update()
 		else
 		{
 			// ボムを生成
+			//mBomb = make_shared<Bomb>(mShader);
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);

@@ -9,9 +9,9 @@
 /* ヘッダファイルのインクルード */
 // 先生のフレームワーク
 #include "../../ImaseLib/Direct3D.h"
+#include "../../ImaseLib/DirectXTK.h"
 // 自作ヘッダファイル
 #include "Bomb.h"
-#include "../Utility/Shader.h"
 
 
 /* 名前空間 */
@@ -31,6 +31,7 @@ void Bomb::Initialize()
 	// メンバ変数の初期化
 	mDef = make_shared<DGSLEffectFactory>(g_pd3dDevice.Get());
 	mDef->SetDirectory(L"Resources");
+	//mModel = mShader->GetModel();
 	mModel = nullptr;
 	mPosition = Vector3(0, 0, 0);
 	mVelocity = Vector3(0, 0, 0);
@@ -39,9 +40,6 @@ void Bomb::Initialize()
 	mLocalWorld = Matrix::Identity;
 	mTime = 0;
 	mFlag = true;
-	mnLib::InitShader(L"Resources\\dogbomb1.cmo");
-	mnLib::CreateShader("VertexLight.cso", "PixelLight.cso");
-	mnLib::CreateConstantBuffer();
 }
 
 // ----------------------------------------------------------------------------------------------- //
@@ -89,7 +87,24 @@ void Bomb::AddPos()
 // @ return : なし                                                                                 //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
-void Bomb::Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj)
+//void Bomb::Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj)
+//{
+//	//mShader->Draw(view, proj);
+//	mModel->Draw(g_pImmediateContext.Get(),*g_state.get(),)
+//
+//}
+
+void Bomb::SetModels(wchar_t * filename)
 {
-	mnLib::Draw(view, proj);
+	//mShader = make_shared<mnLib::Shader>();
+	// シェーダーの生成
+
+	//if (mShader == nullptr)
+	//{
+	//	return;
+	//}
+	//// シェーダーの設定
+	//mShader->InitShader(filename);
+	//mShader->CreateShader("VertexLight.cso", "Light.cso");
+	//mShader->CreateConstantBuffer();
 }
