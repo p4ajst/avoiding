@@ -80,31 +80,3 @@ void Bomb::AddPos()
 {
 	mPosition = mPosition + mVelocity;
 }
-
-// ----------------------------------------------------------------------------------------------- //
-// @ brief	: 描画                                                                                 //
-// @ param	: なし                                                                                 //
-// @ return : なし                                                                                 //
-// @ note	:                                                                                      //
-// ----------------------------------------------------------------------------------------------- // 
-//void Bomb::Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj)
-//{
-//	//mShader->Draw(view, proj);
-//	mModel->Draw(g_pImmediateContext.Get(),*g_state.get(),)
-//
-//}
-
-void Bomb::SetModels(wchar_t * filename)
-{
-	//mShader = make_shared<mnLib::Shader>();
-	// シェーダーの生成
-
-	//if (mShader == nullptr)
-	//{
-	//	return;
-	//}
-	//// シェーダーの設定
-	//mShader->InitShader(filename);
-	//mShader->CreateShader("VertexLight.cso", "Light.cso");
-	//mShader->CreateConstantBuffer();
-}

@@ -45,9 +45,7 @@ private:
 	/* メンバ関数 */
 public:
 	// コンストラクタ
-	Bomb() = default;
-	//Bomb(std::shared_ptr<mnLib::Shader> shader) { mShader = shader; }
-	
+	Bomb() = default;	
 	// デストラクタ
 	~Bomb() = default;
 	// 初期化
@@ -58,10 +56,7 @@ public:
 	void FreeFall();
 	// 座標に速度を足す
 	void AddPos();
-	// 描画
-	//void Draw(DirectX::SimpleMath::Matrix view, DirectX::SimpleMath::Matrix proj);
 	// 設定
-	void SetModels(wchar_t* filename);
 	void SetModel(std::shared_ptr<DirectX::Model> model) { mModel = model; }
 	void SetVel(DirectX::SimpleMath::Vector3 vel) { mVelocity = vel; }
 	//void SetFlag(bool flag) { mFlag = flag; }
@@ -69,5 +64,4 @@ public:
 	std::shared_ptr<DirectX::Model> GetModel() { return mModel; }
 	DirectX::SimpleMath::Vector3 GetVel() { return mVelocity; }
 	bool GetFlag() { return mFlag; }
-
 };

@@ -264,12 +264,12 @@
     <Node Category="Trait" Data="0" DataType="Int" Desc="4037" Id="Microsoft.VisualStudio.DSD.Texture[31].Access" Label="Access" LabelResId="3000" ShowInPropertyWindow="True" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.PixelShaderTerminal[32]" Label="最終的な色" LabelResId="3400" TypeId="Microsoft.VisualStudio.DSD.PixelShaderTerminal" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.PixelShaderTerminal[32].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="7.280858 -0.000005 0.536083" DataType="Float3" Id="Microsoft.VisualStudio.DSD.PixelShaderTerminal[32].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="8.027178 -0.000005 0.502084" DataType="Float3" Id="Microsoft.VisualStudio.DSD.PixelShaderTerminal[32].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000" DataType="Float3" Id="Microsoft.VisualStudio.DSD.PixelShaderTerminal[32].RGB" Label="RGB" LabelResId="3100" PortType="Input" />
     <Node Category="Trait" Data="1.000000" DataType="Float" Id="Microsoft.VisualStudio.DSD.PixelShaderTerminal[32].Alpha" Label="Alpha" LabelResId="3101" PortType="Input" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.Texture2DSample[34]" Label="テクスチャ サンプル" LabelResId="3431" TypeId="Microsoft.VisualStudio.DSD.Texture2DSample" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.Texture2DSample[34].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="0.886832 0.000006 -0.052486" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Texture2DSample[34].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="0.711138 0.000006 -0.167811" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Texture2DSample[34].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="0.000000 0.000000" DataType="Float2" Id="Microsoft.VisualStudio.DSD.Texture2DSample[34].UV" Label="UV" LabelResId="3109" PortType="Input" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000 1.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Texture2DSample[34].Sample" Label="Sample" LabelResId="Sample" PortType="Output" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Texture2DSample[34].rgb" Label="rgb" LabelResId="3210" PortType="Output" />
@@ -286,34 +286,41 @@
     <Node Category="Trait" Data="1.000000 1.000000 1.000000" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Lambert[43].lambert" Label="lambert" LabelResId="3255" PortType="Output" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.Add[45]" Label="加算" LabelResId="3447" TypeId="Microsoft.VisualStudio.DSD.Add" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.Add[45].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="5.247971 0.000000 1.088919" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Add[45].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="6.295499 0.000000 1.307236" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Add[45].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="0.000000 0.000000 0.000000 0.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Add[45].x" Label="x" LabelResId="3102" PortType="Input" />
     <Node Category="Trait" Data="0.000000 0.000000 0.000000 0.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Add[45].y" Label="y" LabelResId="3103" PortType="Input" />
     <Node Category="Trait" Data="0.000000 0.000000 0.000000 0.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Add[45].x + y" Label="x + y" LabelResId="3227" PortType="Output" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.SpecularContribution[46]" Label="反射" LabelResId="3442" TypeId="Microsoft.VisualStudio.DSD.SpecularContribution" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.SpecularContribution[46].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="3.514259 0.000002 2.163838" DataType="Float3" Id="Microsoft.VisualStudio.DSD.SpecularContribution[46].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="4.461760 0.000002 2.521160" DataType="Float3" Id="Microsoft.VisualStudio.DSD.SpecularContribution[46].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="0.000000 0.000000 1.000000" DataType="Float3" Id="Microsoft.VisualStudio.DSD.SpecularContribution[46].surface normal" Label="surface normal" LabelResId="3116" PortType="Input" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000" DataType="Float3" Id="Microsoft.VisualStudio.DSD.SpecularContribution[46].specular" Label="specular" LabelResId="3256" PortType="Output" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.LightDirection[48]" Label="光の方向" LabelResId="3429" TypeId="Microsoft.VisualStudio.DSD.LightDirection" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.LightDirection[48].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="-1.639195 -0.000004 1.319864" DataType="Float3" Id="Microsoft.VisualStudio.DSD.LightDirection[48].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="-1.732445 -0.000004 1.121938" DataType="Float3" Id="Microsoft.VisualStudio.DSD.LightDirection[48].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000" DataType="Float3" Id="Microsoft.VisualStudio.DSD.LightDirection[48].Light Direction" Label="Light Direction" LabelResId="3224" PortType="Output" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.CameraWorldPosition[49]" Label="カメラのワールド位置" LabelResId="3428" TypeId="Microsoft.VisualStudio.DSD.CameraWorldPosition" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.CameraWorldPosition[49].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="-1.423018 -0.000002 3.185031" DataType="Float3" Id="Microsoft.VisualStudio.DSD.CameraWorldPosition[49].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="-1.729767 -0.000002 3.136874" DataType="Float3" Id="Microsoft.VisualStudio.DSD.CameraWorldPosition[49].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000" DataType="Float3" Id="Microsoft.VisualStudio.DSD.CameraWorldPosition[49].Camera World Position" Label="Camera World Position" LabelResId="3223" PortType="Output" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.Multiply[51]" Label="乗算記号" LabelResId="3459" TypeId="Microsoft.VisualStudio.DSD.Multiply" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.Multiply[51].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="0.355699 0.000002 2.280399" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Multiply[51].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="0.237784 0.000002 2.664461" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Multiply[51].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000 1.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Multiply[51].x" Label="x" LabelResId="3102" PortType="Input" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000 1.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Multiply[51].y" Label="y" LabelResId="3103" PortType="Input" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000 1.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Multiply[51].x * y" Label="x * y" LabelResId="3239" PortType="Output" />
     <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.Normalize[52]" Label="正規化" LabelResId="3463" TypeId="Microsoft.VisualStudio.DSD.Normalize" />
     <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.Normalize[52].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
-    <Node Category="Trait" Data="1.849448 0.000002 2.173149" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Normalize[52].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="2.973288 0.000002 2.530437" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Normalize[52].Position" Label="Position" LabelResId="Position" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000 1.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Normalize[52].x" Label="x" LabelResId="3102" PortType="Input" />
     <Node Category="Trait" Data="1.000000 1.000000 1.000000 1.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Normalize[52].normalize(x)" Label="normalize(x)" LabelResId="3243" PortType="Output" />
+    <Node Category="Element" Group="Expanded" Id="Microsoft.VisualStudio.DSD.Clamp[54]" Label="クランプ" LabelResId="3449" TypeId="Microsoft.VisualStudio.DSD.Clamp" />
+    <Node Category="Trait" Data="False" DataType="Bool" Id="Microsoft.VisualStudio.DSD.Clamp[54].PropertyWindowShowElementName" Label="PropertyWindowShowElementName" LabelResId="PropertyWindowShowElementName" />
+    <Node Category="Trait" Data="1.584184 0.000000 2.562479" DataType="Float3" Id="Microsoft.VisualStudio.DSD.Clamp[54].Position" Label="Position" LabelResId="Position" />
+    <Node Category="Trait" Data="0.000000 0.000000 0.000000 0.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Clamp[54].x" Label="x" LabelResId="3102" PortType="Input" />
+    <Node Category="Trait" Data="0.000000" DataType="Float" Desc="4001" Id="Microsoft.VisualStudio.DSD.Clamp[54].min" Label="min" LabelResId="3006" ShowInPropertyWindow="True" />
+    <Node Category="Trait" Data="1.000000" DataType="Float" Desc="4000" Id="Microsoft.VisualStudio.DSD.Clamp[54].max" Label="max" LabelResId="3007" ShowInPropertyWindow="True" />
+    <Node Category="Trait" Data="0.000000 0.000000 0.000000 0.000000" DataType="Float4" Id="Microsoft.VisualStudio.DSD.Clamp[54].clamp(x)" Label="clamp(x)" LabelResId="3229" PortType="Output" />
   </Nodes>
   <Links>
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Root[1]" Target="Microsoft.VisualStudio.DSD.Root[1].PropertyWindowShowElementName" />
@@ -630,12 +637,20 @@
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Multiply[51]" Target="Microsoft.VisualStudio.DSD.Multiply[51].x" />
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Multiply[51]" Target="Microsoft.VisualStudio.DSD.Multiply[51].y" />
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Multiply[51]" Target="Microsoft.VisualStudio.DSD.Multiply[51].x * y" />
-    <Link Source="Microsoft.VisualStudio.DSD.Multiply[51].x * y" Target="Microsoft.VisualStudio.DSD.Normalize[52].x" />
+    <Link Source="Microsoft.VisualStudio.DSD.Multiply[51].x * y" Target="Microsoft.VisualStudio.DSD.Clamp[54].x" />
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.PixelShader[2]" Target="Microsoft.VisualStudio.DSD.Normalize[52]" />
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Normalize[52]" Target="Microsoft.VisualStudio.DSD.Normalize[52].PropertyWindowShowElementName" />
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Normalize[52]" Target="Microsoft.VisualStudio.DSD.Normalize[52].Position" />
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Normalize[52]" Target="Microsoft.VisualStudio.DSD.Normalize[52].x" />
     <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Normalize[52]" Target="Microsoft.VisualStudio.DSD.Normalize[52].normalize(x)" />
     <Link Source="Microsoft.VisualStudio.DSD.Normalize[52].normalize(x)" Target="Microsoft.VisualStudio.DSD.SpecularContribution[46].surface normal" />
+    <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.PixelShader[2]" Target="Microsoft.VisualStudio.DSD.Clamp[54]" />
+    <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Clamp[54]" Target="Microsoft.VisualStudio.DSD.Clamp[54].PropertyWindowShowElementName" />
+    <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Clamp[54]" Target="Microsoft.VisualStudio.DSD.Clamp[54].Position" />
+    <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Clamp[54]" Target="Microsoft.VisualStudio.DSD.Clamp[54].x" />
+    <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Clamp[54]" Target="Microsoft.VisualStudio.DSD.Clamp[54].min" />
+    <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Clamp[54]" Target="Microsoft.VisualStudio.DSD.Clamp[54].max" />
+    <Link Category="Contains" Source="Microsoft.VisualStudio.DSD.Clamp[54]" Target="Microsoft.VisualStudio.DSD.Clamp[54].clamp(x)" />
+    <Link Source="Microsoft.VisualStudio.DSD.Clamp[54].clamp(x)" Target="Microsoft.VisualStudio.DSD.Normalize[52].x" />
   </Links>
 </DirectedGraph>
