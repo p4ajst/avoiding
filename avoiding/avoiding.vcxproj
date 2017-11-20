@@ -113,7 +113,6 @@
     <ClCompile Include="GameSource\Scene\PlayScene.cpp" />
     <ClCompile Include="GameSource\Scene\ResultScene.cpp" />
     <ClCompile Include="GameSource\Scene\TitleScene.cpp" />
-    <ClCompile Include="GameSource\Stage\Field.cpp" />
     <ClCompile Include="GameSource\Stage\Map.cpp" />
     <ClCompile Include="GameSource\Stage\MapChip.cpp" />
     <ClCompile Include="GameSource\Utility\BinaryLoader.cpp" />
@@ -155,7 +154,6 @@
     <ClInclude Include="GameSource\Scene\Scene.h" />
     <ClInclude Include="GameSource\Scene\TitleScene.h" />
     <ClInclude Include="GameSource\Stage\Attribute.h" />
-    <ClInclude Include="GameSource\Stage\Field.h" />
     <ClInclude Include="GameSource\Stage\Map.h" />
     <ClInclude Include="GameSource\Stage\MapChip.h" />
     <ClInclude Include="GameSource\Utility\BinaryLoader.h" />

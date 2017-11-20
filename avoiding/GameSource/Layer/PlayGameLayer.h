@@ -23,7 +23,6 @@
 #include "../Object/Item.h"
 #include "../Stage/Attribute.h"
 #include "../Stage/Map.h"
-#include "../Stage/Field.h"
 #include "../Utility/CSVReader.h"
 #include "../Utility/MouseCursor.h"
 
@@ -56,9 +55,6 @@ class PlayGameLayer : public Layer
 	std::shared_ptr<Map> mMap;
 	// マップチップ
 	MapChip* mChip[MapChipAttribute::ATTRIBUTE_NUM];
-
-	// フィールド
-	std::shared_ptr<Field> mField;
 
 	// ボムのモデル
 	std::shared_ptr<DirectX::Model> mBombModel;
