@@ -46,6 +46,9 @@
     <Filter Include="リソース ファイル\Shader">
       <UniqueIdentifier>{1500bfa3-85bd-4ce0-ae41-5a007dba5921}</UniqueIdentifier>
     </Filter>
+    <Filter Include="MuraseLib">
+      <UniqueIdentifier>{01f0d783-c14b-4290-b626-86955360fd18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImaseLib\FPSTimer.cpp">
@@ -148,6 +151,12 @@
       <Filter>GameSource\Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameSource\Utility\Common.cpp">
+      <Filter>GameSource\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSource\Utility\BinaryLoader.cpp">
+      <Filter>GameSource\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="GameSource\Utility\Shader.cpp">
       <Filter>GameSource\Utility</Filter>
     </ClCompile>
   </ItemGroup>
@@ -260,6 +269,15 @@
     <ClInclude Include="GameSource\Scene\GameStartScreen.h">
       <Filter>GameSource\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="MuraseLib\ConstantBuffer.h">
+      <Filter>MuraseLib</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSource\Utility\BinaryLoader.h">
+      <Filter>GameSource\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSource\Utility\Shader.h">
+      <Filter>GameSource\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="myfile.spritefont">
@@ -270,6 +288,9 @@
     </None>
     <None Include="ReleaseBase.props">
       <Filter>property</Filter>
+    </None>
+    <None Include="Resources\Light.hlsli">
+      <Filter>リソース ファイル\Shader</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -308,5 +329,19 @@
     <ShaderGraphContentTask Include="Resources\NetTexture.dgsl">
       <Filter>リソース ファイル\Shader</Filter>
     </ShaderGraphContentTask>
+    <ShaderGraphContentTask Include="Resources\Light.dgsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </ShaderGraphContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\PixelLight.hlsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\VertexLight.hlsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Light.hlsl">
+      <Filter>リソース ファイル\Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

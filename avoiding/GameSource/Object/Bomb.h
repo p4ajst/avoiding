@@ -13,6 +13,8 @@
 // 自作ヘッダファイル
 #include "Actor.h"
 #include "../Stage/Map.h"
+#include "../Utility/Shader.h"
+
 
 /* 定数定義 */
 // 重力
@@ -33,11 +35,16 @@ private:
 	float mTime;
 	// フラグ
 	bool mFlag;
+	// シェーダ
+	//std::shared_ptr<mnLib::Shader> mShader;
+
+
+	
 
 	/* メンバ関数 */
 public:
 	// コンストラクタ
-	Bomb() = default;
+	Bomb() = default;	
 	// デストラクタ
 	~Bomb() = default;
 	// 初期化
@@ -49,9 +56,11 @@ public:
 	// 座標に速度を足す
 	void AddPos();
 	// 設定
+	void SetModel(std::shared_ptr<DirectX::Model> model) { mModel = model; }
 	void SetVel(DirectX::SimpleMath::Vector3 vel) { mVelocity = vel; }
 	//void SetFlag(bool flag) { mFlag = flag; }
 	// 取得
+	std::shared_ptr<DirectX::Model> GetModel() { return mModel; }
 	DirectX::SimpleMath::Vector3 GetVel() { return mVelocity; }
 	bool GetFlag() { return mFlag; }
 };

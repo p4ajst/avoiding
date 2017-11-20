@@ -34,20 +34,12 @@ void PlayHUDLayer::Initialize(Scene* scene)
 	mBiscuitBefore = make_unique<Texture>(L"Resources\\Biscuit_before.png");
 	// ビスケットのテクスチャの生成
 	mBiscuitAfter = make_unique<Texture>(L"Resources\\Biscuit_after.png");
-	//// ポーズ画面の生成
-	//mPause = make_unique<PauseScreen>();
-	//// スタートスクリーンの生成
-	//mStart = make_unique<GameStartScreen>();
 
 	// ビスケットの描画範囲の設定
 	mBisrect.left = 1211;
 	mBisrect.top = 40;
 	mBisrect.right = 1275;
 	mBisrect.bottom = 104;
-	//// ポーズしているか
-	//mPauseFlag = false;
-	//// スタートカウント中であるか
-	//mStartFlag = false;
 
 	// ポーズフラグの初期化
 	mPauseFlag = false;
@@ -94,10 +86,6 @@ void PlayHUDLayer::Update()
 		// フラグを切り替えない
 		mpFrag = false;
 	}
-	//// ポーズ画面の更新
-	//mPause->Update();
-	//// スタートスクリーンの更新
-	//mStart->Update();
 }
 
 
@@ -121,21 +109,9 @@ void PlayHUDLayer::Draw()
 		// ビスケットの画像を描画
 		pScene->GetSprite()->Draw(mBiscuitAfter->m_pTexture, mBisrect, Colors::White);
 	}
-	//// ポーズ中であれば
-	//if (mPauseFlag)
-	//{
-	//	// ポーズ画面を描画
-	//	mPause->Render();
-	//}
-	//// スタートカウント中であれば
-	//if (!mStartFlag)
-	//{
-	//	// スタートスクリーンの描画
-	//	mStart->Render();
-	//}
 
 	// 歩数を描画
-	DrawNum(pScene->GetSprite().get(), mNum->m_pTexture, mCount, 160.0f, 32.0f);
+	//DrawNum(pScene->GetSprite().get(), mNum->m_pTexture, mCount, 160.0f, 32.0f);
 }
 
 // ----------------------------------------------------------------------------------------------- //

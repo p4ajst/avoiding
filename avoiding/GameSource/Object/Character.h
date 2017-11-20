@@ -11,6 +11,7 @@
 /* ヘッダファイルのインクルード */
 // 自作ヘッダファイル
 #include "Actor.h"
+#include "../Stage/Map.h"
 
 /* クラス宣言 */
 class Character :public Actor
@@ -21,14 +22,18 @@ private:
 	DirectX::SimpleMath::Vector3 mVelocity;
 	// 歩数
 	int mStepCount;
+	// マップの情報
+	std::shared_ptr<Map> mMap;
 	/* メンバ関数 */
 public:
 	// コンストラクタ
 	Character() = default;
 	// デストラクタ
 	~Character() = default;
+	// 初期化
+	void Initialize(int sx, int sz);
 	// 移動
-	void Move();
+	void Move(int ox,int oz,int sx,int sz);
 	// 落下
 	void Fall();
 	// 設定

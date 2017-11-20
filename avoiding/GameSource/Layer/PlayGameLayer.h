@@ -64,6 +64,8 @@ class PlayGameLayer : public Layer
 	// 網のモデル
 	std::shared_ptr<DirectX::Model> mNetModel;
 
+	std::shared_ptr<mnLib::Shader> mShader;
+
 	// マウスカーソルの座標
 	DirectX::SimpleMath::Vector3 mCursorPos;
 	// マウスレイとフィールドとのあたり判定の関数の戻り値
@@ -99,6 +101,7 @@ class PlayGameLayer : public Layer
 	bool mFallFlag;
 	// カウンタ
 	int mCount;
+
 public:
 	/* メンバ関数 */
 	// 初期化

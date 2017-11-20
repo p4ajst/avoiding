@@ -28,8 +28,6 @@ private:
 	std::unique_ptr<Texture> mNum;
 	std::unique_ptr<Texture> mBiscuitBefore;
 	std::unique_ptr<Texture> mBiscuitAfter;
-	/*std::unique_ptr<PauseScreen> mPause;
-	std::unique_ptr<GameStartScreen> mStart;*/
 	// 描画範囲
 	RECT mBisrect;
 	// ポーズ中か？
@@ -55,9 +53,7 @@ public:
 	void Finalize();
 	// カウンタのセット
 	void SetCount(int cnt) { mCount = cnt; }
-	//void SetStartFlag(bool flag) { mStartFlag = flag; }
 	
 	// フラグの取得
 	bool GetPauseFlag() { return mPauseFlag; }
-	//bool GetStartFlag() { return mStartFlag; }
 };

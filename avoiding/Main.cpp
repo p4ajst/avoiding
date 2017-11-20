@@ -26,6 +26,7 @@
 
 // 自作ヘッダファイル
 #include "GameSource\Game.h"
+#include "GameSource\Utility\BinaryLoader.h"
 
 // 名前空間
 using namespace std;
@@ -63,6 +64,7 @@ shared_ptr<Game> game;
 //--------------------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	// 乱数を利用するため
 	srand((unsigned int)time(NULL));
 
 	// デバッグカメラ

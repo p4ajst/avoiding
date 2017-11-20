@@ -28,9 +28,9 @@ Map::Map(int width, int height)
 	, mHeight(height)
 {
 	/*
-	マップ生成
-	new MapChip* -> マップチップのポインタの配列を動的確保
-	width * height -> 二次元配列を一次元配列に変換
+		マップ生成
+		new MapChip* -> マップチップのポインタの配列を動的確保
+		width * height -> 二次元配列を一次元配列に変換
 	*/
 	mMapChip = new MapChip*[width*height];
 }
