@@ -159,9 +159,6 @@
     <ClCompile Include="GameSource\Utility\Shader.cpp">
       <Filter>GameSource\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="GameSource\Stage\Field.cpp">
-      <Filter>GameSource\Stage</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImaseLib\FPSTimer.h">
@@ -280,9 +277,6 @@
     </ClInclude>
     <ClInclude Include="GameSource\Utility\Shader.h">
       <Filter>GameSource\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSource\Stage\Field.h">
-      <Filter>GameSource\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
