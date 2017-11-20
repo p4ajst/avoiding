@@ -9,8 +9,10 @@
 /* ヘッダファイルのインクルード */
 // 先生のフレームワーク
 #include "../../ImaseLib/Direct3D.h"
+#include "../../ImaseLib/DirectXTK.h"
 // 自作ヘッダファイル
 #include "Bomb.h"
+
 
 /* 名前空間 */
 using namespace std;
@@ -29,6 +31,7 @@ void Bomb::Initialize()
 	// メンバ変数の初期化
 	mDef = make_shared<DGSLEffectFactory>(g_pd3dDevice.Get());
 	mDef->SetDirectory(L"Resources");
+	//mModel = mShader->GetModel();
 	mModel = nullptr;
 	mPosition = Vector3(0, 0, 0);
 	mVelocity = Vector3(0, 0, 0);

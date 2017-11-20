@@ -12,11 +12,13 @@
 #include "../../ImaseLib/DirectXTK.h"
 // 自作ヘッダファイル
 #include "PlayGameLayer.h"
+#include "../Utility/Shader.h"
 
 /* 名前空間 */
 using namespace std;
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
+using namespace mnLib;
 
 /* メンバ関数の定義 */
 // ----------------------------------------------------------------------------------------------- //
@@ -64,7 +66,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	mOffset_z = mMapSize_z / 2.0f;
 
 	// ボムのモデルの読み込み
-	mBombModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\dogbomb1.cmo", *mDef);
+	mBombModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\dogBomb1.cmo", *mDef);
 	// クッキー床のモデルの読み込み
 	mCookieModel = Model::CreateFromCMO(g_pd3dDevice.Get(), L"Resources\\cookie.cmo", *mDef);
 	// 穴のモデルの読み込み
@@ -91,7 +93,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	// キャラクターの生成
 	mKuma = make_shared<Character>();
 	// キャラクターの初期化
-	mKuma->Initialize();
+	mKuma->Initialize(mMapSize_x,mMapSize_z);
 	// キャラクターのモデルの読み込み
 	mKuma->LoadModel(L"Resources\\kumakyun2.cmo");
 	// キャラクターの初期配置
@@ -137,7 +139,7 @@ void PlayGameLayer::Initialize(Scene* scene, int width, int height)
 	// 落下中であるか
 	mFallFlag = false;
 	// カウンタの初期化
-	mCount = 0;
+	mCount = 0;	
 }
 
 // ----------------------------------------------------------------------------------------------- //
@@ -174,6 +176,8 @@ void PlayGameLayer::Update()
 		if (timing % 3 == 0)
 		{
 			// ボムを生成
+			//mBomb = make_shared<Bomb>(mShader);
+			//mBomb->Initialize();
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);
@@ -186,6 +190,7 @@ void PlayGameLayer::Update()
 		else
 		{
 			// ボムを生成
+			//mBomb = make_shared<Bomb>(mShader);
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);
@@ -235,7 +240,7 @@ void PlayGameLayer::Update()
 	if (!mFallFlag)
 	{
 		// キャラクターの移動
-		mKuma->Move();
+		mKuma->Move(mOffset_x,mOffset_z,mMapSize_x,mMapSize_z);
 	}
 	// 歩数を取得
 	mCount = mKuma->GetCount();

@@ -23,6 +23,7 @@
 #include "../Object/Item.h"
 #include "../Stage/Attribute.h"
 #include "../Stage/Map.h"
+#include "../Stage/Field.h"
 #include "../Utility/CSVReader.h"
 #include "../Utility/MouseCursor.h"
 
@@ -56,6 +57,9 @@ class PlayGameLayer : public Layer
 	// マップチップ
 	MapChip* mChip[MapChipAttribute::ATTRIBUTE_NUM];
 
+	// フィールド
+	std::shared_ptr<Field> mField;
+
 	// ボムのモデル
 	std::shared_ptr<DirectX::Model> mBombModel;
 	// クッキー床のモデル
@@ -64,6 +68,8 @@ class PlayGameLayer : public Layer
 	std::shared_ptr<DirectX::Model> mHoleModel;
 	// 網のモデル
 	std::shared_ptr<DirectX::Model> mNetModel;
+
+	std::shared_ptr<mnLib::Shader> mShader;
 
 	// マウスカーソルの座標
 	DirectX::SimpleMath::Vector3 mCursorPos;
@@ -100,6 +106,7 @@ class PlayGameLayer : public Layer
 	bool mFallFlag;
 	// カウンタ
 	int mCount;
+
 public:
 	/* メンバ関数 */
 	// 初期化

@@ -109,8 +109,6 @@ void PlayScene::Update()
 			// 背景レイヤーの更新
 			mBackGround->Update();
 			// ゲームレイヤーの更新
-			
-			//mGame->SetPauseFlag(mHUD->GetPauseFlag());
 			mGame->Update();
 			// HUDレイヤーの更新
 			mHUD->Update();

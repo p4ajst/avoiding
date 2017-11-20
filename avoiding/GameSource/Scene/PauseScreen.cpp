@@ -51,11 +51,13 @@ void PauseScreen::Update()
 void PauseScreen::Render()
 {
 	RECT rect{ 32,105,1247,855 };
+	// スプライトバッチの始まり
 	pSpriteBatch->Begin(SpriteSortMode_Deferred, nullptr, nullptr, nullptr, nullptr, [=]
 	{
 		// 画像の半透明処理
 		g_pImmediateContext->OMSetBlendState(g_state->NonPremultiplied(), nullptr, 0xFFFFFFFF);
 	});
+	// 描画
 	pSpriteBatch->Draw(mChoco->m_pTexture, rect, Colors::White);
 	// スプライトバッチの終わり
 	pSpriteBatch->End();
