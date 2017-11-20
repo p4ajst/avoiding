@@ -1,53 +1,53 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Shader.cpp                                                                           //
-// @ brief	 : ƒVƒF[ƒ_[‚ğ—˜—p‚·‚é‚½‚ß‚ÌŠÖ”ŒQ                                                     //
+// @ brief	 : ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’åˆ©ç”¨ã™ã‚‹ãŸã‚ã®é–¢æ•°ç¾¤                                                     //
 // @ date	 : 2017/10/19                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// •W€ƒ‰ƒCƒuƒ‰ƒŠ
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// æ¨™æº–ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include <fstream>
 #include <simplemath.h>
-// æ¶‚Ìƒ‰ƒCƒuƒ‰ƒŠ
+// å…ˆç”Ÿã®ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 #include "../../ImaseLib/Direct3D.h"
 #include "../../ImaseLib/DirectXTK.h"
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "Shader.h"
 
-/* –¼‘O‹óŠÔ */
-// ComPtr‚ğg‚¤ˆ×
+/* åå‰ç©ºé–“ */
+// ComPtrã‚’ä½¿ã†ç‚º
 using namespace Microsoft::WRL;
-// unique_ptr‚ğg‚¤ˆ×
+// unique_ptrã‚’ä½¿ã†ç‚º
 using namespace std;
-// DirectX‚Ì‹@”\‚ğg‚¤ˆ×
+// DirectXã®æ©Ÿèƒ½ã‚’ä½¿ã†ç‚º
 using namespace DirectX;
-// SimpleMath‚Ì‹@”\‚ğg‚¤ˆ×
+// SimpleMathã®æ©Ÿèƒ½ã‚’ä½¿ã†ç‚º
 using namespace DirectX::SimpleMath;
-// ©ì–¼‘O‹óŠÔ
+// è‡ªä½œåå‰ç©ºé–“
 using namespace mnLib;
 
-/* ƒƒ“ƒoŠÖ”‚Ì’è‹` */
+/* ãƒ¡ãƒ³ãƒé–¢æ•°ã®å®šç¾© */
 
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒRƒ“ƒXƒgƒ‰ƒNƒ^                                                                       //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ©ì–¼‘O‹óŠÔ“à‚ÌŠÖ”                                                                 //
+// @ brief	: ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                                       //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
+// @ note	: è‡ªä½œåå‰ç©ºé–“å†…ã®é–¢æ•°                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 mnLib::Shader::Shader()
 {
-	// ƒ‚ƒfƒ‹‚É‹ó‚ğ“ü‚ê‚é
+	// ãƒ¢ãƒ‡ãƒ«ã«ç©ºã‚’å…¥ã‚Œã‚‹
 	model = nullptr;
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒfƒXƒgƒ‰ƒNƒ^                                                                         //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ©ì–¼‘O‹óŠÔ“à‚ÌŠÖ”                                                                 //
+// @ brief	: ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿                                                                         //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
+// @ note	: è‡ªä½œåå‰ç©ºé–“å†…ã®é–¢æ•°                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 mnLib::Shader::~Shader()
 {
@@ -55,10 +55,10 @@ mnLib::Shader::~Shader()
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒVƒF[ƒ_[‚ğİ’è‚·‚éƒ‚ƒfƒ‹‚Ì‰Šú‰»                                                   //
-// @ param	: wchar_t* name...“Ç‚İ‚Şƒ‚ƒfƒ‹‚Ìƒtƒ@ƒCƒ‹–¼                                           //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ©ì–¼‘O‹óŠÔ“à‚ÌŠÖ”                                                                 //
+// @ brief	: ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’è¨­å®šã™ã‚‹ãƒ¢ãƒ‡ãƒ«ã®åˆæœŸåŒ–                                                   //
+// @ param	: wchar_t* name...èª­ã¿è¾¼ã‚€ãƒ¢ãƒ‡ãƒ«ã®ãƒ•ã‚¡ã‚¤ãƒ«å                                           //
+// @ return : ãªã—                                                                                 //
+// @ note	: è‡ªä½œåå‰ç©ºé–“å†…ã®é–¢æ•°                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 void mnLib::Shader::InitShader(wchar_t * name)
 {
@@ -69,114 +69,114 @@ void mnLib::Shader::InitShader(wchar_t * name)
 
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒVƒF[ƒ_[‚ğì¬‚·‚é                                                                 //
-// @ param	: const char * vertex...’¸“_ƒVƒF[ƒ_[‚Ìƒtƒ@ƒCƒ‹–¼                                     //
-// @ param	: const char * pixel...ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ìƒtƒ@ƒCƒ‹–¼                                    //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ©ì–¼‘O‹óŠÔ“à‚ÌŠÖ”                                                                 //
+// @ brief	: ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’ä½œæˆã™ã‚‹                                                                 //
+// @ param	: const char * vertex...é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã®ãƒ•ã‚¡ã‚¤ãƒ«å                                     //
+// @ param	: const char * pixel...ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®ãƒ•ã‚¡ã‚¤ãƒ«å                                    //
+// @ return : ãªã—                                                                                 //
+// @ note	: è‡ªä½œåå‰ç©ºé–“å†…ã®é–¢æ•°                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 void mnLib::Shader::CreateShader(const char * vertex, const char * pixel)
 {
-	// ’¸“_ƒVƒF[ƒ_
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€
 	binary.Load(vertex);
-	// ’¸“_ƒVƒF[ƒ_‚Ìì¬i‰Šú‰»j
+	// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®ä½œæˆï¼ˆåˆæœŸåŒ–ï¼‰
 	g_pd3dDevice.Get()->CreateVertexShader(buffer.data(), buffer.size(), nullptr, vertexShader.GetAddressOf());
 	/*
-	ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
-	“ü—Í‚·‚é—v‘f‚ÍAÀ•WE–@üEÚüEFEƒeƒNƒXƒ`ƒƒÀ•W
+	ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
+	å…¥åŠ›ã™ã‚‹è¦ç´ ã¯ã€åº§æ¨™ãƒ»æ³•ç·šãƒ»æ¥ç·šãƒ»è‰²ãƒ»ãƒ†ã‚¯ã‚¹ãƒãƒ£åº§æ¨™
 	*/
 	g_pd3dDevice.Get()->CreateInputLayout
 	(
-		// “ü—Í‚Ì—v‘fw’è
+		// å…¥åŠ›ã®è¦ç´ æŒ‡å®š
 		VertexPositionNormalTangentColorTexture::InputElements,
-		// “ü—Í‚Ì—v‘f”
+		// å…¥åŠ›ã®è¦ç´ æ•°
 		VertexPositionNormalTangentColorTexture::InputElementCount,
-		// ’¸“_ƒVƒF[ƒ_
+		// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€
 		buffer.data(),
-		// ’¸“_ƒVƒF[ƒ_‚ÌƒTƒCƒY
+		// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®ã‚µã‚¤ã‚º
 		buffer.size(),
-		// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg‚Ìæ“¾
+		// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®å–å¾—
 		inputLayout.GetAddressOf()
 	);
 
-	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_
+	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€
 	binary.Load(pixel);
-	// ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ìì¬i‰Šú‰»j
+	// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®ä½œæˆï¼ˆåˆæœŸåŒ–ï¼‰
 	g_pd3dDevice.Get()->CreatePixelShader(buffer.data(), buffer.size(), nullptr, pixelShader.GetAddressOf());
 }
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚Ì‰Šú‰»                                                         //
-// @ param	: ‚È‚µ                                                                                 //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ©ì–¼‘O‹óŠÔ“à‚ÌŠÖ”                                                                 //
+// @ brief	: ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã®åˆæœŸåŒ–                                                         //
+// @ param	: ãªã—                                                                                 //
+// @ return : ãªã—                                                                                 //
+// @ note	: è‡ªä½œåå‰ç©ºé–“å†…ã®é–¢æ•°                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 void mnLib::Shader::CreateConstantBuffer()
 {
-	// ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚Ìî•ñ‚ğ“ü‚ê‚é
+	// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã®æƒ…å ±ã‚’å…¥ã‚Œã‚‹
 	D3D11_BUFFER_DESC bufferDesc = {};
-	// ƒTƒCƒY
+	// ã‚µã‚¤ã‚º
 	bufferDesc.ByteWidth = sizeof(MatrixesConstant);
-	// êŠFƒrƒfƒIƒƒ‚ƒŠ‚Éì¬
+	// å ´æ‰€ï¼šãƒ“ãƒ‡ã‚ªãƒ¡ãƒ¢ãƒªã«ä½œæˆ
 	bufferDesc.Usage = D3D11_USAGE_DYNAMIC;
-	// Ú‘±FƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
+	// æ¥ç¶šï¼šã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
 	bufferDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	// CPU‚©‚ç‚ÌƒAƒNƒZƒXF‘‚«‚İ
+	// CPUã‹ã‚‰ã®ã‚¢ã‚¯ã‚»ã‚¹ï¼šæ›¸ãè¾¼ã¿
 	bufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	// g‚í‚È‚¢
+	// ä½¿ã‚ãªã„
 	bufferDesc.MiscFlags = 0;
-	// g‚í‚È‚¢
+	// ä½¿ã‚ãªã„
 	bufferDesc.StructureByteStride = 0;
 
-	// ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚Ìì¬
+	// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã®ä½œæˆ
 	g_pd3dDevice.Get()->CreateBuffer(&bufferDesc, nullptr, constantBuffer.GetAddressOf());
 	matrixesConstant.reset(new MatrixesConstant());
 }
 
 
 // ----------------------------------------------------------------------------------------------- //
-// @ brief	: •`‰æ                                                                                 //
-// @ param	: Matrix view...ƒrƒ…[s—ñ                                                             //
-// @ param	: Matrix proj...Ë‰es—ñ                                                               //
-// @ return : ‚È‚µ                                                                                 //
-// @ note	: ©ì–¼‘O‹óŠÔ“à‚ÌŠÖ”                                                                 //
+// @ brief	: æç”»                                                                                 //
+// @ param	: Matrix view...ãƒ“ãƒ¥ãƒ¼è¡Œåˆ—                                                             //
+// @ param	: Matrix proj...å°„å½±è¡Œåˆ—                                                               //
+// @ return : ãªã—                                                                                 //
+// @ note	: è‡ªä½œåå‰ç©ºé–“å†…ã®é–¢æ•°                                                                 //
 // ----------------------------------------------------------------------------------------------- // 
 void mnLib::Shader::Draw(Matrix view, Matrix proj)
 {
-	// ƒ[ƒ‹ƒhs—ñ
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—
 	Matrix world = Matrix::Identity;
-	// ƒ[ƒ‹ƒh–ƒrƒ…[–ƒvƒƒWƒFƒNƒVƒ‡ƒ“
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰ï¼Šãƒ“ãƒ¥ãƒ¼ï¼Šãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³
 	Matrix wvp = Matrix::Identity;
 
-	// ƒ[ƒ‹ƒh–ƒrƒ…[–ƒvƒƒWƒFƒNƒVƒ‡ƒ“‚Ì•Ï”‚É‚»‚ê‚¼‚ê‚ğ‚©‚¯‚é
+	// ãƒ¯ãƒ¼ãƒ«ãƒ‰ï¼Šãƒ“ãƒ¥ãƒ¼ï¼Šãƒ—ãƒ­ã‚¸ã‚§ã‚¯ã‚·ãƒ§ãƒ³ã®å¤‰æ•°ã«ãã‚Œãã‚Œã‚’ã‹ã‘ã‚‹
 	wvp *= world;
 	wvp *= view;
 	wvp *= proj;
 
-	// ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚Ìİ’è
-	// ¦İ’è‚ÉTranspose‚·‚éi“]’us—ñj
+	// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã®è¨­å®š
+	// â€»è¨­å®šæ™‚ã«Transposeã™ã‚‹ï¼ˆè»¢ç½®è¡Œåˆ—ï¼‰
 	matrixesConstant->WorldViewProjection = wvp.Transpose();
 
-	// •`‰æ
+	// æç”»
 	model->Draw(g_pImmediateContext.Get(), *g_state.get(), world, view, proj, false, [&]()
 	{
-		// GPU‚ÌƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚ÉƒAƒNƒZƒX‚·‚éƒAƒhƒŒƒX‚Ìæ“¾
+		// GPUã®ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã«ã‚¢ã‚¯ã‚»ã‚¹ã™ã‚‹ã‚¢ãƒ‰ãƒ¬ã‚¹ã®å–å¾—
 		D3D11_MAPPED_SUBRESOURCE mappedResource;
 		g_pImmediateContext.Get()->Map(constantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource);
-		// GPUã‚ÌƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚Éƒf[ƒ^‚ğ‘—‚é
+		// GPUä¸Šã®ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã«ãƒ‡ãƒ¼ã‚¿ã‚’é€ã‚‹
 		*(MatrixesConstant*)mappedResource.pData = *matrixesConstant.get();
 		g_pImmediateContext.Get()->Unmap(constantBuffer.Get(), 0);
 
-		// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg‚Ìİ’è
+		// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã®è¨­å®š
 		g_pImmediateContext.Get()->IASetInputLayout(inputLayout.Get());
-		// ƒo[ƒeƒbƒNƒXƒVƒF[ƒ_‚Ìİ’è
+		// ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ã‚·ã‚§ãƒ¼ãƒ€ã®è¨­å®š
 		g_pImmediateContext.Get()->VSSetShader(vertexShader.Get(), nullptr, 0);
 
-		// ƒo[ƒeƒbƒNƒXƒVƒF[ƒ_‚É“n‚·ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
+		// ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ã‚·ã‚§ãƒ¼ãƒ€ã«æ¸¡ã™ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
 		ID3D11Buffer * buffer[] = { constantBuffer.Get() };
 		g_pImmediateContext.Get()->VSSetConstantBuffers(0, 1, buffer);
 
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_‚Ìİ’è
+		// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€ã®è¨­å®š
 		g_pImmediateContext.Get()->PSSetShader(pixelShader.Get(), nullptr, 0);
 	});
 }

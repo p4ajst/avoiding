@@ -57,7 +57,6 @@ void Character::Move(int ox, int oz, int sx, int sz)
 	if (g_key.A)
 	{
 		mAngle = 270;
-		//mVelocity = Vector3(-1, 0, 0);
 		
 		// ポジションを代入
 		temp = mPosition;
@@ -70,14 +69,6 @@ void Character::Move(int ox, int oz, int sx, int sz)
 			mPosition = lerpSpd;
 		}
 		mStepCount++;
-		//mStepCount += 1;
-		//mAngle = 270;
-		//for (float i = 0; i <1.0f; i += 0.001f)
-		//{
-		//	mVelocity.x = -0.001f;
-		//	mPosition += mVelocity;
-		//}
-		//mStepCount += 1;
 	}
 	if (g_key.D)
 	{
@@ -124,20 +115,6 @@ void Character::Move(int ox, int oz, int sx, int sz)
 			mStepCount++;
 		}
 	}
-
-	//int px = (int)(floorf(mPosition.x + ox));
-	//int pz = (int)(floorf(mPosition.z + oz));
-
-	//for (int i = 0; i < sx; i++)
-	//{
-	//	for (int j = 0; i < sz; j++)
-	//	{
-	//		if (px == i && pz == j)
-	//		{
-	//			mStepCount++;
-	//		}
-	//	}
-	//}
 }
 
 // ----------------------------------------------------------------------------------------------- //

@@ -1,85 +1,85 @@
-// ------------------------------------------------------------------------------------------------ //
+ï»¿// ------------------------------------------------------------------------------------------------ //
 // @ file	 : Shader.h                                                                             //
-// @ brief	 : ƒVƒF[ƒ_[‚ğ—˜—p‚·‚é‚½‚ß‚ÌŠÖ”ŒQ                                                     //
+// @ brief	 : ã‚·ã‚§ãƒ¼ãƒ€ãƒ¼ã‚’åˆ©ç”¨ã™ã‚‹ãŸã‚ã®é–¢æ•°ç¾¤                                                     //
 // @ date	 : 2017/10/19                                                                           //
 // @ author  : Madoka Nakajima                                                                      //
 // @ note	 :                                                                                      //
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
-/* ‘½dƒCƒ“ƒNƒ‹[ƒh‚Ì–h~ */
+/* å¤šé‡ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ã®é˜²æ­¢ */
 #pragma once
-/* ƒwƒbƒ_ƒtƒ@ƒCƒ‹‚ÌƒCƒ“ƒNƒ‹[ƒh */
-// ƒXƒ^ƒ“ƒ_[ƒhƒ‰ƒCƒuƒ‰ƒŠŠÖ˜A 
-#include <memory>          // ƒXƒ}[ƒgƒ|ƒCƒ“ƒ^‚ğg‚¤‚½‚ß
+/* ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«ã®ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰ */
+// ã‚¹ã‚¿ãƒ³ãƒ€ãƒ¼ãƒ‰ãƒ©ã‚¤ãƒ–ãƒ©ãƒªé–¢é€£ 
+#include <memory>          // ã‚¹ãƒãƒ¼ãƒˆãƒã‚¤ãƒ³ã‚¿ã‚’ä½¿ã†ãŸã‚
 #define _USE_MATH_DEFINES
-#include <cmath>           // ZpŠÖ”
-#include <iostream>        // IOƒXƒgƒŠ[ƒ€
+#include <cmath>           // ç®—è¡“é–¢æ•°
+#include <iostream>        // IOã‚¹ãƒˆãƒªãƒ¼ãƒ 
 
-// DirectXŠÖ˜A
-#include <DirectXMath.h>   // DirectX‚ÌZpŠÖ˜A‚ğg‚¤‚½‚ß
-#include <SimpleMath.h>    // DirectXTK‚ÌŠÈˆÕZpŠÖ˜A‚ğg‚¤‚½‚ß
-#include <DirectXColors.h> // Fw’è‚Ì‚½‚ß
+// DirectXé–¢é€£
+#include <DirectXMath.h>   // DirectXã®ç®—è¡“é–¢é€£ã‚’ä½¿ã†ãŸã‚
+#include <SimpleMath.h>    // DirectXTKã®ç°¡æ˜“ç®—è¡“é–¢é€£ã‚’ä½¿ã†ãŸã‚
+#include <DirectXColors.h> // è‰²æŒ‡å®šã®ãŸã‚
 
-#include <wrl.h>  // Windows ƒ‰ƒ“ƒ^ƒCƒ€ C++ ƒeƒ“ƒvƒŒ[ƒg ƒ‰ƒCƒuƒ‰ƒŠ
+#include <wrl.h>  // Windows ãƒ©ãƒ³ã‚¿ã‚¤ãƒ  C++ ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆ ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
 
-// DGSLƒVƒF[ƒ_‚ğg—p‚·‚é‚½‚ß‚Ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// DGSLã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½¿ç”¨ã™ã‚‹ãŸã‚ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include <Effects.h>
 #include <Model.h>
 #include <CommonStates.h>
 
-// ƒo[ƒeƒbƒNƒXƒVƒF[ƒ_‚ğg—p‚·‚é‚½‚ß‚Ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// ãƒãƒ¼ãƒ†ãƒƒã‚¯ã‚¹ã‚·ã‚§ãƒ¼ãƒ€ã‚’ä½¿ç”¨ã™ã‚‹ãŸã‚ã®ãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include <d3d11.h>
 #include <vector>
 #include <fstream>
 #include <VertexTypes.h>
 #include <DirectXMath.h>
 
-// ©ìƒwƒbƒ_ƒtƒ@ƒCƒ‹
+// è‡ªä½œãƒ˜ãƒƒãƒ€ãƒ•ã‚¡ã‚¤ãƒ«
 #include "BinaryLoader.h"
 
 namespace mnLib
 {
-	/* \‘¢‘Ì‚ÌéŒ¾ */
-	// ƒVƒF[ƒ_‚É“n‚·ƒf[ƒ^‚Ì\‘¢‘Ì
+	/* æ§‹é€ ä½“ã®å®£è¨€ */
+	// ã‚·ã‚§ãƒ¼ãƒ€ã«æ¸¡ã™ãƒ‡ãƒ¼ã‚¿ã®æ§‹é€ ä½“
 #pragma pack(push,1)
 	__declspec(align(16)) struct MatrixesConstant
 	{
 		DirectX::XMMATRIX WorldViewProjection;   // world * view * projection
-		float x;                                 // ‚˜À•W
-		float z;                                 // ‚šÀ•W
-		float padding1;                          // ‹óŠÔ‚ğ–„‚ß‚é	
-		float padding2;                          // ‹óŠÔ‚ğ–„‚ß‚é	
+		float x;                                 // ï½˜åº§æ¨™
+		float z;                                 // ï½šåº§æ¨™
+		float padding1;                          // ç©ºé–“ã‚’åŸ‹ã‚ã‚‹	
+		float padding2;                          // ç©ºé–“ã‚’åŸ‹ã‚ã‚‹	
 
 		// Allocate aligned memory.
 		static void* operator new(size_t size)
 		{
-			// ƒAƒ‰ƒCƒƒ“ƒg‚ğæ“¾
+			// ã‚¢ãƒ©ã‚¤ãƒ¡ãƒ³ãƒˆã‚’å–å¾—
 			const size_t alignment = __alignof(MatrixesConstant);
 			/*
-			@@ƒGƒ‰[ƒƒbƒZ[ƒWFAlignedNew > ‚Í‚WƒoƒCƒgƒAƒ‰ƒCƒƒ“ƒg‚ğ‚Âƒ^ƒCƒv‚É‚Ì‚İ—LŒø‚Å‚·B
-			  @‚ ‚È‚½‚Í”h¶‚É__declspeciˆÊ’u‡‚í‚¹j‚ğ–Y‚ê‚Ü‚µ‚½‚©B
+			ã€€ã€€ã‚¨ãƒ©ãƒ¼ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ï¼šAlignedNew > ã¯ï¼˜ãƒã‚¤ãƒˆã‚¢ãƒ©ã‚¤ãƒ¡ãƒ³ãƒˆã‚’æŒã¤ã‚¿ã‚¤ãƒ—ã«ã®ã¿æœ‰åŠ¹ã§ã™ã€‚
+			  ã€€ã‚ãªãŸã¯æ´¾ç”Ÿã«__declspecï¼ˆä½ç½®åˆã‚ã›ï¼‰ã‚’å¿˜ã‚Œã¾ã—ãŸã‹ã€‚
 			   */
 			static_assert(alignment > 8
 				, "AlignedNew is only useful for types with > 8byte alignment.Did you forget a __declspec(align) on TDerved ? ");
-			// ƒAƒ‰ƒCƒƒ“ƒg‚É‡‚í‚¹‚Äƒƒ‚ƒŠ[Šm•Û
+			// ã‚¢ãƒ©ã‚¤ãƒ¡ãƒ³ãƒˆã«åˆã‚ã›ã¦ãƒ¡ãƒ¢ãƒªãƒ¼ç¢ºä¿
 			void* ptr = _aligned_malloc(size, alignment);
-			// ƒƒ‚ƒŠ[Šm•Û‚Å‚«‚½‚©ƒ`ƒFƒbƒN
+			// ãƒ¡ãƒ¢ãƒªãƒ¼ç¢ºä¿ã§ããŸã‹ãƒã‚§ãƒƒã‚¯
 			if (!ptr)
 				throw std::bad_alloc();
-			// Šm•Û‚µ‚½ƒƒ‚ƒŠƒAƒhƒŒƒX‚ğ•Ô‚·
+			// ç¢ºä¿ã—ãŸãƒ¡ãƒ¢ãƒªã‚¢ãƒ‰ãƒ¬ã‚¹ã‚’è¿”ã™
 			return ptr;
 		}
 
 		// Free align memory.
 		static void operator delete(void* ptr)
 		{
-			// _aligned_malloc‚ÅŠm•Û‚µ‚½ƒƒ‚ƒŠ[‚Ì‰ğ•ú
+			// _aligned_mallocã§ç¢ºä¿ã—ãŸãƒ¡ãƒ¢ãƒªãƒ¼ã®è§£æ”¾
 			_aligned_free(ptr);
 		}
 	};
 #pragma pack(pop)
 
-	// ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚Ì\‘¢‘Ì
+	// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã®æ§‹é€ ä½“
 #pragma pack(push,1)
 	struct MatrixesConstants
 	{
@@ -92,29 +92,29 @@ namespace mnLib
 	class Shader
 	{
 	public:
-		/* ƒƒ“ƒo•Ï” */
-		// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+		/* ãƒ¡ãƒ³ãƒå¤‰æ•° */
+		// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		Shader();
-		// ƒfƒXƒgƒ‰ƒNƒ^
+		// ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 		~Shader();
-		// ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@
+		// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡
 		std::vector<char> buffer;
-		// ’¸“_ƒVƒF[ƒ_
+		// é ‚ç‚¹ã‚·ã‚§ãƒ¼ãƒ€
 		Microsoft::WRL::ComPtr<ID3D11VertexShader> vertexShader;
-		// ƒCƒ“ƒvƒbƒgƒŒƒCƒAƒEƒg
+		// ã‚¤ãƒ³ãƒ—ãƒƒãƒˆãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆ
 		Microsoft::WRL::ComPtr<ID3D11InputLayout> inputLayout;
-		// ƒsƒNƒZƒ‹ƒVƒF[ƒ_
+		// ãƒ”ã‚¯ã‚»ãƒ«ã‚·ã‚§ãƒ¼ãƒ€
 		Microsoft::WRL::ComPtr<ID3D11PixelShader> pixelShader;
-		// ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚ÌƒIƒuƒWƒFƒNƒg
+		// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
 		Microsoft::WRL::ComPtr<ID3D11Buffer> constantBuffer;
-		// ƒRƒ“ƒXƒ^ƒ“ƒgƒoƒbƒtƒ@‚É“n‚·ƒf[ƒ^
+		// ã‚³ãƒ³ã‚¹ã‚¿ãƒ³ãƒˆãƒãƒƒãƒ•ã‚¡ã«æ¸¡ã™ãƒ‡ãƒ¼ã‚¿
 		std::unique_ptr<MatrixesConstant> matrixesConstant;
-		// ƒ‚ƒfƒ‹
+		// ãƒ¢ãƒ‡ãƒ«
 		std::shared_ptr<DirectX::Model> model;
-		// ƒoƒCƒiƒŠƒ[ƒ_[
+		// ãƒã‚¤ãƒŠãƒªãƒ­ãƒ¼ãƒ€ãƒ¼
 		BinaryLoader binary;
 
-		/* ƒƒ“ƒoŠÖ” */
+		/* ãƒ¡ãƒ³ãƒé–¢æ•° */
 		void InitShader(wchar_t* name);
 
 		void CreateShader(const char* vertex, const char* pixel);
