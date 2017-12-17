@@ -10,11 +10,20 @@
 #pragma once
 
 /* ヘッダファイルのインクルード */
+#include <SpriteBatch.h>
+#include "../../ImaseLib/Texture.h"
 #include "Layer.h"
 
 /* クラス宣言 */
 class PlayBackGroundLayer :public Layer
 {
+
+	//// 背景画像
+	//std::shared_ptr<DirectX::SpriteBatch> mTexture;
+	//ID3D10ShaderResourceView* mBackGround;
+
+	std::unique_ptr<Texture> mBackGround;
+
 	/* メンバ関数 */
 public:
 	// 初期化

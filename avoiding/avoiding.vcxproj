@@ -172,6 +172,7 @@
     <ClInclude Include="MuraseLib\ConstantBuffer.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram.cd" />
     <None Include="DebugBase.props" />
     <None Include="myfile.spritefont" />
     <None Include="ReleaseBase.props" />

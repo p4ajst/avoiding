@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DebugCamera" Collapsed="true">
+    <Position X="28.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAIAAAAAAAAAAQAAAAAAAQABEYAAAAAAgQBAAAAA=</HashCode>
+      <FileName>ImaseLib\DebugCamera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Grid" Collapsed="true">
+    <Position X="26.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAQAACAAgAAAAAAAQAAAAACAIBAAAAIAAQQ=</HashCode>
+      <FileName>ImaseLib\Grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GridFloor" Collapsed="true">
+    <Position X="28.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAYAAAAACAAAAAAAAAAAAACAIBAAAAIAAAA=</HashCode>
+      <FileName>ImaseLib\Grid.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LineBatch" Collapsed="true">
+    <Position X="21.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAAQAAgAAAAAQAAAAQAAAEACAIEAAAAIAAAA=</HashCode>
+      <FileName>ImaseLib\Line.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Texture" Collapsed="true">
+    <Position X="23.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAgAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>ImaseLib\Texture.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game" Collapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAQAAAAAAAQAAAAAAgAAAABAAACAAAAA=</HashCode>
+      <FileName>GameSource\Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Map" Collapsed="true">
+    <Position X="23.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACABAABgAAAAAAAAggAAAAAQIAAAAIAAAAAAI=</HashCode>
+      <FileName>GameSource\Stage\Map.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MapChip" Collapsed="true">
+    <Position X="25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACCCCAIAAAAAAAAAAAAAAAAIIAAAQAAAAAAAA=</HashCode>
+      <FileName>GameSource\Stage\MapChip.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameStartScreen" Collapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAYAAAQAAEAAAAEAAAAACgAAAABAAAAAAAkA=</HashCode>
+      <FileName>GameSource\Scene\GameStartScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PauseScreen" Collapsed="true">
+    <Position X="28.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAQAAAAAAAAAAAAABgAAAABAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Scene\PauseScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayScene" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAACABAAQABAAAACEAAACAAgAAAABAAAAAAACA=</HashCode>
+      <FileName>GameSource\Scene\PlayScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResultScene" Collapsed="true">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAABAAQABAAAAAEAAACAAgAAAABIAAAAAAAA=</HashCode>
+      <FileName>GameSource\Scene\ResultScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Scene" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAABAEQAAgAEAIAgAQAAAgAAAABAAAAAAAQA=</HashCode>
+      <FileName>GameSource\Scene\Scene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleScene" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAAAABAAQABAAAAAEAAAAAAgAAAABAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Scene\TitleScene.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Actor" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QIQEAgACCAiAowAEAAAIAAggAAACgAAAIAAAAgAAAgA=</HashCode>
+      <FileName>GameSource\Object\Actor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bomb" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAACAACACBAYAAAIAAAAAggAACAABAQAgAIAAAAAI=</HashCode>
+      <FileName>GameSource\Object\Bomb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Character" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAAIABAQAAAAAAAAggAAAAAAAAAAgAAAAAKAI=</HashCode>
+      <FileName>GameSource\Object\Character.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cursor" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAQAAAwAAAAAAAAAAAAAAAAQAAAAQEAAAAAA=</HashCode>
+      <FileName>GameSource\Object\Cursor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Object\Item.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BinaryLoader" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAgAAAEAAAQAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Utility\BinaryLoader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Camera" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gSQDgAAAAgAAAAgQQAgAAQCCIBAACBAACAAAgJQACCA=</HashCode>
+      <FileName>GameSource\Utility\Camera.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSVReader" Collapsed="true">
+    <Position X="26.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BBAAAAAAEAAAAAAAEAAAAAAAAAAAAAAQAAEAAABAAAA=</HashCode>
+      <FileName>GameSource\Utility\CSVReader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseCursor" Collapsed="true">
+    <Position X="26.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAkAQAAAAAwAIAAgBAAAQAAAIAIAADAAAAAQAAAA=</HashCode>
+      <FileName>GameSource\Utility\MouseCursor.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Layer" Collapsed="true">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAAAwAAAAAAAAAAAAAAgAAEAAAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Layer\Layer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayBackGroundLayer" Collapsed="true">
+    <Position X="10" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwBAAAAAAEAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Layer\PlayBackGroundLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayGameLayer" Collapsed="true">
+    <Position X="16.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAwAAABhEQABAwQIAJABggAkICCSwAFgAUAAAALBAwA=</HashCode>
+      <FileName>GameSource\Layer\PlayGameLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayHUDLayer" Collapsed="true">
+    <Position X="1" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAQCAwAcAAAAIAAAAEAAgAAAEEAAAAAAAEA=</HashCode>
+      <FileName>GameSource\Layer\PlayHUDLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResultBackGroundLayer" Collapsed="true">
+    <Position X="3.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAAAgAAAACAAAIAAAAA=</HashCode>
+      <FileName>GameSource\Layer\ResultBackGroundLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResultGameLayer" Collapsed="true">
+    <Position X="5.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Layer\ResultGameLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ResultHUDLayer" Collapsed="true">
+    <Position X="7.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAgAwQAAAAAAAAAADACgAAACAIBHAAAAQQ=</HashCode>
+      <FileName>GameSource\Layer\ResultHUDLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleBackGroundLayer" Collapsed="true">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAACgAAAAAAAAAAAAQA=</HashCode>
+      <FileName>GameSource\Layer\TitleBackGroundLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleGameLayer" Collapsed="true">
+    <Position X="14.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GameSource\Layer\TitleGameLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleHUDLayer" Collapsed="true">
+    <Position X="19" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAACAAAAAwAgAAAAAAAAAAACgAAAAAAAAAAAASA=</HashCode>
+      <FileName>GameSource\Layer\TitleHUDLayer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConstantBuffer&lt;T&gt;" Collapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASAAAABAAAAAAAAQAAAAQIAAAAAAEAAAAAgAAAAAAA=</HashCode>
+      <FileName>MuraseLib\ConstantBuffer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ImaseLib::FPSTimer" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAYCAgAABAAAAAAAADIAAAAggAAAAADgAAAAAAAA=</HashCode>
+      <FileName>ImaseLib\FPSTimer.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mnLib::Shader" Collapsed="true">
+    <Position X="21.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAACABCBCAAkAAEAAAAAAAAIACAAACBABAAAAIgAA=</HashCode>
+      <FileName>GameSource\Utility\Shader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="mnLib::MatrixesConstant" Collapsed="true">
+    <Position X="21.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AICAAAAAAAAAAAAAAAAAAQAAAAAAAAAABQBAAQAAAAA=</HashCode>
+      <FileName>GameSource\Utility\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="mnLib::MatrixesConstants" Collapsed="true">
+    <Position X="23.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQBAAQAAAAA=</HashCode>
+      <FileName>GameSource\Utility\Shader.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="MapChipAttribute" Collapsed="true">
+    <Position X="21.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAACAAABA=</HashCode>
+      <FileName>GameSource\Stage\Attribute.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="PlayGameState" Collapsed="true">
+    <Position X="23.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>GameSource\Layer\PlayGameLayer.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>

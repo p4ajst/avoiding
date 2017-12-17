@@ -493,4 +493,3 @@ void PlayGameLayer::RegisterMapChip(MapChipAttribute attr, shared_ptr<Model> mod
 	mChip[attr] = new MapChip(attr);
 	mChip[attr]->SetModel(model);
 }
-
