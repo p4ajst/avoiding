@@ -112,7 +112,7 @@ void PlayHUDLayer::Draw()
 	}
 
 	// 歩数を描画
-	//DrawNum(pScene->GetSprite().get(), mNum->m_pTexture, mCount, 160.0f, 32.0f);
+	DrawNum(pScene->GetSprite().get(), mNum->m_pTexture, mCount, 160.0f, 32.0f);
 }
 
 // ----------------------------------------------------------------------------------------------- //

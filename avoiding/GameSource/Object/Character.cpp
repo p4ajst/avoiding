@@ -20,6 +20,10 @@
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
+/* 定数定義 */
+// フレーム数
+static const int frame = 10;
+
 void Character::Initialize(int sx,int sz)
 {
 	// マップの初期化
@@ -39,6 +43,9 @@ void Character::Initialize(int sx,int sz)
 	mScalingFactor = 1;
 	mLocalWorld = Matrix::Identity;
 
+	// 移動中でない = 待機中
+	mIsMoving = false;
+
 }
 
 /* メンバ関数の定義 */
@@ -50,71 +57,149 @@ void Character::Initialize(int sx,int sz)
 // ----------------------------------------------------------------------------------------------- // 
 void Character::Move(int ox, int oz, int sx, int sz)
 {
-	Vector3 lerpSpd = Vector3(0, 0, 0);
-	Vector3 temp;
-	float deltaTime;
-	deltaTime = 1.0f / 60.0f;
-	if (g_key.A)
+	// 待機中
+	if (!mIsMoving)
 	{
-		mAngle = 270;
-		
-		// ポジションを代入
-		temp = mPosition;
-		// 左に移動
-		temp += Vector3(-1.00f,0.0f,0.0f);
-		Vector3 mTemp = mPosition;
-		for (float i = 0.0f; i < 1.0f; i += deltaTime)
+		// キャラクターの現在地を移動のスタート地点にする
+		mSource = mPosition;
+
+		// キー入力
+		if (g_key.A)
 		{
-			lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-			mPosition = lerpSpd;
+			// 移動方向を設定
+			mAngle = 270;
+			// 目的地の設定
+			mDestination = mSource + Vector3::Left;
+			mIsMoving = true;
 		}
-		mStepCount++;
-	}
-	if (g_key.D)
-	{
-		mAngle = 90;
-		// ポジションを代入
-		temp = mPosition;
-		// 左に移動
-		temp += Vector3(1.00f, 0.0f, 0.0f);
-		Vector3 mTemp = mPosition;
-		for (float i = 0.0f; i < 1.0f; i += deltaTime)
+		if (g_key.D)
 		{
-			lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-			mPosition = lerpSpd;
+			// 移動方向を設定
+			mAngle = 90;
+			// 目的地の設定
+			mDestination = mSource + Vector3::Right;
+			mIsMoving = true;
 		}
-		mStepCount++;
-	}
-	if (g_key.W)
-	{
-		mAngle = 180;
-		// ポジションを代入
-		temp = mPosition;
-		// 左に移動
-		temp += Vector3(0.0f, 0.0f, -1.00f);
-		Vector3 mTemp = mPosition;
-		for (float i = 0.0f; i < 1.0f; i += deltaTime)
+		if (g_key.W)
 		{
-			lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-			mPosition = lerpSpd;
+			// 移動方向を設定
+			mAngle = 180;
+			// 目的地の設定
+			mDestination = mSource + Vector3::Forward;
+			mIsMoving = true;
 		}
-		mStepCount++;
-	}
-	if (g_key.S)
-	{
-		mAngle = 0;
-		// ポジションを代入
-		temp = mPosition;
-		// 左に移動
-		temp += Vector3(0.00f, 0.0f, 1.00f);
-		Vector3 mTemp = mPosition;
-		for (float i = 0.0f; i < 1.0f; i += deltaTime)
+		if (g_key.S)
 		{
-			lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-			mPosition = lerpSpd;
+			// 移動方向を設定
+			mAngle = 0;
+			// 目的地の設定
+			mDestination = mSource + Vector3::Backward;
+			mIsMoving = true;
+		}
+		if (mIsMoving)
+		{
+			// 歩数をカウント
 			mStepCount++;
+			// 移動割合を０にする
+			mMoveRate = 0;
 		}
 	}
+	// 移動中
+	else
+	{
+		// 割合を追加
+		mMoveRate++;
+
+		// 座標を変更する
+
+		///// Vector3::Lerp()
+		///// brief : 線形補間をする
+		///// param : 開始点
+		///// param : 終着点
+		///// param : どこまで移動したか
+		//mPosition = Vector3::Lerp(mSource, mDestination, mMoveRate / (float)frame);
+
+		/// Vector3::SmoothStep()
+		/// brief : 補間をする
+		/// param : 開始点
+		/// param : 終着点
+		/// param : どこまで移動したか
+		mPosition = Vector3::SmoothStep(mSource, mDestination, mMoveRate / (float)frame);
+
+
+		// 移動割合がフレーム数だったら
+		if (mMoveRate == frame)
+		{
+			mIsMoving = false;
+		}
+
+	}
+
+	//Vector3 lerpSpd = Vector3(0, 0, 0);
+	//Vector3 temp;
+	//float deltaTime;
+	//deltaTime = 1.0f / 60.0f;
+	//if (g_key.A)
+	//{
+	//	mAngle = 270;
+	//	
+	//	// ポジションを代入
+	//	temp = mPosition;
+	//	// 左に移動
+	//	temp += Vector3(-1.00f,0.0f,0.0f);
+	//	Vector3 mTemp = mPosition;
+	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
+	//	{
+	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
+	//		mPosition = lerpSpd;
+	//	}
+	//	mStepCount++;
+	//}
+	//if (g_key.D)
+	//{
+	//	mAngle = 90;
+	//	// ポジションを代入
+	//	temp = mPosition;
+	//	// 左に移動
+	//	temp += Vector3(1.00f, 0.0f, 0.0f);
+	//	Vector3 mTemp = mPosition;
+	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
+	//	{
+	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
+	//		mPosition = lerpSpd;
+	//	}
+	//	mStepCount++;
+	//}
+	//if (g_key.W)
+	//{
+	//	mAngle = 180;
+	//	// ポジションを代入
+	//	temp = mPosition;
+	//	// 左に移動
+	//	temp += Vector3(0.0f, 0.0f, -1.00f);
+	//	Vector3 mTemp = mPosition;
+	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
+	//	{
+	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
+	//		mPosition = lerpSpd;
+	//	}
+	//	mStepCount++;
+	//}
+	//if (g_key.S)
+	//{
+	//	mAngle = 0;
+	//	// ポジションを代入
+	//	temp = mPosition;
+	//	// 左に移動
+	//	temp += Vector3(0.00f, 0.0f, 1.00f);
+	//	Vector3 mTemp = mPosition;
+	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
+	//	{
+	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
+	//		mPosition = lerpSpd;
+	//		mStepCount++;
+	//	}
+	//}
 }
 
 // ----------------------------------------------------------------------------------------------- //
