@@ -26,11 +26,6 @@ void PlayBackGroundLayer::Initialize(Scene* scene)
 {
 
 	pScene = scene;
-
-	//mTexture = std::make_shared<SpriteBatch>();
-
-	//const wchar_t* name = L"Resources\\haikei.png";
-	//CreateWICTextureFromFile(g_pd3dDevice.Get(), name, nullptr, &mBackGround);
 	mBackGround = make_unique<Texture>(L"Resources\\chocobiscket.png");
 }
 
