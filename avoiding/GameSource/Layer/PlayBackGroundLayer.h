@@ -20,11 +20,7 @@
 /* クラス宣言 */
 class PlayBackGroundLayer :public Layer
 {
-
-	//// 背景画像
-	//std::shared_ptr<DirectX::SpriteBatch> mTexture;
-	//ID3D10ShaderResourceView* mBackGround;
-
+	// 画像
 	std::unique_ptr<Texture> mBackGround;
 
 	/* メンバ関数 */

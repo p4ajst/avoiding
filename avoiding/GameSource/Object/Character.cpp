@@ -45,7 +45,6 @@ void Character::Initialize(int sx,int sz)
 
 	// 移動中でない = 待機中
 	mIsMoving = false;
-
 }
 
 /* メンバ関数の定義 */
@@ -111,14 +110,6 @@ void Character::Move(int ox, int oz, int sx, int sz)
 		mMoveRate++;
 
 		// 座標を変更する
-
-		///// Vector3::Lerp()
-		///// brief : 線形補間をする
-		///// param : 開始点
-		///// param : 終着点
-		///// param : どこまで移動したか
-		//mPosition = Vector3::Lerp(mSource, mDestination, mMoveRate / (float)frame);
-
 		/// Vector3::SmoothStep()
 		/// brief : 補間をする
 		/// param : 開始点
@@ -134,72 +125,6 @@ void Character::Move(int ox, int oz, int sx, int sz)
 		}
 
 	}
-
-	//Vector3 lerpSpd = Vector3(0, 0, 0);
-	//Vector3 temp;
-	//float deltaTime;
-	//deltaTime = 1.0f / 60.0f;
-	//if (g_key.A)
-	//{
-	//	mAngle = 270;
-	//	
-	//	// ポジションを代入
-	//	temp = mPosition;
-	//	// 左に移動
-	//	temp += Vector3(-1.00f,0.0f,0.0f);
-	//	Vector3 mTemp = mPosition;
-	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
-	//	{
-	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-	//		mPosition = lerpSpd;
-	//	}
-	//	mStepCount++;
-	//}
-	//if (g_key.D)
-	//{
-	//	mAngle = 90;
-	//	// ポジションを代入
-	//	temp = mPosition;
-	//	// 左に移動
-	//	temp += Vector3(1.00f, 0.0f, 0.0f);
-	//	Vector3 mTemp = mPosition;
-	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
-	//	{
-	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-	//		mPosition = lerpSpd;
-	//	}
-	//	mStepCount++;
-	//}
-	//if (g_key.W)
-	//{
-	//	mAngle = 180;
-	//	// ポジションを代入
-	//	temp = mPosition;
-	//	// 左に移動
-	//	temp += Vector3(0.0f, 0.0f, -1.00f);
-	//	Vector3 mTemp = mPosition;
-	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
-	//	{
-	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-	//		mPosition = lerpSpd;
-	//	}
-	//	mStepCount++;
-	//}
-	//if (g_key.S)
-	//{
-	//	mAngle = 0;
-	//	// ポジションを代入
-	//	temp = mPosition;
-	//	// 左に移動
-	//	temp += Vector3(0.00f, 0.0f, 1.00f);
-	//	Vector3 mTemp = mPosition;
-	//	for (float i = 0.0f; i < 1.0f; i += deltaTime)
-	//	{
-	//		lerpSpd = Vector3::Lerp(mTemp, temp, deltaTime);
-	//		mPosition = lerpSpd;
-	//		mStepCount++;
-	//	}
-	//}
 }
 
 // ----------------------------------------------------------------------------------------------- //
