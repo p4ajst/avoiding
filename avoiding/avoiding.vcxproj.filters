@@ -292,6 +292,8 @@
     <None Include="Resources\Light.hlsli">
       <Filter>リソース ファイル\Shader</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <MeshContentTask Include="Resources\cookie.FBX">

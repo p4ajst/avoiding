@@ -143,10 +143,21 @@ void PlayScene::Update()
 // ----------------------------------------------------------------------------------------------- // 
 void PlayScene::Render()
 {
+	// スプライトバッチの始まり（半透明処理）
+	pSprite->Begin(SpriteSortMode_Deferred, nullptr, nullptr, nullptr, nullptr, [=]
+	{
+		// 画像の半透明処理
+		g_pImmediateContext->OMSetBlendState(g_state->NonPremultiplied(), nullptr, 0xFFFFFFFF);
+	});
+
 	// 背景レイヤーの描画
 	mBackGround->Draw();
+	// スプライトバッチの終わり
+	pSprite->End();
+
 	// ゲームレイヤーの描画
 	mGame->Draw();
+
 	// スプライトバッチの始まり（半透明処理）
 	pSprite->Begin(SpriteSortMode_Deferred, nullptr, nullptr, nullptr, nullptr, [=]
 	{

@@ -7,8 +7,10 @@
 // @ version : ver.3.00                                                                             //
 // ------------------------------------------------------------------------------------------------ // 
 /* ヘッダファイルのインクルード */
+// 自作ヘッダファイル
 #include "ResultBackGroundLayer.h"
 /* 名前空間 */
+using namespace std;
 using namespace DirectX::SimpleMath;
 
 /* メンバ関数の定義 */

@@ -468,7 +468,7 @@ Vector3 PlayGameLayer::InitialPlacement(int mapSize_x, int mapSize_z, float offs
 // @ return : Vector3...座標                                                                       //
 // @ note	:                                                                                      //
 // ----------------------------------------------------------------------------------------------- // 
-Vector3 PlayGameLayer::CalculateElementNumber(Vector3 pos, int offset_x, int offset_z)
+Vector3 PlayGameLayer::CalculateElementNumber(Vector3 pos, float offset_x, float offset_z)
 {
 	// 戻り値の変数を定義
 	Vector3 result = Vector3(0, 0, 0);
@@ -492,4 +492,3 @@ void PlayGameLayer::RegisterMapChip(MapChipAttribute attr, shared_ptr<Model> mod
 	mChip[attr] = new MapChip(attr);
 	mChip[attr]->SetModel(model);
 }
-

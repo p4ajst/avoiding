@@ -24,6 +24,20 @@ private:
 	int mStepCount;
 	// マップの情報
 	std::shared_ptr<Map> mMap;
+
+	// 移動中であるか
+	bool mIsMoving;
+
+
+	// 出発点
+	DirectX::SimpleMath::Vector3 mSource;
+	// 目的地
+	DirectX::SimpleMath::Vector3 mDestination;
+	
+	// 移動割合
+	int mMoveRate;
+
+
 	/* メンバ関数 */
 public:
 	// コンストラクタ

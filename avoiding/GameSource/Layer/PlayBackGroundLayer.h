@@ -9,11 +9,19 @@
 #pragma once
 
 /* ヘッダファイルのインクルード */
+// 標準ライブラリ
+#include <SpriteBatch.h>
+// 先生のライブラリ
+#include "../../ImaseLib/Texture.h"
+// 自作ヘッダファイル
 #include "Layer.h"
 
 /* クラス宣言 */
 class PlayBackGroundLayer :public Layer
 {
+	// 画像
+	std::unique_ptr<Texture> mBackGround;
+
 	/* メンバ関数 */
 public:
 	// 初期化

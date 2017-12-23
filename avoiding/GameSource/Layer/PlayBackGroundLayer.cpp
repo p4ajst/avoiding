@@ -6,8 +6,12 @@
 // @ note	 :                                                                                      //
 // ------------------------------------------------------------------------------------------------ // 
 /* ヘッダファイルのインクルード */
+#include <WICTextureLoader.h>
+#include "../../ImaseLib/Direct3D.h"
 #include "PlayBackGroundLayer.h"
 /* 名前空間 */
+using namespace std;
+using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 /* メンバ関数の定義 */
@@ -19,6 +23,9 @@ using namespace DirectX::SimpleMath;
 // ----------------------------------------------------------------------------------------------- // 
 void PlayBackGroundLayer::Initialize(Scene* scene)
 {
+
+	pScene = scene;
+	mBackGround = make_unique<Texture>(L"Resources\\chocobiscket.png");
 }
 
 // ----------------------------------------------------------------------------------------------- //
@@ -40,6 +47,10 @@ void PlayBackGroundLayer::Update()
 // ----------------------------------------------------------------------------------------------- // 
 void PlayBackGroundLayer::Draw()
 {
+	// 描画位置（l,t,r,b）;
+	RECT rect{ 0,0,1280,960 };
+
+	pScene->GetSprite()->Draw(mBackGround->m_pTexture, rect,Colors::White);
 }
 
 // ----------------------------------------------------------------------------------------------- //
