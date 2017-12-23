@@ -173,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="DebugBase.props" />
     <None Include="myfile.spritefont" />
     <None Include="ReleaseBase.props" />

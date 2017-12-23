@@ -31,7 +31,7 @@ void PlayBackGroundLayer::Initialize(Scene* scene)
 
 	//const wchar_t* name = L"Resources\\haikei.png";
 	//CreateWICTextureFromFile(g_pd3dDevice.Get(), name, nullptr, &mBackGround);
-	mBackGround = make_unique<Texture>(L"Resources\\haikei.png");
+	mBackGround = make_unique<Texture>(L"Resources\\chocobiscket.png");
 }
 
 // ----------------------------------------------------------------------------------------------- //

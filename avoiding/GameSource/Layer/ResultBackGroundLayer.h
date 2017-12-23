@@ -9,6 +9,7 @@
 /* 多重インクルードの防止 */
 #pragma once
 /* ヘッダファイルのインクルード */
+// 自作ヘッダファイル
 #include "Layer.h"
 /* クラス宣言 */
 class ResultBackGroundLayer :public Layer
