@@ -176,8 +176,6 @@ void PlayGameLayer::Update()
 		if (timing % 3 == 0)
 		{
 			// ボムを生成
-			//mBomb = make_shared<Bomb>(mShader);
-			//mBomb->Initialize();
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);
@@ -190,7 +188,6 @@ void PlayGameLayer::Update()
 		else
 		{
 			// ボムを生成
-			//mBomb = make_shared<Bomb>(mShader);
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);
@@ -318,15 +315,6 @@ void PlayGameLayer::Update()
 	// ボムとキャラクターのあたり判定
 	for (int i = 0; i < (int)(mBombs.size()); i++)
 	{
-		//// ボムとプレイヤーのあたり判定
-		//if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
-		//	mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
-		//	mBombs[i]->GetPos().y < 0)
-		//{
-		//	// ゲームを終了する
-		//	mSceneFlag = true;
-		//}
-
 		// ボムとプレイヤーのあたり判定
 		if (CollisionDetermination(mBombs[i]->GetPos(), mKuma->GetPos()))
 		{
@@ -337,16 +325,6 @@ void PlayGameLayer::Update()
 			}
 		}
 	}
-
-	//// アイテムとキャラクターのあたり判定
-	//if (mItem->GetPos().x < mKuma->GetPos().x + 0.5f && mItem->GetPos().x + 0.5f > mKuma->GetPos().x &&
-	//	mItem->GetPos().z < mKuma->GetPos().z + 0.5f && mItem->GetPos().z + 0.5f > mKuma->GetPos().z)
-	//{
-	//	// ゲームを終了する
-	//	mSceneFlag = true;
-	//	// ゲームクリア
-	//	mResultFlag = true;
-	//}
 
 	// アイテムとキャラクターのあたり判定
 	if (CollisionDetermination(mItem->GetPos(), mKuma->GetPos()))
