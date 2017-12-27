@@ -120,6 +120,8 @@ public:
 	DirectX::SimpleMath::Vector3 CalculateElementNumber(DirectX::SimpleMath::Vector3 pos, float offset_x, float offset_z);
 	// マップチップの登録
 	void RegisterMapChip(MapChipAttribute attr, std::shared_ptr<DirectX::Model> model);
+	// 当たり判定
+	bool CollisionDetermination(DirectX::SimpleMath::Vector3 pos1, DirectX::SimpleMath::Vector3 pos2);
 	// 設定
 	void SetPauseFlag(bool flag) { mPauseFlag = flag; }
 	void SetStartFlag(bool flag) { mStartFlag = flag; }

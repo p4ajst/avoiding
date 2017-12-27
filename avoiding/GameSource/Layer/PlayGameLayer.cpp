@@ -176,8 +176,6 @@ void PlayGameLayer::Update()
 		if (timing % 3 == 0)
 		{
 			// ボムを生成
-			//mBomb = make_shared<Bomb>(mShader);
-			//mBomb->Initialize();
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);
@@ -190,7 +188,6 @@ void PlayGameLayer::Update()
 		else
 		{
 			// ボムを生成
-			//mBomb = make_shared<Bomb>(mShader);
 			mBomb = make_shared<Bomb>();
 			mBomb->Initialize();
 			mBomb->SetModel(mBombModel);
@@ -319,18 +316,18 @@ void PlayGameLayer::Update()
 	for (int i = 0; i < (int)(mBombs.size()); i++)
 	{
 		// ボムとプレイヤーのあたり判定
-		if (mBombs[i]->GetPos().x < mKuma->GetPos().x + 0.5f && mBombs[i]->GetPos().x + 0.5f > mKuma->GetPos().x &&
-			mBombs[i]->GetPos().z < mKuma->GetPos().z + 0.5f && mBombs[i]->GetPos().z + 0.5f > mKuma->GetPos().z &&
-			mBombs[i]->GetPos().y < 0)
+		if (CollisionDetermination(mBombs[i]->GetPos(), mKuma->GetPos()))
 		{
-			// ゲームを終了する
-			mSceneFlag = true;
+			if (mBombs[i]->GetPos().y < 0)
+			{
+				// ゲームを終了する
+				mSceneFlag = true;
+			}
 		}
 	}
 
 	// アイテムとキャラクターのあたり判定
-	if (mItem->GetPos().x < mKuma->GetPos().x + 0.5f && mItem->GetPos().x + 0.5f > mKuma->GetPos().x &&
-		mItem->GetPos().z < mKuma->GetPos().z + 0.5f && mItem->GetPos().z + 0.5f > mKuma->GetPos().z)
+	if (CollisionDetermination(mItem->GetPos(), mKuma->GetPos()))
 	{
 		// ゲームを終了する
 		mSceneFlag = true;
@@ -492,4 +489,25 @@ void PlayGameLayer::RegisterMapChip(MapChipAttribute attr, shared_ptr<Model> mod
 {
 	mChip[attr] = new MapChip(attr);
 	mChip[attr]->SetModel(model);
+}
+
+
+// ----------------------------------------------------------------------------------------------- //
+// @ brief	: 当たり判定                                                                           //
+// @ param	: Vector3 pos1...オブジェクトの座標                                                    //
+// @ param	: Vector3 pos2...オブジェクトの座標                                                    //
+// @ return : 当たっていたらtrue , 当たってなければfalseを返す                                     //
+// @ note	:                                                                                      //
+// ----------------------------------------------------------------------------------------------- // 
+bool PlayGameLayer::CollisionDetermination(Vector3 pos1, Vector3 pos2)
+{
+	if (pos1.x < pos2.x + 0.5f && pos1.x + 0.5f > pos2.x &&
+		pos1.z < pos2.z + 0.5f && pos1.z + 0.5f > pos2.z)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
