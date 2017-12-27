@@ -37,17 +37,18 @@ void TitleHUDLayer::Initialize(Scene * scene)
 	
 	// 判定用フラグ
 	start.flag = false;
-	end.flag = false;
+	end.flag = false;s
 
 	// 画像の描画範囲
-	start.range.left   = 425;
-	start.range.top    = 400;
-	start.range.right  = 825;
-	start.range.bottom = 610;
-	end.range.left     = 425;
-	end.range.top      = 650;
-	end.range.right    = 825;
-	end.range.bottom   = 860;
+	start.range.left = 200;
+	start.range.top = 500;
+	start.range.right = 600;
+	start.range.bottom = 710;
+	end.range.left = 680;
+	end.range.top = 500;
+	end.range.right = 1080;
+	end.range.bottom = 710;
+
 
 	// シーン切替用変数の初期化
 	mSceneFlag = false;
